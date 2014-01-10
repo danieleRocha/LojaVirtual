@@ -1,0 +1,32 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
+    <title>Index</title>
+</head>
+    <body>
+        
+        <ul class="thumbnails">
+            <li class="span5">
+                <a href="../Produto/Adicionar" class="thumbnail">
+                    <img src="~/Content/bootstrap/img/ControleDeEstoque.jpg" alt="">
+                </a>
+                <p>
+                    <h3 >Estoque</h3>
+                    <p>Sistema para controle de Mercadorias</p></p>                        
+            </li>
+        </ul>
+        <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="/Scripts/bootstrap.js"></script>
+        
+    </body>
+</html>

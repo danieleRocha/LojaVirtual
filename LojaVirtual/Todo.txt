@@ -1,0 +1,17 @@
+A fazer:
+
+1 - Centralizar a figura inicial do assistente de cadastro de produtos. OK
+2 - Colocar uma figura de testes OK
+3 - Direcionar para uma página de cadastro de produto. OK
+
+--------------------------------------------------------------------------------06/01/2014
+
+4 - Arrumar página de cadastro de mercadorias:
+
+- Código do produto (Podendo inserir número e letras)
+- Colocar mais fotos do produto
+- Fazer cadastramento guardando os dados.
+
+5 - Listar mercadorias cadastradas
+6 - Editar mercadorias cadastradas
+7 - Excluir mercadorias cadastradas

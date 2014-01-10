@@ -3,6 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LojaVirtual.Apresentacao", "LojaVirtual.Apresentacao\LojaVirtual.Apresentacao.csproj", "{182D7A6A-CF2B-4534-B4D6-0A7BE633FC77}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Anotações", "Anotações", "{196C8C4D-45BA-42CD-8F48-F4AF3CC7C7DA}"
+	ProjectSection(SolutionItems) = preProject
+		Anotações.txt = Anotações.txt
+		Todo.txt = Todo.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LojaVirtual.Modelo", "LojaVirtual.Modelo\LojaVirtual.Modelo.csproj", "{C8FC2371-B2D3-454E-8259-F8C61C8AD97D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,8 +21,15 @@ Global
 		{182D7A6A-CF2B-4534-B4D6-0A7BE633FC77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{182D7A6A-CF2B-4534-B4D6-0A7BE633FC77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{182D7A6A-CF2B-4534-B4D6-0A7BE633FC77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8FC2371-B2D3-454E-8259-F8C61C8AD97D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8FC2371-B2D3-454E-8259-F8C61C8AD97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8FC2371-B2D3-454E-8259-F8C61C8AD97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8FC2371-B2D3-454E-8259-F8C61C8AD97D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 	EndGlobalSection
 EndGlobal
