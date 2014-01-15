@@ -1,4 +1,6 @@
 using System.Web.Mvc;
+using LojaVirtual.Modelo;
+using LojaVirtual.Repositorio;
 using Microsoft.Practices.Unity;
 using Unity.Mvc4;
 
@@ -28,9 +30,9 @@ namespace LojaVirtual.Apresentacao
       return container;
     }
 
-    public static void RegisterTypes(IUnityContainer container)
-    {
-    
-    }
+      public static void RegisterTypes(IUnityContainer container)
+      {
+          container.RegisterType<IRepositorio<Categoria>,Repositorio<Categoria>>(new ContainerControlledLifetimeManager());
+      }
   }
 }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LojaVirtual.Apresentacao.ViewModels;
 
 namespace LojaVirtual.Apresentacao.Controllers
 {
-    public class ProdutoController : Controller
+    public class MercadoriaController : Controller
     {
-        public ActionResult Produtos()
+        public ActionResult Mercadorias()
         {
             return View();
         }
@@ -18,5 +19,6 @@ namespace LojaVirtual.Apresentacao.Controllers
         {
             return View();
         }
+
     }
 }

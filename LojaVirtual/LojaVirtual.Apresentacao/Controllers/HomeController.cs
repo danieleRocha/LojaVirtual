@@ -13,5 +13,9 @@ namespace LojaVirtual.Apresentacao.Controllers
             return View();
         }
 
+        public ActionResult BarraMenu()
+        {
+            return View();
+        }
     }
 }

@@ -1,6 +1,11 @@
 ﻿@using System.Globalization
 @using LojaVirtual.Apresentacao.ViewModels
-@model LojaVirtual.Modelo.Produto
+@using LojaVirtual.Modelo
+@model LojaVirtual.Apresentacao.ViewModels.MercadoriaViewModel
+
+@{
+    string tamanhosDisponiveis = MercadoriasViewModel.TamanhosDisponiveis;    
+}  
 
 <!DOCTYPE html>
 
@@ -17,26 +22,26 @@
     {
         <legend>Cadastro de nova Mercadoria</legend>
         <label><strong>Nome</strong></label>
-        <div>@Html.TextBoxFor(a => a.Nome, new {@class = "input-xxlarge"})</div>
+        <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
         <label><strong>Descrição</strong></label>
-        <div>@Html.TextAreaFor(a => a.Descricao, new {@class = "span7", @rows=5})</div>
+        <div>@Html.TextAreaFor(a => a.Descricao, new { @class = "span7", @rows = 5, @id="texto" })</div>
         <label><strong>Preço</strong></label>
         <div class="input-prepend">
             <span class="add-on">R$</span>
-            @Html.TextBoxFor(a => a.Preco, new {@class = "input-large",@id="prependedInput",@placeholder= "Exemplo: 51,99"})
+            @Html.TextBoxFor(a => a.Preco, new { @class = "input-large", @id = "prependedInput", @placeholder = "Exemplo: 51,99" })
         </div>
         <label><strong>Categorias</strong></label>
         <div>@Html.ListBox("Categorias",
-                           new List<SelectListItem>(ProdutosViewModel.CategoriasDisponiveis.Select(c => new SelectListItem {Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString()}).ToList()),
-                           new {@class = "input-large"})
+                           new List<SelectListItem>(MercadoriasViewModel.CategoriasDisponiveis.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString() }).ToList()),
+                           new { @class = "input-large" })
         </div>
         <label><strong>Cores</strong></label>
         <div>@Html.ListBox("Cores",
-                           new List<SelectListItem>(ProdutosViewModel.Cores.Select(c => new SelectListItem {Text = c, Value = c}).ToList()),
-                           new {@class = "input-large"})
+                           new List<SelectListItem>(Catalogo.Cores.Select(c => new SelectListItem { Text = c, Value = c }).ToList()),
+                           new { @class = "input-large" })
         </div>
         <label><strong>Número de Tamanhos Disponíveis</strong></label>
-        <div>@Html.TextBoxFor(a => a.NumeroDeTamanhos, new {@class = "input-large",@id = "Tamanho"})</div>
+        <div>@Html.TextBoxFor(a => a.NumeroDeTamanhos, new { @class = "input-large", @id = "Tamanho" })</div>
         <label><strong>Tamanhos</strong></label>
         <table class="table table-bordered table table-striped" id="tabelaTamanho">
             <thead>
@@ -55,8 +60,8 @@
         <div class="alert-info">
             <label><strong>Adicionar Fotos</strong></label>
             <ul class="inline">       
-                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="myimage">
-                    <input type="hidden" name="myimage" id="myimage" value="1" />
+                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem1">
+                    <input type="hidden" name="imagem1" id="imagem1" value="1" />
                     <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /></div>
                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                     <div>
@@ -67,7 +72,44 @@
                         <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
                     </div>
                 </li>
-                <li class="fileupload fileupload-new" data-provides="fileupload">
+                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem2">
+                    <input type="hidden" name="imagem2" id="imagem2" value="1" />
+                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /></div>
+                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                    <div>
+                        <span class="btn btn-file">
+                            <span class="fileupload-new">Procurar Imagem...</span>
+                            <span class="fileupload-exists">Alterar</span><input type="file" />
+                        </span>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                    </div>
+                </li>
+                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem3">
+                    <input type="hidden" name="imagem3" id="imagem3" value="1" />
+                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /></div>
+                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                    <div>
+                        <span class="btn btn-file">
+                            <span class="fileupload-new">Procurar Imagem...</span>
+                            <span class="fileupload-exists">Alterar</span><input type="file" />
+                        </span>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                    </div>
+                </li>
+                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem4">
+                    <input type="hidden" name="imagem4" id="imagem4" value="1" />
+                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /></div>
+                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                    <div>
+                        <span class="btn btn-file">
+                            <span class="fileupload-new">Procurar Imagem...</span>
+                            <span class="fileupload-exists">Alterar</span><input type="file" />
+                        </span>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                    </div>
+                </li>
+                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem5">
+                    <input type="hidden" name="imagem5" id="imagem5" value="1" />
                     <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /></div>
                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                     <div>
@@ -82,7 +124,7 @@
         </div>
         
         <p>
-            @*<input type="submit" name= @ProdutosViewModel.AdicionarProduto value="Adicionar" class="btn btn-primary" />*@
+            <input type="submit" name= "Adicionar" value="Cadastrar" class="btn btn-primary" />
             @Html.ActionLink("Voltar", "Produtos", new { }, new { @class = "btn btn-inverse" })
         </p>
         <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
@@ -92,14 +134,35 @@
         <script>
             $("table.table tr th").bind("click", headerClick);
             $("table.table tr td").bind("click", dataClick);
+
+            $(document).keypress(function (e) {
+                if (e.keyCode == 13)
+                    if (e.target.id == 'texto') {
+                        return true;
+                    }
+                    else if (e.target.id == 'Tamanho') {
+                        tamanhoClick();
+                    return false;
+                }
+                else{
+                    return false;
+                }
+            });
+
             
-            
-            function tamanhoClick() {
+           function tamanhoClick() {
                 var myTable = document.getElementById("tabelaTamanho");
                 var j = document.getElementById("Tamanho").value;
+                var tamanhos = '@tamanhosDisponiveis';
+                var tamanho = tamanhos.split(',');
+                var opcoes = "<select>";
+                for (var i = 0; i < tamanho.length; i++) {
+                    opcoes = opcoes + "<option value=" + tamanho[i] + ">" + tamanho[i] + "</option>";
+                }
+                opcoes = opcoes + "</select>";
+
                 var rows = [];
                 var cells = [];
-
                 while (myTable.hasChildNodes()) {
                     myTable.removeChild(myTable.lastChild);
                 }
@@ -120,23 +183,8 @@
                             }
                         } else {
                             if (x == 0) {
-                                cells[i][x].innerHTML = "<select> " +
-                                    "<option value='tamanhoUnico'>Único</option>" +
-                                    "<option value='tamanhoPP'>PP</option>" +
-                                    "<option value='tamanhoP'>P</option> " +
-                                    "<option value='tamanhoM'>M</option>" +
-                                    "<option value='tamanhoG'>G</option>" +
-                                    "<option value='tamanhoGG'>GG</option>" +
-                                    "<option value='tamanho34'>34</option>" +
-                                    "<option value='tamanho36'>36</option>" +
-                                    "<option value='tamanho38'>38</option>" +
-                                    "<option value='tamanho40'>40</option>" +
-                                    "<option value='tamanho42'>42</option>" +
-                                    "<option value='tamanho44'>44</option>" +
-                                    "<option value='tamanho46'>46</option>" +
-                                    "<option value='tamanho48'>48</option>" +
-                                    "<option value='tamanho50'>50</option>" +
-                                    " </select>";
+                                cells[i][x].innerHTML = opcoes;
+                                
                             } else {
                                 cells[i][x].innerHTML = "<input>";
                             }
@@ -147,8 +195,7 @@
                 }
                 
             }
-            
-            document.getElementById('Tamanho').addEventListener('change', tamanhoClick);
+           document.getElementById('Tamanho').addEventListener('change', tamanhoClick);
 
             tamanhoClick();
             

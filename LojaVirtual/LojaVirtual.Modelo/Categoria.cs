@@ -5,45 +5,45 @@ using System.Text;
 
 namespace LojaVirtual.Modelo
 {
-    public class Categoria
+    public class Categoria:ITipo
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        private List<Produto> produtos = new List<Produto>();
+        private List<Mercadoria> mercadorias = new List<Mercadoria>();
 
-        public IEnumerable<Produto> Produtos
+        public IEnumerable<Mercadoria> Mercadorias
         {
-            get { return produtos; }
-            set { produtos = value.ToList(); }
+            get { return mercadorias; }
+            set { mercadorias = value.ToList(); }
         }
 
-        public void AdicionarProduto(Produto produto)
+        public void AdicionarMercadoria(Mercadoria mercadoria)
         {
-            if (produtos.FirstOrDefault(p => p.Id == produto.Id) == null)
-                produtos.Add(produto);
+            if (mercadorias.FirstOrDefault(p => p.Id == mercadoria.Id) == null)
+                mercadorias.Add(mercadoria);
         }
 
-        public void RemoverProduto(Produto produto)
+        public void RemoverMercadoria(Mercadoria mercadoria)
         {
-            if (produtos.FirstOrDefault(p => p.Id == produto.Id) != null)
-                produtos.Remove(produto);
+            if (mercadorias.FirstOrDefault(p => p.Id == mercadoria.Id) != null)
+                mercadorias.Remove(mercadoria);
         }
 
-        public void RemoverProduto(Guid idProduto)
+        public void RemoverMercadoria(Guid idMercadoria)
         {
-            foreach (var produto in Produtos.Where(produto => produto.Id == idProduto))
+            foreach (var mercadoria in Mercadorias.Where(mercadoria => mercadoria.Id == idMercadoria))
             {
-                produtos.Remove(produto);
+                mercadorias.Remove(mercadoria);
                 break;
             }
         }
 
-        public void AdicionarProdutos(IEnumerable<Produto> produtosAdicionados)
+        public void AdicionarMercadorias(IEnumerable<Mercadoria> mercadoriasAdicionadas)
         {
-            foreach (var produto in produtosAdicionados)
+            foreach (var mercadoria in mercadoriasAdicionadas)
             {
-                AdicionarProduto(produto);
+                AdicionarMercadoria(mercadoria);
             }
         }
     }

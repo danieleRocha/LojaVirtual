@@ -8,8 +8,6 @@ A fazer:
 
 4 - Arrumar página de cadastro de mercadorias:
 
-- Código do produto (Podendo inserir número e letras)
-- Colocar mais fotos do produto
 - Fazer cadastramento guardando os dados.
 
 5 - Listar mercadorias cadastradas

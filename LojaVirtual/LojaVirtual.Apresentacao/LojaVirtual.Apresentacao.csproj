@@ -144,17 +144,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\MercadoriaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BarraMenu.cs" />
+    <Compile Include="Paginacao\IOrdenavel.cs" />
+    <Compile Include="Paginacao\Paginacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CategoriasViewModel.cs" />
+    <Compile Include="ViewModels\CategoriaViewModel.cs" />
     <Compile Include="ViewModels\ConfigReader.cs" />
-    <Compile Include="ViewModels\InformacaoDePaginacao.cs" />
-    <Compile Include="ViewModels\ProdutosViewModel.cs" />
+    <Compile Include="ViewModels\MercadoriasViewModel.cs" />
+    <Compile Include="ViewModels\MercadoriaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
@@ -202,16 +206,20 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Produto\Produtos.cshtml" />
+    <Content Include="Views\Mercadoria\Mercadorias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LojaVirtual.Modelo\LojaVirtual.Modelo.csproj">
       <Project>{c8fc2371-b2d3-454e-8259-f8c61c8ad97d}</Project>
       <Name>LojaVirtual.Modelo</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LojaVirtual.Repositorio\LojaVirtual.Repositorio.csproj">
+      <Project>{95396B57-D038-48FE-84DD-DAA4561056CD}</Project>
+      <Name>LojaVirtual.Repositorio</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Produto\Adicionar.cshtml" />
+    <Content Include="Views\Mercadoria\Adicionar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\jasny-bootstrap\font\iconic_fill.eot" />
@@ -225,6 +233,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Apresentacao.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Categoria\Adicionar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\BarraMenu.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
