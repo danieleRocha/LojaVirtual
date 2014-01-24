@@ -15,5 +15,6 @@ namespace LojaVirtual.Apresentacao.ViewModels
         }
 
         public const string MercadoriasCadastradas = "MercadoriasCadastradas";
+        public const string MercadoriasSelecionadas = "MercadoriasSelecionadas";
     }
 }

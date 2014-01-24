@@ -10,7 +10,7 @@ namespace LojaVirtual.Repositorio
     public class Repositorio<T>:IRepositorio<T> where T:ITipo 
     {
 
-#region CategoriasMock
+        #region CategoriasMock
         private List<ITipo> CategoriasMock = new List<ITipo>()
             {
                 new Categoria()
@@ -35,11 +35,11 @@ namespace LojaVirtual.Repositorio
                         Nome = "Categoria 3"
                     }
             };
-#endregion CategoriasMock
+        #endregion CategoriasMock
 
-#region MercadoriasMock
+        #region MercadoriasMock
 
-        private List<ITipo> MercadoriasMock = new List<ITipo>()
+        private dynamic MercadoriasMock = new List<ITipo>()
             {
                 new Mercadoria()
                     {
@@ -78,14 +78,26 @@ namespace LojaVirtual.Repositorio
 
         #endregion MercadoriasMock
 
-        public Repositorio()
+        public List<T> ObterTodos()
         {
-            
+            try
+            {
+                return ObterTodosT().Cast<T>().ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public List<ITipo> ObterTodos()
+        public T Obter(Guid id)
         {
-            if (typeof (T) == typeof (Categoria))
+            throw new NotImplementedException();
+        }
+
+        public List<ITipo> ObterTodosT()
+        {
+            if (typeof(T) == typeof(Categoria))
                 return CategoriasMock;
             if (typeof(T) == typeof(Mercadoria))
                 return MercadoriasMock;

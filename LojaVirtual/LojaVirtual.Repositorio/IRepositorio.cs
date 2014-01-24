@@ -7,8 +7,9 @@ using LojaVirtual.Modelo;
 
 namespace LojaVirtual.Repositorio
 {
-    public interface IRepositorio<T> where T:ITipo
+    public interface IRepositorio<T> where T:ITipo 
     {
-        List<ITipo> ObterTodos();
+        List<T> ObterTodos();
+        T Obter(Guid id);
     }
 }

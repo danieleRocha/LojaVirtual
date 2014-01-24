@@ -11,20 +11,36 @@ namespace LojaVirtual.Apresentacao.Controllers
 {
     public class CategoriaController : Controller
     {
-        private IRepositorio<Categoria> Repositorio;
+        private IRepositorio<Categoria> repositorioDeCategorias;
+        private IRepositorio<Mercadoria> repositorioDeMercadorias;
 
-        public CategoriaController(IRepositorio<Categoria> repositorio)
+        public CategoriaController(IRepositorio<Categoria> repositorioDeCategorias, IRepositorio<Mercadoria> repositorioDeMercadorias)
         {
-            Repositorio = repositorio;
+            this.repositorioDeCategorias = repositorioDeCategorias;
+            this.repositorioDeMercadorias = repositorioDeMercadorias;
         }
 
         [HttpGet]
         public ActionResult Adicionar()
         {
-            ViewData[CategoriasViewModel.MercadoriasCadastradas] = Repositorio.ObterTodos();
+            ViewData[CategoriasViewModel.MercadoriasCadastradas] = repositorioDeMercadorias.ObterTodos();
 
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Adicionar(CategoriaViewModel categoriaViewModel, FormCollection form)
+        {
+            var ids = form[CategoriasViewModel.MercadoriasSelecionadas].Split(',');
+            categoriaViewModel.Mercadorias.Clear();
+
+            //foreach (var id in ids)
+            //    {
+            //    var mercadoria = 
+            //        categoriaViewModel.Mercadorias.Add(repositorioDeMercadorias.Obter(Guid.Parse(id)));
+            //    }
+            
+            return View();
+        }
     }
 }

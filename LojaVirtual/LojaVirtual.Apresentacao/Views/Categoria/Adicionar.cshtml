@@ -4,7 +4,7 @@
 @model CategoriaViewModel
 
 @{
-    List<ITipo> mercadoriasCadastradas = (List<ITipo>) ViewData[CategoriasViewModel.MercadoriasCadastradas];    
+    List<Mercadoria> mercadoriasCadastradas = (List<Mercadoria>)ViewData[CategoriasViewModel.MercadoriasCadastradas];    
 }  
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
         <label><strong>Descrição</strong></label>
         <div>@Html.TextAreaFor(a => a.Descricao, new { @class = "span7", @rows = 5, @id="texto" })</div>
         <label><strong>Mercadorias</strong></label>
-        <div>@Html.ListBox("Mercadorias",
+        <div>@Html.ListBox(CategoriasViewModel.MercadoriasSelecionadas,
                            new List<SelectListItem>(mercadoriasCadastradas.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString() }).ToList()),
                            new { @class = "input-large" })
         </div>

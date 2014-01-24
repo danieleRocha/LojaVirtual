@@ -33,6 +33,7 @@ namespace LojaVirtual.Apresentacao
       public static void RegisterTypes(IUnityContainer container)
       {
           container.RegisterType<IRepositorio<Categoria>,Repositorio<Categoria>>(new ContainerControlledLifetimeManager());
+          container.RegisterType<IRepositorio<Mercadoria>, Repositorio<Mercadoria>>(new ContainerControlledLifetimeManager());
       }
   }
 }
