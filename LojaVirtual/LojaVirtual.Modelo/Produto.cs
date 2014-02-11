@@ -5,13 +5,12 @@ namespace LojaVirtual.Modelo
     public class Produto:ITipo
     {
         public Guid Id { get; set; }
-        public string Codigo { get; set; }
         public string Tamanho { get; set; }
         
         private EstadoDoProduto estado = EstadoDoProduto.Disponível;
-        public EstadoDoProduto Estado
+        public string Estado
         {
-            get { return estado; }
+            get { return estado.ToString(); }
         }
 
         public enum EstadoDoProduto
@@ -23,7 +22,7 @@ namespace LojaVirtual.Modelo
 
         public bool Vender()
         {
-            if (Estado == EstadoDoProduto.Disponível)
+            if (estado == EstadoDoProduto.Disponível)
             {
                 estado = EstadoDoProduto.AguardandoPagamento;
                 return true;
@@ -33,15 +32,13 @@ namespace LojaVirtual.Modelo
 
         public bool ConcluirVenda()
         {
-            if (Estado == EstadoDoProduto.AguardandoPagamento)
+            if (estado == EstadoDoProduto.AguardandoPagamento)
             {
                 estado = EstadoDoProduto.Vendido;
                 return true;
             }
             return false;
         }
-
-
 
     }
 }

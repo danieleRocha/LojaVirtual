@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LojaVirtual.Modelo;
+using LojaVirtual.Repositorio;
 
 namespace LojaVirtual.Apresentacao.Controllers
 {

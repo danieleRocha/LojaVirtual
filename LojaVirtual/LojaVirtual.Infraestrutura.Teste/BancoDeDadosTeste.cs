@@ -14,11 +14,11 @@ namespace LojaVirtual.Infraestrutura.Teste
             banco = new BancoDeDados();
         }
 
-        //[TestMethod]
-        //public void Criar()
-        //{
-        //    banco.Criar();
-        //}
+        [TestMethod]
+        public void Criar()
+        {
+            banco.Criar();
+        }
 
         //[TestMethod]
         //public void Excluir()

@@ -7,19 +7,12 @@ using System.Text;
 
 namespace LojaVirtual.Modelo
 {
-    public class Foto
+    public class Foto:ITipo
     {
         public Guid Id { get; set; }
-        public MemoryStream DadosEmMemoria { get; set; }
-
-        public Bitmap ObterImagem()
-        {
-            Bitmap bitmapImage = null;
-
-            if (DadosEmMemoria != null)
-                bitmapImage = new Bitmap(DadosEmMemoria);
-
-            return bitmapImage;
-        }
+        public string Nome { get; set; }
+        public string Conteudo { get; set; }
+        public int Tamanho { get; set; }
+        public string Formato { get; set; }
     }
 }

@@ -1,0 +1,43 @@
+﻿@using System.Globalization
+@using LojaVirtual.Apresentacao.ViewModels
+@using LojaVirtual.Modelo
+@model CategoriaViewModel
+
+@{
+    List<Mercadoria> mercadoriasCadastradas = (List<Mercadoria>)ViewData[CategoriasViewModel.MercadoriasCadastradas];    
+}  
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
+        <link href="~/Content/jasny-bootstrap/css/jasny-bootstrap.css" media="screen" rel="stylesheet"/>
+        <title>Adiconar novo Produto</title>
+    </head>
+
+    @using (Html.BeginForm())
+    {
+        <legend>Cadastro de nova Categoria</legend>
+        <label><strong>Nome</strong></label>
+        <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
+        <label><strong>Descrição</strong></label>
+        <div>@Html.TextAreaFor(a => a.Descricao, new { @class = "span7", @rows = 5, @id="texto" })</div>
+        <label><strong>Mercadorias</strong></label>
+        <div>@Html.ListBox(CategoriasViewModel.MercadoriasSelecionadas,
+                           new List<SelectListItem>(mercadoriasCadastradas.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString() }).ToList()),
+                           new { @class = "input-large" })
+        </div>
+       
+        <p>
+            <input type="submit" name= "Adicionar" value="Cadastrar" class="btn btn-primary" />
+            @Html.ActionLink("Voltar", "Listar", new { }, new { @class = "btn btn-inverse" })
+        </p>
+        <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.js"></script>    
+        <script src="~/Content/jasny-bootstrap/js/jasny-bootstrap.js"></script>
+ }       
+   
+</html>

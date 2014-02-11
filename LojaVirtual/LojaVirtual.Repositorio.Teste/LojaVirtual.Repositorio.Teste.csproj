@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6B865F48-A359-4559-AA3A-2A1EAA536D35}</ProjectGuid>
+    <ProjectGuid>{7CC26209-864D-4710-AE4D-A4C31389DF78}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LojaVirtual.Infraestrutura.Teste</RootNamespace>
-    <AssemblyName>LojaVirtual.Infraestrutura.Teste</AssemblyName>
+    <RootNamespace>LojaVirtual.Repositorio.Teste</RootNamespace>
+    <AssemblyName>LojaVirtual.Repositorio.Teste</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,13 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\LojaVirtual.Apresentacao\bin\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\LojaVirtual.Infraestrutura\bin\Debug\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -57,10 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BancoDeDadosTeste.cs" />
-    <Compile Include="MapperTeste.cs" />
+    <Compile Include="RepositorioBaseTeste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseDaoTeste.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LojaVirtual.Apresentacao\LojaVirtual.Apresentacao.csproj">
@@ -74,6 +65,10 @@
     <ProjectReference Include="..\LojaVirtual.Modelo\LojaVirtual.Modelo.csproj">
       <Project>{C8FC2371-B2D3-454E-8259-F8C61C8AD97D}</Project>
       <Name>LojaVirtual.Modelo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LojaVirtual.Repositorio\LojaVirtual.Repositorio.csproj">
+      <Project>{95396B57-D038-48FE-84DD-DAA4561056CD}</Project>
+      <Name>LojaVirtual.Repositorio</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

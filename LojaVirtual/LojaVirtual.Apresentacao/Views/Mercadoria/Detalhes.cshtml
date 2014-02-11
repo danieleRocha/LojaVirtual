@@ -1,0 +1,178 @@
+﻿@using System.Globalization
+@using LojaVirtual.Apresentacao.ViewModels
+@using LojaVirtual.Modelo
+@model MercadoriaViewModel
+
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
+    <link href="~/Content/jasny-bootstrap/css/jasny-bootstrap.css" media="screen" rel="stylesheet" />
+</head>
+
+@using (Html.BeginForm())
+{
+    <legend>Detalhes da Mercadoria</legend>
+    <label><strong>Nome</strong></label>
+    <div>@Html.DisplayFor(a => a.Nome)</div>
+    <p>
+    </p>
+    <label><strong>Descrição</strong></label>
+    <div>@Html.DisplayFor(a => a.Descricao)</div>
+    <p>
+    </p>
+    <label><strong>Preço</strong></label>
+    <div>
+        R$
+            @Html.DisplayFor(a => a.Preco)
+    </div>
+    <p>
+    </p>
+    <label><strong>Categorias</strong></label>
+    <table class="table table-bordered table table-striped">
+        <tr>
+            <th><strong>Nome</strong></th>
+            <th><strong>Descrição</strong></th>
+        </tr>
+        @foreach (var item in Model.Categorias)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <p>
+    </p>
+    <label><strong>Cores</strong></label>
+    <table class="table table-bordered table table-striped">
+        @foreach (var item in Model.Cores)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <p>
+    </p>
+    <label><strong>Número de Tamanhos Disponíveis</strong></label>
+    <div>@Html.TextBoxFor(a => a.NumeroDeTamanhos, new { @class = "input-large", @id = "Tamanho" })</div>
+    <label><strong>Tamanhos</strong></label>
+    <table class="table table-bordered table table-striped" id="tabelaTamanho">
+        <thead>
+            <tr style="width: 50px; height: 20px;">
+                <th style="width: 50px; height: 20px;">Tamanho</th>
+                <th style="width: 50px; height: 20px;">Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="width: 50px; height: 20px;">
+                <td style="width: 50px; height: 20px;"></td>
+                <td style="width: 50px; height: 20px;"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="alert-info">
+        <label><strong>Adicionar Fotos</strong></label>
+        <ul class="inline">
+            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem1">
+                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem1" id="imagem1" value="1" />
+                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
+                </div>
+                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                <div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Procurar Imagem...</span>
+                        <span class="fileupload-exists">Alterar</span><input type="file" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                </div>
+            </li>
+            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem2">
+                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem2" id="imagem2" value="1" />
+                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
+                </div>
+                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                <div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Procurar Imagem...</span>
+                        <span class="fileupload-exists">Alterar</span><input type="file" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                </div>
+            </li>
+            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem3">
+                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem3" id="imagem3" value="1" />
+                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
+                </div>
+                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                <div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Procurar Imagem...</span>
+                        <span class="fileupload-exists">Alterar</span><input type="file" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                </div>
+            </li>
+            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem4">
+                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem4" id="imagem4" value="1" />
+                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
+                </div>
+                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                <div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Procurar Imagem...</span>
+                        <span class="fileupload-exists">Alterar</span><input type="file" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                </div>
+            </li>
+            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem5">
+                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem5" id="imagem5" value="1" />
+                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
+                </div>
+                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                <div>
+                    <span class="btn btn-file">
+                        <span class="fileupload-new">Procurar Imagem...</span>
+                        <span class="fileupload-exists">Alterar</span><input type="file" />
+                    </span>
+                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+        
+    <p>
+        <input type="submit" name="Adicionar" value="Cadastrar" class="btn btn-primary" />
+        @Html.ActionLink("Voltar", "Listar", new { }, new { @class = "btn btn-inverse" })
+    </p>
+    <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.js"></script>    
+    <script src="~/Content/jasny-bootstrap/js/jasny-bootstrap.js"></script>
+        
+}
+
+
+
+</html>
+

@@ -1,0 +1,78 @@
+﻿@using System.Globalization
+@model LojaVirtual.Apresentacao.Paginacao.Paginacao<LojaVirtual.Apresentacao.ViewModels.MercadoriaViewModel>
+
+@{
+    ViewBag.Title = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <title>Lista de Turmas</title>
+</head>
+    <body>
+        
+        @LojaVirtual.Apresentacao.Helpers.BarraMenu.Administrador("Lista de Mercadorias")
+
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Descricao)
+                </th>
+                 <th>
+                    @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Preco)
+                </th>
+                <th>
+                    Opções
+                </th>
+            </tr>   
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Preco)
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            @Html.ActionLink("Detalhes", "Detalhes", new {id = item.Id}, new { @class = "btn btn-small" })
+                            @Html.ActionLink("Editar", "Editar", new {id = item.Id}, new { @class = "btn btn-small" })
+                            @Html.ActionLink("Excluir", "Excluir", new { id = item.Id, pagina = Model.PaginaAtual }, new { @class = "btn btn-small" })                         
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+        <p>
+
+        </p>
+        @if(Model.TotalDePaginas > 0) {
+            <div class="pagination">
+                Página:
+                <ul>
+                    @{
+                        var paginaAnterior = 1;
+                        var proximaPagina = Model.TotalDePaginas;
+
+                        if (Model.PaginaAtual > 1) { paginaAnterior = Model.PaginaAtual - 1; }
+                        if (Model.PaginaAtual < Model.TotalDePaginas) { proximaPagina = Model.PaginaAtual + 1; }
+
+                        <li>@Html.ActionLink("Anterior", "Listar", new {pagina = paginaAnterior})</li>
+
+                        for (int i = 1; i <= Model.TotalDePaginas; i++) { <li>@Html.ActionLink(i.ToString(CultureInfo.InvariantCulture), "Listar", new {pagina = i})</li> }
+                        <li>@Html.ActionLink("Próxima", "Listar", new {pagina = proximaPagina})</li>
+                    }
+                </ul>
+            </div>
+        }
+
+    </body>
+</html>
