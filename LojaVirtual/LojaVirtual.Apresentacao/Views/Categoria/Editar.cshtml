@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width" />
         <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
         <link href="~/Content/jasny-bootstrap/css/jasny-bootstrap.css" media="screen" rel="stylesheet"/>
-        <title>Adiconar novo Produto</title>
+        <title>Editar Categoria</title>
     </head>
 
     @using (Html.BeginForm())
@@ -27,7 +27,7 @@
         <div>@Html.TextAreaFor(a => a.Descricao, new { @class = "span7", @rows = 5, @id="texto" })</div>
         <label><strong>Mercadorias</strong></label>
         <div>@Html.ListBox(CategoriasViewModel.MercadoriasSelecionadas,
-                           new List<SelectListItem>(mercadoriasCadastradas.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString(),Selected = (Model.Mercadorias.Where(m=>m.Id==c.Id).FirstOrDefault()!=null)}).ToList()),
+                           new List<SelectListItem>(mercadoriasCadastradas.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString(),Selected = (Model.Mercadorias.FirstOrDefault(m => m.Id==c.Id)!=null)}).ToList()),
                            new { @class = "input-large" })
         </div>
        

@@ -17,13 +17,13 @@ namespace LojaVirtual.Fabrica
             internal static readonly FabricaDeMercadoria instancia = new FabricaDeMercadoria();
         }
         
-        public void ObterMercadoria(Mercadoria mercadoria, List<KeyValuePair<string, string>> tamanhos,
+        public void CriarMercadoria(Mercadoria mercadoria, List<KeyValuePair<string, string>> tamanhos,
                                       List<HttpPostedFileWrapper> arquivos)
         {
             mercadoria.Id = Guid.NewGuid();
             mercadoria.DataDeCadastramento = DateTime.Now;
             mercadoria.Produtos = FabricaDeProduto.Instancia().CriarProdutos(tamanhos);
-            mercadoria.Fotos = FabricaDeFoto.Instancia().ObterFotos(arquivos);
+            mercadoria.Fotos = FabricaDeFoto.Instancia().CriarFotos(arquivos);
         }
     }
 }

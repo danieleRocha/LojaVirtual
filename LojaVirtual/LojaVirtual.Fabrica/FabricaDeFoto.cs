@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mime;
 using System.Web;
 using LojaVirtual.Modelo;
 
@@ -17,7 +19,7 @@ namespace LojaVirtual.Fabrica
             internal static readonly FabricaDeFoto instancia = new FabricaDeFoto();
         }
         
-        public IEnumerable<Foto> ObterFotos(List<HttpPostedFileWrapper> arquivos)
+        public IEnumerable<Foto> CriarFotos(List<HttpPostedFileWrapper> arquivos)
         {
             var fotos = new List<Foto>();
 
@@ -28,7 +30,7 @@ namespace LojaVirtual.Fabrica
                                                                  (int)
                                                                  arquivos[i].InputStream.Length);
                 var base64String = Convert.ToBase64String(binaryData, 0, binaryData.Length);
-
+                
                 var foto = new Foto()
                 {
                     Id = Guid.NewGuid(),
@@ -41,6 +43,11 @@ namespace LojaVirtual.Fabrica
             }
 
             return fotos;
+        }
+
+        public List<string> ObterFotos(IEnumerable<Foto> fotos)
+        {
+            return fotos.Select(foto => "data:image/" + foto.Formato + ";base64," + foto.Conteudo).ToList();
         }
     }
 }

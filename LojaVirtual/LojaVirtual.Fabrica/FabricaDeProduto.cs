@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using LojaVirtual.Modelo;
 
 namespace LojaVirtual.Fabrica
@@ -38,23 +40,21 @@ namespace LojaVirtual.Fabrica
 
         public List<KeyValuePair<string, string>> ObterProdutos(IEnumerable<Produto> produtos)
         {
-            var lista = new List<KeyValuePair<string, string>>();
+            var dic = new Dictionary<string, int>();
 
             foreach (var produto in produtos)
             {
-                var key = produto.Tamanho;
-
-                //foreach (var keyvalue in lista)
-                //{
-                //    if (keyvalue.Key == key)
-                //    {
-                //        keyvalue = keyvalue.Value + 1;
-                //    }
-                //}
+                if(dic.ContainsKey(produto.Tamanho))
+                {
+                    dic[produto.Tamanho]++;
+                }
+                else
+                {
+                    dic.Add(produto.Tamanho,1);
+                }
             }
 
-            return lista;
+            return dic.Keys.Select(key => new KeyValuePair<string, string>(key, dic[key].ToString(CultureInfo.InvariantCulture))).ToList();
         }
     }
 }
- 

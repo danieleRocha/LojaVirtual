@@ -156,6 +156,7 @@
     </Compile>
     <Compile Include="Helpers\BarraMenu.cs" />
     <Compile Include="Mappers\AutoMapperRegister.cs" />
+    <Compile Include="Mappers\ModeloParaViewFotoResolver.cs" />
     <Compile Include="Mappers\ModeloParaViewProdutoResolver.cs" />
     <Compile Include="Mappers\ModeloParaViewMappingProfile.cs" />
     <Compile Include="Mappers\ViewParaModeloMappingProfile.cs" />
@@ -189,8 +190,10 @@
     <Content Include="Content\jasny-bootstrap\img\glyphicons-halflings.png" />
     <Content Include="Content\jasny-bootstrap\js\jasny-bootstrap.js" />
     <Content Include="Content\jasny-bootstrap\js\jasny-bootstrap.min.js" />
+    <Content Include="Content\SemImagem.gif" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -207,7 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -266,6 +268,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Mercadoria\Detalhes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Mercadoria\Editar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,7 +7,7 @@ using LojaVirtual.Modelo;
 
 namespace LojaVirtual.Apresentacao.ViewModels
 {
-    public class MercadoriaViewModel:IViewModel
+    public class MercadoriaViewModel : IViewModel
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
@@ -16,8 +16,15 @@ namespace LojaVirtual.Apresentacao.ViewModels
         [Display(Name = "Preço")]
         public decimal Preco { get; set; }
         public int NumeroDeTamanhos { get; set; }
-        
-        private List<Categoria> categorias = new List<Categoria>(); 
+
+        private List<string> fotos = new List<string>();
+        public List<string> Fotos
+        {
+            get { return fotos; }
+            set { fotos = value; }
+        }
+
+        private List<Categoria> categorias = new List<Categoria>();
         public List<Categoria> Categorias
         {
             get { return categorias; }
@@ -31,7 +38,7 @@ namespace LojaVirtual.Apresentacao.ViewModels
             set { cores = value; }
         }
 
-        private List<KeyValuePair<string, string>> tamanhos  = new List<KeyValuePair<string, string>>();
+        private List<KeyValuePair<string, string>> tamanhos = new List<KeyValuePair<string, string>>();
         public List<KeyValuePair<string, string>> Tamanhos
         {
             get { return tamanhos; }
@@ -45,6 +52,61 @@ namespace LojaVirtual.Apresentacao.ViewModels
             set { arquivos = value; }
         }
 
+        public string TamanhosSelecionados()
+        {
+            string tamanhosSelecionados = string.Empty;
 
+            for (int j = 0; j < tamanhos.Count; j++)
+            {
+                for (int i = 0; i < Catalogo.Tamanhos.Count; i++)
+                {
+                    bool selecionado = tamanhos[j].Key == Catalogo.Tamanhos[i];
+
+                    if (i == 0)
+                    {
+                        if (selecionado)
+                        {
+                            tamanhosSelecionados = tamanhosSelecionados + "true";
+                        }
+                        else
+                        {
+                            tamanhosSelecionados = tamanhosSelecionados + "false";
+                        }
+                    }
+                    else
+                    {
+                        if (selecionado)
+                        {
+                            tamanhosSelecionados = tamanhosSelecionados + "," + "true";
+                        }
+                        else
+                        {
+                            tamanhosSelecionados = tamanhosSelecionados + "," + "false";
+                        }
+                    }
+                }
+                if (j < tamanhos.Count - 1)
+                    tamanhosSelecionados = tamanhosSelecionados + ";";
+            }
+
+            return tamanhosSelecionados;
+        }
+
+        public string QuantidadeTamanhosSelecionados()
+        {
+            string quantidadeTamanhosSelecionados = string.Empty;
+            for (int j = 0; j < tamanhos.Count; j++)
+            {
+                if (j == 0)
+                {
+                    quantidadeTamanhosSelecionados = quantidadeTamanhosSelecionados + tamanhos[j].Value;
+                }
+                else
+                {
+                    quantidadeTamanhosSelecionados = quantidadeTamanhosSelecionados + "," + tamanhos[j].Value;
+                }
+            }
+            return quantidadeTamanhosSelecionados;
+        }
     }
 }

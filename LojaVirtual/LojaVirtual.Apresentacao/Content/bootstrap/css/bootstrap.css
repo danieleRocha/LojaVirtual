@@ -3934,6 +3934,12 @@ input[type="submit"].btn.btn-mini {
   border-color: #bce8f1;
 }
 
+.alert-rosa {
+  color: #ba55d3;
+  background-color: #ffb6c1;
+  border-color: #ffc0cb;
+}
+
 .alert-info h4 {
   color: #3a87ad;
 }

@@ -1,6 +1,4 @@
-﻿@using System.Globalization
-@using LojaVirtual.Apresentacao.ViewModels
-@using LojaVirtual.Modelo
+﻿@using LojaVirtual.Apresentacao.ViewModels
 @model MercadoriaViewModel
 
 
@@ -34,7 +32,7 @@
     <p>
     </p>
     <label><strong>Categorias</strong></label>
-    <table class="table table-bordered table table-striped">
+    <table class="table table-condensed table-bordered">
         <tr>
             <th><strong>Nome</strong></th>
             <th><strong>Descrição</strong></th>
@@ -56,7 +54,7 @@
     <p>
     </p>
     <label><strong>Cores</strong></label>
-    <table class="table table-bordered table table-striped">
+    <table class="table table-condensed table-bordered">
         @foreach (var item in Model.Cores)
         {
             <tr>
@@ -69,101 +67,42 @@
 
     <p>
     </p>
-    <label><strong>Número de Tamanhos Disponíveis</strong></label>
-    <div>@Html.TextBoxFor(a => a.NumeroDeTamanhos, new { @class = "input-large", @id = "Tamanho" })</div>
     <label><strong>Tamanhos</strong></label>
-    <table class="table table-bordered table table-striped" id="tabelaTamanho">
-        <thead>
-            <tr style="width: 50px; height: 20px;">
-                <th style="width: 50px; height: 20px;">Tamanho</th>
-                <th style="width: 50px; height: 20px;">Quantidade</th>
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th><strong>Tamanho</strong></th>
+            <th><strong>Quantidade</strong></th>
+        </tr>
+        @foreach (var item in Model.Tamanhos)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Key)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            <tr style="width: 50px; height: 20px;">
-                <td style="width: 50px; height: 20px;"></td>
-                <td style="width: 50px; height: 20px;"></td>
-            </tr>
-        </tbody>
+        }
     </table>
-    <div class="alert-info">
-        <label><strong>Adicionar Fotos</strong></label>
+    <div>
+        <label><strong>Fotos</strong></label>
         <ul class="inline">
-            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem1">
-                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem1" id="imagem1" value="1" />
-                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
-                </div>
-                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                <div>
-                    <span class="btn btn-file">
-                        <span class="fileupload-new">Procurar Imagem...</span>
-                        <span class="fileupload-exists">Alterar</span><input type="file" />
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
-                </div>
-            </li>
-            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem2">
-                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem2" id="imagem2" value="1" />
-                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
-                </div>
-                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                <div>
-                    <span class="btn btn-file">
-                        <span class="fileupload-new">Procurar Imagem...</span>
-                        <span class="fileupload-exists">Alterar</span><input type="file" />
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
-                </div>
-            </li>
-            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem3">
-                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem3" id="imagem3" value="1" />
-                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
-                </div>
-                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                <div>
-                    <span class="btn btn-file">
-                        <span class="fileupload-new">Procurar Imagem...</span>
-                        <span class="fileupload-exists">Alterar</span><input type="file" />
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
-                </div>
-            </li>
-            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem4">
-                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem4" id="imagem4" value="1" />
-                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
-                </div>
-                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                <div>
-                    <span class="btn btn-file">
-                        <span class="fileupload-new">Procurar Imagem...</span>
-                        <span class="fileupload-exists">Alterar</span><input type="file" />
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
-                </div>
-            </li>
-            <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem5">
-                <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem5" id="imagem5" value="1" />
-                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
-                </div>
-                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                <div>
-                    <span class="btn btn-file">
-                        <span class="fileupload-new">Procurar Imagem...</span>
-                        <span class="fileupload-exists">Alterar</span><input type="file" />
-                    </span>
-                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
-                </div>
-            </li>
+            @foreach (var item in Model.Fotos)
+            {
+                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem1">
+                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem1" id="imagem1" value="1" />
+                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src=@item alt="Erro"/>
+                    </div>
+                </li>
+            }
         </ul>
     </div>
         
     <p>
-        <input type="submit" name="Adicionar" value="Cadastrar" class="btn btn-primary" />
+        @Html.ActionLink("Editar", "Editar", new {id = Model.Id }, new { @class = "btn btn-primary" })
         @Html.ActionLink("Voltar", "Listar", new { }, new { @class = "btn btn-inverse" })
     </p>
     <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>

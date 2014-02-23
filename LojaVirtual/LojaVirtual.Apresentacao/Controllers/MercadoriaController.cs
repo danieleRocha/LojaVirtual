@@ -71,7 +71,7 @@ namespace LojaVirtual.Apresentacao.Controllers
             var mercadoria = Mapper.Map<MercadoriaViewModel, Mercadoria>(mercadoriaViewModel);
 
             FabricaDeMercadoria.Instancia()
-                               .ObterMercadoria(mercadoria, mercadoriaViewModel.Tamanhos, mercadoriaViewModel.Arquivos);
+                               .CriarMercadoria(mercadoria, mercadoriaViewModel.Tamanhos, mercadoriaViewModel.Arquivos);
 
             bool adicionado = false;
 
@@ -117,6 +117,82 @@ namespace LojaVirtual.Apresentacao.Controllers
             }
 
             return View(mercadoria);
+        }
+
+        [HttpGet]
+        public ActionResult Editar(Guid id)
+        {
+            var mercadoriasViewModel = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
+            ViewData[MercadoriasViewModel.Mercadorias] = mercadoriasViewModel;
+            var mercadoria = Mapper.Map<Mercadoria, MercadoriaViewModel>(repositorioDeMercadorias.Obter(id));
+            mercadoria.NumeroDeTamanhos = mercadoria.Tamanhos.Count;
+            mercadoria.Categorias.Clear();
+            foreach (var categoria in repositorioDeCategorias.ObterTodos())
+            {
+                foreach (var merc in categoria.Mercadorias.Where(merc => merc.Id == mercadoria.Id))
+                {
+                    mercadoria.Categorias.Add(categoria);
+                }
+            }
+            return View(mercadoria);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(MercadoriaViewModel mercadoriaViewModel, FormCollection form,
+                                      HttpPostedFileBase file)
+        {
+            if (form[MercadoriasViewModel.MercadoriasSelecionadas] != null)
+            {
+                var ids = form[MercadoriasViewModel.MercadoriasSelecionadas].Split(',');
+                mercadoriaViewModel.Categorias = new List<Categoria>();
+
+                foreach (var id in ids)
+                {
+                    mercadoriaViewModel.Categorias.Add(repositorioDeCategorias.Obter(Guid.Parse(id)));
+                }
+            }
+
+            mercadoriaViewModel.Tamanhos = new List<KeyValuePair<string, string>>(mercadoriaViewModel.NumeroDeTamanhos);
+            for (int i = 0; i < mercadoriaViewModel.NumeroDeTamanhos; i++)
+            {
+                if ((form["tamanho" + (i + 1)] != null) && (form["quantidadeTamanho" + (i + 1)] != null))
+                {
+                    mercadoriaViewModel.Tamanhos.Add(new KeyValuePair<string, string>(form["tamanho" + (i + 1)],
+                                                                                      form["quantidadeTamanho" + (i + 1)
+                                                                                          ]));
+                }
+            }
+
+            mercadoriaViewModel.Arquivos = new List<HttpPostedFileWrapper>();
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                var imagem = Request.Files[i] as HttpPostedFileWrapper;
+                
+                if ((imagem != null) && (imagem.ContentLength > 0))
+                {
+                    mercadoriaViewModel.Arquivos.Add(imagem);
+                }
+            }
+            //Todo:As fotos adicionadas anteriormente não estão sendo carregadas, embora sejam idetificadas no Request.Files.
+            var mercadoria = Mapper.Map<MercadoriaViewModel, Mercadoria>(mercadoriaViewModel);
+
+            FabricaDeMercadoria.Instancia()
+                               .CriarMercadoria(mercadoria, mercadoriaViewModel.Tamanhos, mercadoriaViewModel.Arquivos);
+
+            bool adicionado = false;
+
+            for (int i = 0; i < mercadoriaViewModel.Categorias.Count; i++)
+            {
+                var categoria = repositorioDeCategorias.Obter(mercadoriaViewModel.Categorias[i].Id);
+                categoria.AdicionarMercadoria(mercadoria);
+                if (repositorioDeCategorias.Editar(categoria))
+                    adicionado = true;
+            }
+
+            if (adicionado)
+                return RedirectToAction("Listar");
+
+            return RedirectToAction("Adicionar");
         }
     }
 }

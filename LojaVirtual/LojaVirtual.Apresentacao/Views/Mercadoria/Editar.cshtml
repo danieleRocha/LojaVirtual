@@ -4,8 +4,10 @@
 @model LojaVirtual.Apresentacao.ViewModels.MercadoriaViewModel
 
 @{
+    string tamanhosSelecionados = Model.TamanhosSelecionados();
+    string quantidadeTamanhosSelecionados = Model.QuantidadeTamanhosSelecionados();
     string tamanhosDisponiveis = MercadoriasViewModel.TamanhosDisponiveis;
-    MercadoriasViewModel mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];    
+    MercadoriasViewModel mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias]; 
 }
 
 <!DOCTYPE html>
@@ -16,12 +18,12 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
     <link href="~/Content/jasny-bootstrap/css/jasny-bootstrap.css" media="screen" rel="stylesheet" />
-    <title>Adiconar nova Mercadoria</title>
+    <title>Editar Mercadoria</title>
 </head>
 
-@using (Html.BeginForm("Adicionar", "Mercadoria", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Editar", "Mercadoria", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <legend>Cadastro de nova Mercadoria</legend>
+    <legend>Editar Mercadoria</legend>
     <label><strong>Nome</strong></label>
     <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
     <label><strong>Descrição</strong></label>
@@ -33,12 +35,12 @@
     </div>
     <label><strong>Categorias</strong></label>
     <div>@Html.ListBox(MercadoriasViewModel.MercadoriasSelecionadas,
-                           new List<SelectListItem>(mercadorias.CategoriasDisponiveis.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString() }).ToList()),
+                           new List<SelectListItem>(mercadorias.CategoriasDisponiveis.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString(), Selected = (Model.Categorias.FirstOrDefault(m => m.Id == c.Id) != null) }).ToList()),
                            new { @class = "input-large" })
     </div>
     <label><strong>Cores</strong></label>
     <div>@Html.ListBox(MercadoriasViewModel.Cores,
-                           new List<SelectListItem>(Catalogo.Cores.Select(c => new SelectListItem { Text = c, Value = c }).ToList()),
+                           new List<SelectListItem>(Catalogo.Cores.Select(c => new SelectListItem { Text = c, Value = c, Selected = (Model.Cores.FirstOrDefault(m => m == c) != null) }).ToList()),
                            new { @class = "input-large" })
     </div>
     <label><strong>Número de Tamanhos Disponíveis</strong></label>
@@ -58,26 +60,59 @@
             @for (int i = 0; i < MercadoriasViewModel.NumeroDeFotosPermitidas; i++)
             {
                 var nome = "imagem" + i;
+                var foto = "../../Content/SemImagem.gif";
+
+                if (Model.Fotos.Count > i)
+                {
+                    foto = Model.Fotos[i];
+                }
+
+                if (foto == "../../Content/SemImagem.gif")
+                {
                 <li class="fileupload fileupload-new" data-provides="fileupload" data-name=@nome>
                     <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name=@nome id=@nome value="1" />
                     <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                        <img src="../../Content/SemImagem.gif" alt="Erro" />
+                        <img src=@foto alt="Erro"/>
                     </div>
                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                     <div>
                         <span class="btn btn-file">
                             <span class="fileupload-new">Procurar Imagem...</span>
-                            <span class="fileupload-exists">Alterar</span><input type="file" />
+                            <span class="fileupload-exists">Alterar</span>
+                            <input type="file" />
                         </span>
                         <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
                     </div>
                 </li>
+                }
+                else
+                {
+                <li class="fileupload fileupload-exists" data-provides="fileupload" data-name=@nome>
+                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name=@nome id=@nome value="1" />
+                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src="../../Content/SemImagem.gif" />
+                    </div>
+                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+                        <img src=@foto>
+                    </div>
+                    <div>
+                        <span class="btn btn-file">
+                            <span class="fileupload-new">Procurar Imagem...</span>
+                            <span class="fileupload-exists">Alterar</span>
+                            <input type="file" />
+                        </span>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                    </div>
+                </li>​
+                }
+
+
             }
         </ul>
     </div>
         
     <p>
-        <input type="submit" name="Adicionar" value="Cadastrar" class="btn btn-primary" />
+        <input type="submit" name="Editar" value="Confirmar" class="btn btn-primary" />
         @Html.ActionLink("Voltar", "Listar", new { }, new { @class = "btn btn-inverse" })
     </p>
     <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
@@ -107,44 +142,61 @@
             var myTable = document.getElementById("tabelaTamanho");
             var j = document.getElementById("Tamanho").value;
             var tamanhos = '@tamanhosDisponiveis';
+            var tamanhosSel = '@tamanhosSelecionados';
+            var qtdTamanhosSel = '@quantidadeTamanhosSelecionados';
             var linhas = myTable.rows.length - 1;
 
             var rows = [];
             var cells = [];
-            for (var i = linhas; i >j; i--) {
+            for (var i = linhas; i > j; i--) {
                 myTable.deleteRow(i);
             }
-
-            for (var i = linhas+1; i <= j; i++) {
+            
+            var tamanhosSele = tamanhosSel.split(';');
+            var qtdTamanhosSele = qtdTamanhosSel.split(',');
+            
+            for (var i = linhas + 1; i <= j; i++) {
                 rows[i] = myTable.insertRow(i);
                 cells[i] = [];
 
-                for (var x = 0; x < 2 ; x++) {
+                for (var x = 0; x < 2; x++) {
                     cells[i][x] = document.createElement((x == 0) ? "th" : "td");
                     if (x == 0) {
 
-                            var tamanhoi = "tamanho" + i.toString();
+                        var tamanhoi = "tamanho" + i.toString();
 
-                            var tamanho = tamanhos.split(',');
-                            var opcoes = "<select name=" + tamanhoi + ">";
-                            for (var w = 0; w < tamanho.length; w++) {
-                                opcoes = opcoes + "<option value=" + tamanho[w] + ">" + tamanho[w] + "</option>";
+                        var tamanho = tamanhos.split(',');
+                        if (tamanhosSele.length >= i) {
+                            var tamanhosSelected = tamanhosSele[i - 1].split(',');
+                        }
+                        var opcoes = "<select name=" + tamanhoi + ">";
+                        for (var w = 0; w < tamanho.length; w++) {
+                            {
+                                if ((tamanhosSele.length >= i)&&(tamanhosSelected[w] == "true")) {
+                                    opcoes = opcoes + "<option selected>" + tamanho[w] + "</option>";
+                                } else {
+                                    opcoes = opcoes + "<option>" + tamanho[w] + "</option>";
+                                }
+
                             }
-                            opcoes = opcoes + "</select>";
+                        }
+                        opcoes = opcoes + "</select>";
 
-                            cells[i][x].innerHTML = opcoes;
+                        cells[i][x].innerHTML = opcoes;
 
+                    } else {
+
+                        if (tamanhosSele.length >= i) {
+                            cells[i][x].innerHTML = "<input value=" + qtdTamanhosSele[i - 1] + ">";
                         } else {
-
-                            var qtdtamanhoi = "quantidadeTamanho" + i.toString();
-
-                            cells[i][x].innerHTML = "<input name=" + qtdtamanhoi + ">";
-
+                            cells[i][x].innerHTML = "<input>";
                         }
 
-                    //}
+                    }
                     rows[rows.length - 1].appendChild(cells[i][x]);
+
                 }
+                
             }
 
         }
