@@ -160,6 +160,8 @@
     <Compile Include="Mappers\ModeloParaViewProdutoResolver.cs" />
     <Compile Include="Mappers\ModeloParaViewMappingProfile.cs" />
     <Compile Include="Mappers\ViewParaModeloMappingProfile.cs" />
+    <Compile Include="Model\FabricaDeImagem.cs" />
+    <Compile Include="Model\Imagem.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="Paginacao\Paginacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

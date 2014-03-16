@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using LojaVirtual.Apresentacao.Model;
 using LojaVirtual.Modelo;
 
 namespace LojaVirtual.Apresentacao.ViewModels
@@ -17,11 +18,11 @@ namespace LojaVirtual.Apresentacao.ViewModels
         public decimal Preco { get; set; }
         public int NumeroDeTamanhos { get; set; }
 
-        private List<string> fotos = new List<string>();
-        public List<string> Fotos
+        private List<Imagem> imagens = new List<Imagem>();
+        public List<Imagem> Imagens
         {
-            get { return fotos; }
-            set { fotos = value; }
+            get { return imagens; }
+            set { imagens = value; }
         }
 
         private List<Categoria> categorias = new List<Categoria>();

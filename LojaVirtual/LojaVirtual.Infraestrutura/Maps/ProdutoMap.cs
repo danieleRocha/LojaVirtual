@@ -19,12 +19,12 @@ namespace LojaVirtual.Infraestrutura.Maps
 
         public void Atualizar(Contexto contexto)
         {
-            throw new NotImplementedException();
+            
         }
         
         public void RemoverDependencias(Contexto contexto)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }

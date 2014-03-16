@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -138,8 +139,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         }
 
         [HttpPost]
-        public ActionResult Editar(MercadoriaViewModel mercadoriaViewModel, FormCollection form,
-                                      HttpPostedFileBase file)
+        public ActionResult Editar(MercadoriaViewModel mercadoriaViewModel, FormCollection form)
         {
             if (form[MercadoriasViewModel.MercadoriasSelecionadas] != null)
             {
@@ -163,36 +163,99 @@ namespace LojaVirtual.Apresentacao.Controllers
                 }
             }
 
+            var mercadoriaViewModelAntiga = Mapper.Map<Mercadoria, MercadoriaViewModel>(repositorioDeMercadorias.Obter(mercadoriaViewModel.Id));
+
+            foreach (var categoria in repositorioDeCategorias.ObterTodos())
+            {
+                foreach (var merc in categoria.Mercadorias.Where(merc => merc.Id == mercadoriaViewModelAntiga.Id))
+                {
+                    mercadoriaViewModelAntiga.Categorias.Add(categoria);
+                }
+            }
+
+            var indiceDeFotosARemover = new List<int>();
+
+            for (int i = 0; i < mercadoriaViewModelAntiga.Imagens.Count; i++)
+            {
+                var imagem = "imagem" + i;
+                if (form[imagem] != null)
+                {
+                    if (form[imagem] == string.Empty)
+                    {
+                        indiceDeFotosARemover.Add(i - indiceDeFotosARemover.Count);
+                    }
+                }
+            }
+
+            for (int i = 0; i < indiceDeFotosARemover.Count; i++)
+            {
+                mercadoriaViewModelAntiga.Imagens.RemoveAt(indiceDeFotosARemover[i]);
+            }
+
+            mercadoriaViewModel.Imagens = mercadoriaViewModelAntiga.Imagens;
+
             mercadoriaViewModel.Arquivos = new List<HttpPostedFileWrapper>();
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 var imagem = Request.Files[i] as HttpPostedFileWrapper;
-                
+
                 if ((imagem != null) && (imagem.ContentLength > 0))
                 {
                     mercadoriaViewModel.Arquivos.Add(imagem);
                 }
             }
-            //Todo:As fotos adicionadas anteriormente não estão sendo carregadas, embora sejam idetificadas no Request.Files.
+            
             var mercadoria = Mapper.Map<MercadoriaViewModel, Mercadoria>(mercadoriaViewModel);
 
-            FabricaDeMercadoria.Instancia()
-                               .CriarMercadoria(mercadoria, mercadoriaViewModel.Tamanhos, mercadoriaViewModel.Arquivos);
+            var mercadoriaAntiga = repositorioDeMercadorias.Obter(mercadoriaViewModel.Id);
 
-            bool adicionado = false;
+            mercadoria.DataDeCadastramento = mercadoriaAntiga.DataDeCadastramento;
+            mercadoria.Fotos = mercadoriaAntiga.Fotos;
+
+            List<Guid> imagens = mercadoriaViewModel.Imagens.Select(imagem => imagem.Id).ToList();
+
+            mercadoria.EditarFotos(imagens);
+           
+            FabricaDeMercadoria.Instancia()
+                               .EditarMercadoria(mercadoria, mercadoriaViewModel.Tamanhos, mercadoriaViewModel.Arquivos);
+
+            bool editada = repositorioDeMercadorias.Editar(mercadoria);
+
+            for (int i = 0; i < mercadoriaViewModelAntiga.Categorias.Count; i++)
+            {
+                var categoria = repositorioDeCategorias.Obter(mercadoriaViewModelAntiga.Categorias[i].Id);
+
+                bool remover = mercadoriaViewModel.Categorias.All(cat => cat.Id != categoria.Id);
+                if (remover)
+                    categoria.RemoverMercadoria(mercadoriaViewModel.Id);
+
+                if (repositorioDeCategorias.Editar(categoria))
+                    editada = true;
+                else
+                {
+                    editada = false;
+                    goto final;
+                }
+            }
 
             for (int i = 0; i < mercadoriaViewModel.Categorias.Count; i++)
             {
                 var categoria = repositorioDeCategorias.Obter(mercadoriaViewModel.Categorias[i].Id);
                 categoria.AdicionarMercadoria(mercadoria);
                 if (repositorioDeCategorias.Editar(categoria))
-                    adicionado = true;
+                    editada = true;
+                else
+                {
+                    editada = false;
+                    break;
+                }
             }
 
-            if (adicionado)
+        final:
+            if (editada)
                 return RedirectToAction("Listar");
 
-            return RedirectToAction("Adicionar");
+            return RedirectToAction("Editar", new { id = mercadoria.Id });
         }
     }
 }

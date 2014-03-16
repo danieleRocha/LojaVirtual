@@ -8,6 +8,7 @@ namespace LojaVirtual.Infraestrutura
         private ProdutoDao ProdutoDao { get; set; }
         private MercadoriaDao MercadoriaDao { get; set; }
         private CategoriaDao CategoriaDao { get; set; }
+        private FotoDao FotoDao { get; set; }
 
         public static FabricaDeDaos Instancia()
         {
@@ -43,6 +44,13 @@ namespace LojaVirtual.Infraestrutura
                     CategoriaDao = new CategoriaDao(unitOfWork);
 
                 dao = (IDao<T>)CategoriaDao;
+            }
+            else if (typeof(T) == typeof(FotoMap))
+            {
+                if (FotoDao == null)
+                    FotoDao = new FotoDao(unitOfWork);
+
+                dao = (IDao<T>)FotoDao;
             }
             
             return dao;

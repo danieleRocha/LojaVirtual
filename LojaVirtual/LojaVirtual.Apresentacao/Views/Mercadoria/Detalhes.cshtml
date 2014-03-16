@@ -89,12 +89,12 @@
     <div>
         <label><strong>Fotos</strong></label>
         <ul class="inline">
-            @foreach (var item in Model.Fotos)
+            @foreach (var item in Model.Imagens)
             {
                 <li class="fileupload fileupload-new" data-provides="fileupload" data-name="imagem1">
                     <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="imagem1" id="imagem1" value="1" />
                     <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                        <img src=@item alt="Erro"/>
+                        <img src=@item.Conteudo alt="Erro"/>
                     </div>
                 </li>
             }

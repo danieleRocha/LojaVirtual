@@ -18,7 +18,7 @@ namespace LojaVirtual.Fabrica
         {
             internal static readonly FabricaDeFoto instancia = new FabricaDeFoto();
         }
-        
+
         public IEnumerable<Foto> CriarFotos(List<HttpPostedFileWrapper> arquivos)
         {
             var fotos = new List<Foto>();
@@ -27,27 +27,23 @@ namespace LojaVirtual.Fabrica
             {
                 var binaryData = new Byte[arquivos[i].InputStream.Length];
                 arquivos[i].InputStream.Read(binaryData, 0,
-                                                                 (int)
-                                                                 arquivos[i].InputStream.Length);
+                                             (int)
+                                             arquivos[i].InputStream.Length);
                 var base64String = Convert.ToBase64String(binaryData, 0, binaryData.Length);
-                
+
                 var foto = new Foto()
-                {
-                    Id = Guid.NewGuid(),
-                    Nome = arquivos[i].FileName,
-                    Conteudo = base64String,
-                    Tamanho = arquivos[i].ContentLength,
-                    Formato = arquivos[i].ContentType
-                };
+                    {
+                        Id = Guid.NewGuid(),
+                        Nome = arquivos[i].FileName,
+                        Conteudo = base64String,
+                        Tamanho = arquivos[i].ContentLength,
+                        Formato = arquivos[i].ContentType
+                    };
                 fotos.Add(foto);
             }
 
             return fotos;
         }
 
-        public List<string> ObterFotos(IEnumerable<Foto> fotos)
-        {
-            return fotos.Select(foto => "data:image/" + foto.Formato + ";base64," + foto.Conteudo).ToList();
-        }
     }
 }

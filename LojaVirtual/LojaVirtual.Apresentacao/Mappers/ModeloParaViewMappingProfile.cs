@@ -11,7 +11,7 @@ namespace LojaVirtual.Apresentacao.Mappers
            Mapper.CreateMap<Categoria, CategoriaViewModel>();
            var mapperMercadoria = Mapper.CreateMap<Mercadoria, MercadoriaViewModel>();
            mapperMercadoria.ForMember(dest => dest.Tamanhos, opt => opt.ResolveUsing<ModeloParaViewProdutoResolver>().ConstructedBy(() => new ModeloParaViewProdutoResolver()));
-           mapperMercadoria.ForMember(dest => dest.Fotos, opt => opt.ResolveUsing<ModeloParaViewFotoResolver>().ConstructedBy(() => new ModeloParaViewFotoResolver()));
+           mapperMercadoria.ForMember(dest => dest.Imagens, opt => opt.ResolveUsing<ModeloParaViewFotoResolver>().ConstructedBy(() => new ModeloParaViewFotoResolver()));
        }
     }
 }

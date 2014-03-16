@@ -29,11 +29,18 @@ namespace LojaVirtual.Infraestrutura.Maps
             var categoriaParaAtualizar = contexto.Categoria.Find(Id);
             if (categoriaParaAtualizar != null)
             {
+                var mercadoriasParaRemover = new List<MercadoriaMap>();
+
                 foreach (var mercadoria in categoriaParaAtualizar.Mercadorias)
                 {
                     bool remover = Mercadorias.All(merc => merc.Id != mercadoria.Id);
                     if (remover)
-                        categoriaParaAtualizar.Mercadorias.Remove(mercadoria);
+                        mercadoriasParaRemover.Add(mercadoria);
+                }
+
+                foreach (var mercadoriaMap in mercadoriasParaRemover)
+                {
+                    categoriaParaAtualizar.Mercadorias.Remove(mercadoriaMap);
                 }
 
                 foreach (var mercadoria in Mercadorias)

@@ -42,6 +42,7 @@
     <Compile Include="BancoDeDados.cs" />
     <Compile Include="BaseDao.cs" />
     <Compile Include="Contexto.cs" />
+    <Compile Include="Daos\FotoDao.cs" />
     <Compile Include="NewBaseDao.cs" />
     <Compile Include="FabricaDeContexto.cs" />
     <Compile Include="Maps\CategoriaMap.cs" />

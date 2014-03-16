@@ -7,6 +7,7 @@
     string tamanhosSelecionados = Model.TamanhosSelecionados();
     string quantidadeTamanhosSelecionados = Model.QuantidadeTamanhosSelecionados();
     string tamanhosDisponiveis = MercadoriasViewModel.TamanhosDisponiveis;
+    var numeroDeImagensPermitidas = MercadoriasViewModel.NumeroDeFotosPermitidas;
     MercadoriasViewModel mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias]; 
 }
 
@@ -60,19 +61,21 @@
             @for (int i = 0; i < MercadoriasViewModel.NumeroDeFotosPermitidas; i++)
             {
                 var nome = "imagem" + i;
+                var nomeFoto = "foto" + i;
+                var nome2 = "imagem" + i + i;
                 var foto = "../../Content/SemImagem.gif";
 
-                if (Model.Fotos.Count > i)
+                if (Model.Imagens.Count > i)
                 {
-                    foto = Model.Fotos[i];
+                    foto = Model.Imagens[i].Conteudo;
                 }
 
                 if (foto == "../../Content/SemImagem.gif")
                 {
-                <li class="fileupload fileupload-new" data-provides="fileupload" data-name=@nome>
-                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name=@nome id=@nome value="1" />
+                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="images">
+                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="images" />
                     <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                        <img src=@foto alt="Erro"/>
+                        <img src=@foto alt="..."/>
                     </div>
                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                     <div>
@@ -87,26 +90,25 @@
                 }
                 else
                 {
-                <li class="fileupload fileupload-exists" data-provides="fileupload" data-name=@nome>
-                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name=@nome id=@nome value="1" />
+                <li class="fileupload fileupload-exists" data-provides="fileupload" data-name="images">
+                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="images" />
                     <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
                         <img src="../../Content/SemImagem.gif" />
                     </div>
-                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
-                        <img src=@foto>
-                    </div>
+                    <span class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+                        <img src=@foto alt="..." >
+                    </span>
                     <div>
                         <span class="btn btn-file">
                             <span class="fileupload-new">Procurar Imagem...</span>
                             <span class="fileupload-exists">Alterar</span>
-                            <input type="file" />
+                            <input type="file" id=@nomeFoto />
+                            @Html.Hidden(nome, foto, new { @id = nome2 })
                         </span>
-                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" id=@nome>Excluir</a>
                     </div>
                 </li>​
                 }
-
-
             }
         </ul>
     </div>
@@ -122,6 +124,36 @@
     <script>
         $("table.table tr th").bind("click", headerClick);
         $("table.table tr td").bind("click", dataClick);
+        
+        $(document).change(function (e) {
+
+            for (var i = 0; i < @numeroDeImagensPermitidas; i++) {
+
+                var imagem = "imagem" + i + i;
+                var foto = 'foto' + i;
+                
+                if (e.target.id == foto) {
+                    
+                    document.getElementById(imagem).value = "";                   
+                }
+            }           
+            return true;
+        });
+
+        $(document).click(function (e) {
+            
+            for (var i = 0; i < @numeroDeImagensPermitidas; i++) {
+
+                var imagem = "imagem" + i + i;
+                var foto = 'imagem' + i;
+                
+                if (e.target.id == foto) {
+                    
+                    document.getElementById(imagem).value = "";                   
+                }
+            }           
+            return true;
+        });
 
         $(document).keypress(function (e) {
             if (e.keyCode == 13)
@@ -142,80 +174,82 @@
             var myTable = document.getElementById("tabelaTamanho");
             var j = document.getElementById("Tamanho").value;
             var tamanhos = '@tamanhosDisponiveis';
-            var tamanhosSel = '@tamanhosSelecionados';
-            var qtdTamanhosSel = '@quantidadeTamanhosSelecionados';
-            var linhas = myTable.rows.length - 1;
+    var tamanhosSel = '@tamanhosSelecionados';
+    var qtdTamanhosSel = '@quantidadeTamanhosSelecionados';
+    var linhas = myTable.rows.length - 1;
 
-            var rows = [];
-            var cells = [];
-            for (var i = linhas; i > j; i--) {
-                myTable.deleteRow(i);
-            }
-            
-            var tamanhosSele = tamanhosSel.split(';');
-            var qtdTamanhosSele = qtdTamanhosSel.split(',');
-            
-            for (var i = linhas + 1; i <= j; i++) {
-                rows[i] = myTable.insertRow(i);
-                cells[i] = [];
+    var rows = [];
+    var cells = [];
+    for (var i = linhas; i > j; i--) {
+        myTable.deleteRow(i);
+    }
 
-                for (var x = 0; x < 2; x++) {
-                    cells[i][x] = document.createElement((x == 0) ? "th" : "td");
-                    if (x == 0) {
+    var tamanhosSele = tamanhosSel.split(';');
+    var qtdTamanhosSele = qtdTamanhosSel.split(',');
 
-                        var tamanhoi = "tamanho" + i.toString();
+    for (var i = linhas + 1; i <= j; i++) {
+        rows[i] = myTable.insertRow(i);
+        cells[i] = [];
 
-                        var tamanho = tamanhos.split(',');
-                        if (tamanhosSele.length >= i) {
-                            var tamanhosSelected = tamanhosSele[i - 1].split(',');
-                        }
-                        var opcoes = "<select name=" + tamanhoi + ">";
-                        for (var w = 0; w < tamanho.length; w++) {
-                            {
-                                if ((tamanhosSele.length >= i)&&(tamanhosSelected[w] == "true")) {
-                                    opcoes = opcoes + "<option selected>" + tamanho[w] + "</option>";
-                                } else {
-                                    opcoes = opcoes + "<option>" + tamanho[w] + "</option>";
-                                }
+        for (var x = 0; x < 2; x++) {
+            cells[i][x] = document.createElement((x == 0) ? "th" : "td");
+            if (x == 0) {
 
-                            }
-                        }
-                        opcoes = opcoes + "</select>";
+                var tamanhoi = "tamanho" + i.toString();
 
-                        cells[i][x].innerHTML = opcoes;
-
-                    } else {
-
-                        if (tamanhosSele.length >= i) {
-                            cells[i][x].innerHTML = "<input value=" + qtdTamanhosSele[i - 1] + ">";
+                var tamanho = tamanhos.split(',');
+                if (tamanhosSele.length >= i) {
+                    var tamanhosSelected = tamanhosSele[i - 1].split(',');
+                }
+                var opcoes = "<select name=" + tamanhoi + ">";
+                for (var w = 0; w < tamanho.length; w++) {
+                    {
+                        if ((tamanhosSele.length >= i) && (tamanhosSelected[w] == "true")) {
+                            opcoes = opcoes + "<option selected>" + tamanho[w] + "</option>";
                         } else {
-                            cells[i][x].innerHTML = "<input>";
+                            opcoes = opcoes + "<option>" + tamanho[w] + "</option>";
                         }
 
                     }
-                    rows[rows.length - 1].appendChild(cells[i][x]);
-
                 }
-                
-            }
+                opcoes = opcoes + "</select>";
 
-        }
-        document.getElementById('Tamanho').addEventListener('change', tamanhoClick);
+                cells[i][x].innerHTML = opcoes;
 
-        tamanhoClick();
-
-        function headerClick() {
-        }
-
-        function dataClick(e) {
-            console.log(e);
-            if (e.currentTarget.innerHTML != "") return;
-            if (e.currentTarget.contentEditable != null) {
-                $(e.currentTarget).attr("contentEditable", true);
             } else {
-                $(e.currentTarget).append("<input type='text'>");
+
+                var qtdtamanhoi = "quantidadeTamanho" + i.toString();
+
+                if (tamanhosSele.length >= i) {
+                    cells[i][x].innerHTML = "<input name="+qtdtamanhoi+" value=" + qtdTamanhosSele[i - 1] + ">";
+                } else {
+                    cells[i][x].innerHTML = "<input name=" + qtdtamanhoi + ">";
+                }
+
             }
+            rows[rows.length - 1].appendChild(cells[i][x]);
+
         }
+
+    }
+
+}
+document.getElementById('Tamanho').addEventListener('change', tamanhoClick);
+
+tamanhoClick();
+
+function headerClick() {
+}
+
+function dataClick(e) {
+    console.log(e);
+    if (e.currentTarget.innerHTML != "") return;
+    if (e.currentTarget.contentEditable != null) {
+        $(e.currentTarget).attr("contentEditable", true);
+    } else {
+        $(e.currentTarget).append("<input type='text'>");
+    }
+}
 
     </script>
 }
