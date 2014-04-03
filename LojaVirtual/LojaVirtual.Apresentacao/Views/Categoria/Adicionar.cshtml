@@ -1,43 +1,79 @@
 ﻿@using System.Globalization
+@using LojaVirtual.Apresentacao.Helpers
 @using LojaVirtual.Apresentacao.ViewModels
 @using LojaVirtual.Modelo
 @model CategoriaViewModel
 
 @{
-    List<Mercadoria> mercadoriasCadastradas = (List<Mercadoria>)ViewData[CategoriasViewModel.MercadoriasCadastradas];    
-}  
+    List<Mercadoria> mercadoriasCadastradas = (List<Mercadoria>)ViewData[CategoriasViewModel.MercadoriasCadastradas];     
+}
 
 <!DOCTYPE html>
 
 <html>
 
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
-        <link href="~/Content/jasny-bootstrap/css/jasny-bootstrap.css" media="screen" rel="stylesheet"/>
-        <title>Adiconar novo Produto</title>
-    </head>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
+    <link href="~/Content/jasny-bootstrap/css/jasny-bootstrap.css" media="screen" rel="stylesheet" />
+    <title>Adiconar novo Produto</title>
+</head>
 
-    @using (Html.BeginForm())
-    {
-        <legend>Cadastro de nova Categoria</legend>
-        <label><strong>Nome</strong></label>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummaryBootstrap();
+        
+    <legend>Cadastro de nova Categoria</legend>
+    <label><strong>Nome</strong></label>
+        
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("Nome"))
+                              { @Html.Raw("error")}">
         <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
-        <label><strong>Descrição</strong></label>
-        <div>@Html.TextAreaFor(a => a.Descricao, new { @class = "span7", @rows = 5, @id="texto" })</div>
-        <label><strong>Mercadorias</strong></label>
-        <div>@Html.ListBox(CategoriasViewModel.MercadoriasSelecionadas,
+        <div>@Html.ValidationMessageFor(a => a.Nome, string.Empty, new { @class = "text-error" })</div>
+    </div>  
+    <label><strong>Descrição</strong></label>
+    <div>@Html.TextAreaFor(a => a.Descricao, new { @class = "span7", @rows = 5, @id = "texto" })</div>
+    <label><strong>Mercadorias</strong></label>
+    <div>@Html.ListBox(CategoriasViewModel.MercadoriasSelecionadas,
                            new List<SelectListItem>(mercadoriasCadastradas.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString() }).ToList()),
                            new { @class = "input-large" })
-        </div>
+    </div>
        
-        <p>
-            <input type="submit" name= "Adicionar" value="Cadastrar" class="btn btn-primary" />
-            @Html.ActionLink("Voltar", "Listar", new { }, new { @class = "btn btn-inverse" })
-        </p>
-        <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.js"></script>    
-        <script src="~/Content/jasny-bootstrap/js/jasny-bootstrap.js"></script>
- }       
-   
+    <p>
+        <input type="submit" name="Adicionar" value="Cadastrar" class="btn btn-primary" />
+        @Html.ActionLink("Voltar", "Listar", new { }, new { @class = "btn btn-inverse" })
+    </p>
+    
+    
+    
+    <a id="mm" href="#myModal" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel" class="text-error">Erro!</h3>
+        </div>
+        <div class="modal-body">
+            <p class="text-error">@ViewBag.Mensagem</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        </div>
+    </div>
+    
+    
+    <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.js"></script>    
+    <script src="~/Content/jasny-bootstrap/js/jasny-bootstrap.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            var f = '@ViewBag.Errou';
+            if (f == "True") {
+                document.getElementById('mm').click();
+            }
+        });
+    </script>
+}
+
+
+
 </html>

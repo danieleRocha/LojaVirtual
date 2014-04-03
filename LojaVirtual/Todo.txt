@@ -1,3 +1,3 @@
 A fazer:
 
-1 - Fazer teste de exclusão no cadastro de 3 mercadorias em 2 categorias diferentes.
+1 - Colocar validação nas fotos da Mercadoria em Adicionar e Copiar códigos para o Editar. Testar também a janela modal nos dois casos.

@@ -1,10 +1,15 @@
 ﻿@using System.Globalization
+@using LojaVirtual.Apresentacao.Helpers
+@using LojaVirtual.Apresentacao.Model
 @using LojaVirtual.Apresentacao.ViewModels
 @using LojaVirtual.Modelo
 @model LojaVirtual.Apresentacao.ViewModels.MercadoriaViewModel
 
 @{
+    string tamanhosSelecionados = Model.TamanhosSelecionados();
+    string quantidadeTamanhosSelecionados = Model.QuantidadeTamanhosSelecionados();
     string tamanhosDisponiveis = MercadoriasViewModel.TamanhosDisponiveis;
+    var numeroDeImagensPermitidas = MercadoriasViewModel.NumeroDeFotosPermitidas;
     MercadoriasViewModel mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];    
 }
 
@@ -21,65 +26,160 @@
 
 @using (Html.BeginForm("Adicionar", "Mercadoria", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.ValidationSummaryBootstrap()
+    
     <legend>Cadastro de nova Mercadoria</legend>
     <label><strong>Nome</strong></label>
-    <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("Nome"))
+                              { @Html.Raw("error")}">
+        <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
+        <div>@Html.ValidationMessageFor(a => a.Nome, string.Empty, new { @class = "text-error" })</div>
+    </div>  
+    
     <label><strong>Descrição</strong></label>
     <div>@Html.TextAreaFor(a => a.Descricao, new { @class = "span7", @rows = 5, @id = "texto" })</div>
     <label><strong>Preço</strong></label>
-    <div class="input-prepend">
-        <span class="add-on">R$</span>
-        @Html.TextBoxFor(a => a.Preco, new { @class = "input-large", @id = "prependedInput", @placeholder = "Exemplo: 51,99" })
+    
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("Preco"))
+                              { @Html.Raw("error")}">
+        <div class="input-prepend">
+            <span class="add-on">R$</span>
+            @Html.TextBoxFor(a => a.Preco, new { @class = "input-large", @id = "prependedInput", @placeholder = "Exemplo: 51,99" })
+        </div>
+        <div>@Html.ValidationMessageFor(a => a.Preco, string.Empty, new { @class = "text-error" })</div>
     </div>
     <label><strong>Categorias</strong></label>
-    <div>@Html.ListBox(MercadoriasViewModel.MercadoriasSelecionadas,
-                           new List<SelectListItem>(mercadorias.CategoriasDisponiveis.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString() }).ToList()),
-                           new { @class = "input-large" })
-    </div>
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("Cat"))
+                              { @Html.Raw("error")}">
+        <div>@Html.ListBox(MercadoriasViewModel.CategoriasSelecionadas,
+                       new List<SelectListItem>(mercadorias.CategoriasDisponiveis.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString(), Selected = (Model.Categorias.FirstOrDefault(m => m.Id == c.Id) != null) }).ToList()),
+                       new { @class = "input-large" })
+        </div>
+        <div>@Html.ValidationMessage("Cat", new { @class = "text-error" })</div>
+    </div>  
+    
     <label><strong>Cores</strong></label>
-    <div>@Html.ListBox(MercadoriasViewModel.Cores,
-                           new List<SelectListItem>(Catalogo.Cores.Select(c => new SelectListItem { Text = c, Value = c }).ToList()),
-                           new { @class = "input-large" })
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("Cor"))
+                              { @Html.Raw("error")}">
+        <div>@Html.ListBox(MercadoriasViewModel.Cores,
+                       new List<SelectListItem>(Catalogo.Cores.Select(c => new SelectListItem { Text = c, Value = c }).ToList()),
+                       new { @class = "input-large" })
+        </div>
+        <div>@Html.ValidationMessage("Cor", new { @class = "text-error" })</div>
     </div>
-    <label><strong>Número de Tamanhos Disponíveis</strong></label>
-    <div>@Html.TextBoxFor(a => a.NumeroDeTamanhos, new { @class = "input-large", @id = "Tamanho" })</div>
+    
+    <label><strong>Quantidade de Tamanhos Disponíveis</strong></label>
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("QuantidadeDeTamanhos"))
+                              { @Html.Raw("error")}">
+        <div>@Html.TextBoxFor(a => a.QuantidadeDeTamanhos, new { @class = "input-large", @id = "Tamanho" })</div>
+        <div>@Html.ValidationMessageFor(a => a.QuantidadeDeTamanhos, string.Empty, new { @class = "text-error" })</div>
+    </div> 
+    
     <label><strong>Tamanhos</strong></label>
-    <table class="table table-bordered table table-striped" id="tabelaTamanho">
-        <thead>
-            <tr style="width: 50px; height: 20px;">
-                <th style="width: 50px; height: 20px;">Tamanho</th>
-                <th style="width: 50px; height: 20px;">Quantidade</th>
-            </tr>
-        </thead>
-    </table>
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("Tamanho"))
+                              { @Html.Raw("error")}">
+        <table class="table table-bordered table table-striped" id="tabelaTamanho">
+            <thead>
+                <tr style="width: 50px; height: 20px;">
+                    <th style="width: 50px; height: 20px;">Tamanho</th>
+                    <th style="width: 50px; height: 20px;">Quantidade</th>
+                </tr>
+            </thead>
+        </table>
+        @foreach (var msg in ViewData.ModelState.Where(tam => tam.Key == "Tamanho").SelectMany(tam => tam.Value.Errors))
+        {
+            <div>@Html.ValidationMessage("Tamanho",msg.ErrorMessage, new { @class = "text-error" })</div>
+        }
+    </div>
     <div>
         <label><strong>Adicionar Fotos</strong></label>
-        <ul class="inline">
+        <div class="control-group @if (!ViewData.ModelState.IsValidField("Foto"))
+                              { @Html.Raw("error")}">
+            <ul class="inline">
             @for (int i = 0; i < MercadoriasViewModel.NumeroDeFotosPermitidas; i++)
             {
                 var nome = "imagem" + i;
-                <li class="fileupload fileupload-new" data-provides="fileupload" data-name=@nome>
-                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name=@nome id=@nome value="1" />
+                var nomeFoto = "foto" + i;
+                var nome2 = "imagem" + i + i;
+                var foto = "../../Content/SemImagem.gif";
+                var nomeImagem = nome + "Nome";
+                var conteudoImagem = nome + "Conteudo";
+                var tamanhoImagem = nome + "Tamanho";
+                var formatoImagem = nome + "Formato";
+
+                if (Model.Imagens.Count > i)
+                {
+                    foto = Model.Imagens[i].ConteudoMisto;
+                }
+
+                if (foto == "../../Content/SemImagem.gif")
+                {
+                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="images">
+                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="images" />
                     <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                        <img src="../../Content/SemImagem.gif" alt="Erro" />
+                        <img src=@foto alt="..."/>
                     </div>
                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                     <div>
                         <span class="btn btn-file">
                             <span class="fileupload-new">Procurar Imagem...</span>
-                            <span class="fileupload-exists">Alterar</span><input type="file" />
+                            <span class="fileupload-exists">Alterar</span>
+                            <input type="file" />
                         </span>
                         <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
                     </div>
                 </li>
+                }
+                else
+                {
+                <li class="fileupload fileupload-exists" data-provides="fileupload" data-name="images">
+                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="images" />
+                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        <img src="../../Content/SemImagem.gif" />
+                    </div>
+                    <span class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+                        <img src=@foto alt="..." >
+                    </span>
+                    <div>
+                        <span class="btn btn-file">
+                            <span class="fileupload-new">Procurar Imagem...</span>
+                            <span class="fileupload-exists">Alterar</span>
+                            <input type="file" id=@nomeFoto />
+                            @Html.Hidden(nome, foto, new { @id = nome2 })
+                            @Html.Hidden(nomeImagem, Model.Imagens[i].Nome)
+                            @Html.Hidden(conteudoImagem, Model.Imagens[i].Conteudo)
+                            @Html.Hidden(tamanhoImagem,  Model.Imagens[i].Tamanho)
+                            @Html.Hidden(formatoImagem, Model.Imagens[i].Formato)
+                        </span>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" id=@nome>Excluir</a>
+                    </div>
+                </li>​
+                }
             }
         </ul>
+            <div>@Html.ValidationMessage("Foto", new { @class = "text-error" })</div>
+         </div>
     </div>
         
     <p>
         <input type="submit" name="Adicionar" value="Cadastrar" class="btn btn-primary" />
         @Html.ActionLink("Voltar", "Listar", new { }, new { @class = "btn btn-inverse" })
     </p>
+    
+    <a id="mm" href="#myModal" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel" class="text-error">Erro!</h3>
+        </div>
+        <div class="modal-body">
+            <p class="text-error">@ViewBag.Mensagem</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        </div>
+    </div>
+    
     <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.js"></script>    
     <script src="~/Content/jasny-bootstrap/js/jasny-bootstrap.js"></script>
@@ -87,6 +187,43 @@
     <script>
         $("table.table tr th").bind("click", headerClick);
         $("table.table tr td").bind("click", dataClick);
+
+        $(document).change(function (e) {
+
+            for (var i = 0; i < @numeroDeImagensPermitidas; i++) {
+
+                var imagem = "imagem" + i + i;
+                var foto = 'foto' + i;
+                
+                if (e.target.id == foto) {
+                    
+                    document.getElementById(imagem).value = "";                   
+                }
+            }           
+            return true;
+        });
+
+        $(document).click(function (e) {
+            
+            for (var i = 0; i < @numeroDeImagensPermitidas; i++) {
+
+                var imagem = "imagem" + i + i;
+                var foto = 'imagem' + i;
+                
+                if (e.target.id == foto) {
+                    
+                    document.getElementById(imagem).value = "";                   
+                }
+            }           
+            return true;
+        });
+
+        $(document).ready(function (e) {
+            var f = '@ViewBag.Errou';
+            if (f == "True") {
+                document.getElementById('mm').click();
+            }
+        });
 
         $(document).keypress(function (e) {
             if (e.keyCode == 13)
@@ -107,44 +244,63 @@
             var myTable = document.getElementById("tabelaTamanho");
             var j = document.getElementById("Tamanho").value;
             var tamanhos = '@tamanhosDisponiveis';
+            var tamanhosSel = '@tamanhosSelecionados';
+            var qtdTamanhosSel = '@quantidadeTamanhosSelecionados';
             var linhas = myTable.rows.length - 1;
 
             var rows = [];
             var cells = [];
-            for (var i = linhas; i >j; i--) {
+            for (var i = linhas; i > j; i--) {
                 myTable.deleteRow(i);
             }
 
-            for (var i = linhas+1; i <= j; i++) {
+            var tamanhosSele = tamanhosSel.split(';');
+            var qtdTamanhosSele = qtdTamanhosSel.split(',');
+
+            for (var i = linhas + 1; i <= j; i++) {
                 rows[i] = myTable.insertRow(i);
                 cells[i] = [];
 
-                for (var x = 0; x < 2 ; x++) {
+                for (var x = 0; x < 2; x++) {
                     cells[i][x] = document.createElement((x == 0) ? "th" : "td");
                     if (x == 0) {
 
-                            var tamanhoi = "tamanho" + i.toString();
+                        var tamanhoi = "tamanho" + i.toString();
 
-                            var tamanho = tamanhos.split(',');
-                            var opcoes = "<select name=" + tamanhoi + ">";
-                            for (var w = 0; w < tamanho.length; w++) {
-                                opcoes = opcoes + "<option value=" + tamanho[w] + ">" + tamanho[w] + "</option>";
+                        var tamanho = tamanhos.split(',');
+                        if (tamanhosSele.length >= i) {
+                            var tamanhosSelected = tamanhosSele[i - 1].split(',');
+                        }
+                        var opcoes = "<select name=" + tamanhoi + ">";
+                        for (var w = 0; w < tamanho.length; w++) {
+                            {
+                                if ((tamanhosSele.length >= i) && (tamanhosSelected[w] == "true")) {
+                                    opcoes = opcoes + "<option selected>" + tamanho[w] + "</option>";
+                                } else {
+                                    opcoes = opcoes + "<option>" + tamanho[w] + "</option>";
+                                }
+
                             }
-                            opcoes = opcoes + "</select>";
+                        }
+                        opcoes = opcoes + "</select>";
 
-                            cells[i][x].innerHTML = opcoes;
+                        cells[i][x].innerHTML = opcoes;
 
+                    } else {
+
+                        var qtdtamanhoi = "quantidadeTamanho" + i.toString();
+
+                        if (tamanhosSele.length >= i) {
+                            cells[i][x].innerHTML = "<input name=" + qtdtamanhoi + " value=" + qtdTamanhosSele[i - 1] + ">";
                         } else {
-
-                            var qtdtamanhoi = "quantidadeTamanho" + i.toString();
-
                             cells[i][x].innerHTML = "<input name=" + qtdtamanhoi + ">";
-
                         }
 
-                    //}
+                    }
                     rows[rows.length - 1].appendChild(cells[i][x]);
+
                 }
+
             }
 
         }

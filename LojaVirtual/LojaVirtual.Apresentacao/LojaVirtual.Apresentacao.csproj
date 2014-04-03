@@ -155,7 +155,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BarraMenu.cs" />
+    <Compile Include="Helpers\Validacao.cs" />
     <Compile Include="Mappers\AutoMapperRegister.cs" />
+    <Compile Include="Mappers\ViewParaModeloFotoResolver.cs" />
     <Compile Include="Mappers\ModeloParaViewFotoResolver.cs" />
     <Compile Include="Mappers\ModeloParaViewProdutoResolver.cs" />
     <Compile Include="Mappers\ModeloParaViewMappingProfile.cs" />

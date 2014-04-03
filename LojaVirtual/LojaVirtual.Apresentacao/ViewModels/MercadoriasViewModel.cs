@@ -11,7 +11,7 @@ namespace LojaVirtual.Apresentacao.ViewModels
     {
         public static string Mercadorias = "Mercadorias";
         public static string Cores = "Cores";
-        public static string MercadoriasSelecionadas = "MercadoriasSelecionadas";
+        public static string CategoriasSelecionadas = "Categoria";
         public static int NumeroDeFotosPermitidas = 5;
 
         private List<Categoria> categoriasDisponiveis;

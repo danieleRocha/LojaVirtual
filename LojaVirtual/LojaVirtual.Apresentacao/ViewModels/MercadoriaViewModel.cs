@@ -11,12 +11,21 @@ namespace LojaVirtual.Apresentacao.ViewModels
     public class MercadoriaViewModel : IViewModel
     {
         public Guid Id { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "* É necessário preencher o Nome da Mercadoria.")]
         public string Nome { get; set; }
+
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "* É necessário preencher o Preço da Mercadoria.")]
+        [Range(typeof(decimal), "0,01", "1000000000",ErrorMessage = "* O preço deve ser maior que R$ 0,00.")]
         [Display(Name = "Preço")]
-        public decimal Preco { get; set; }
-        public int NumeroDeTamanhos { get; set; }
+        public decimal? Preco { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "* É necessário preencher a Quantidade de Tamanhos.")]
+        [Range(typeof(int), "1", "1000000000", ErrorMessage = "* A quantidade de tamanhos deve ser maior que 0.")]
+        public int? QuantidadeDeTamanhos { get; set; }
 
         private List<Imagem> imagens = new List<Imagem>();
         public List<Imagem> Imagens

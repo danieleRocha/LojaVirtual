@@ -8,14 +8,18 @@ using LojaVirtual.Modelo;
 
 namespace LojaVirtual.Apresentacao.ViewModels
 {
-    public class CategoriaViewModel:IViewModel
+    public class CategoriaViewModel : IViewModel
     {
         public Guid Id { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "* É necessário preencher o Nome da Categoria.")]
         public string Nome { get; set; }
+
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
-        private List<Mercadoria> mercadorias = new List<Mercadoria>(); 
+        private List<Mercadoria> mercadorias = new List<Mercadoria>();
+
         public List<Mercadoria> Mercadorias
         {
             get { return mercadorias; }

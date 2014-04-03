@@ -27,13 +27,17 @@ namespace LojaVirtual.Apresentacao.Controllers
         public ActionResult Adicionar()
         {
             ViewData[CategoriasViewModel.MercadoriasCadastradas] = repositorioDeMercadorias.ObterTodos();
-
             return View();
         }
 
         [HttpPost]
         public ActionResult Adicionar(CategoriaViewModel categoriaViewModel, FormCollection form)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewData[CategoriasViewModel.MercadoriasCadastradas] = repositorioDeMercadorias.ObterTodos();
+                return View();
+            }
 
             if (form[CategoriasViewModel.MercadoriasSelecionadas] != null)
             {
@@ -53,14 +57,17 @@ namespace LojaVirtual.Apresentacao.Controllers
 
             if (adicionado)
                 return RedirectToAction("Listar");
-            else
-                return RedirectToAction("Adicionar");
+
+            ViewData[CategoriasViewModel.MercadoriasCadastradas] = repositorioDeMercadorias.ObterTodos();
+            ViewBag.Errou = true;
+            ViewBag.Mensagem = "Não foi possível cadastrar a Categoria. Por favor informe ao administrador do sistema.";
+            return View();
         }
 
         public ActionResult Listar(int? pagina)
         {
             var categorias = Mapper.Map<IEnumerable<Categoria>, IEnumerable<CategoriaViewModel>>(repositorioDeCategorias.ObterTodos());
-            
+
             var paginacao = new Paginacao<CategoriaViewModel>(categorias, 5);
             paginacao.VaParaPagina(pagina);
             return View(paginacao);
@@ -75,7 +82,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         public ActionResult Excluir(Guid id, int? pagina)
         {
             bool removido = repositorioDeCategorias.Excluir(id);
-            return RedirectToAction("Listar",new {pagina = pagina});
+            return RedirectToAction("Listar", new { pagina = pagina });
         }
 
         [HttpGet]
@@ -91,11 +98,26 @@ namespace LojaVirtual.Apresentacao.Controllers
         [HttpPost]
         public ActionResult Editar(CategoriaViewModel categoriaViewModel)
         {
+            var categoriaModel = Mapper.Map<Categoria, CategoriaViewModel>(repositorioDeCategorias.Obter(categoriaViewModel.Id));
+
+            if (!ModelState.IsValid)
+            {
+                ViewData[CategoriasViewModel.MercadoriasCadastradas] = repositorioDeMercadorias.ObterTodos();
+                return View(categoriaModel);
+
+            }
+
             var categoria = Mapper.Map<CategoriaViewModel, Categoria>(categoriaViewModel);
 
             bool editado = repositorioDeCategorias.Editar(categoria);
 
-            return RedirectToAction("Detalhes", new {id = categoria.Id});
+            if (editado)
+                return RedirectToAction("Detalhes", new { id = categoria.Id });
+
+            ViewData[CategoriasViewModel.MercadoriasCadastradas] = repositorioDeMercadorias.ObterTodos();
+            ViewBag.Errou = true;
+            ViewBag.Mensagem = "Não foi possível editar a Categoria. Por favor informe ao administrador do sistema.";
+            return View(categoriaModel);
         }
     }
 }

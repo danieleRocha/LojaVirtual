@@ -10,6 +10,9 @@ namespace LojaVirtual.Apresentacao.Mappers
        {
            Mapper.CreateMap<CategoriaViewModel, Categoria>();
            Mapper.CreateMap<MercadoriaViewModel, Mercadoria>();
+
+           var mapperMercadoria = Mapper.CreateMap<MercadoriaViewModel,Mercadoria>();
+           mapperMercadoria.ForMember(dest => dest.Fotos, opt => opt.ResolveUsing<ViewParaModeloFotoResolver>().ConstructedBy(() => new ViewParaModeloFotoResolver()));
        }
     }
 }

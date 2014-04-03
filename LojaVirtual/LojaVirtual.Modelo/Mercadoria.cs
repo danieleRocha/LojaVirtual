@@ -42,24 +42,6 @@ namespace LojaVirtual.Modelo
             {
                 fotos.Add(foto);
             }
-        }
-
-        public void EditarFotos(List<Guid> listaDeFotos)
-        {
-            List<Foto> fotosARemover = new List<Foto>();
-
-            foreach (var foto in Fotos)
-            {
-                var encontrada = listaDeFotos.Any(id => (id == foto.Id));
-
-                if (!encontrada)
-                    fotosARemover.Add(foto);
-            }
-
-            foreach (var foto in fotosARemover)
-            {
-                fotos.Remove(foto);
-            }
-        }
+        }       
     }
 }
