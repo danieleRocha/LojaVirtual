@@ -13,7 +13,7 @@ namespace LojaVirtual.Infraestrutura
 {
     public class BaseDao<T> : IDisposable, IDao<T> where T : class,IMap
     {
-        protected Contexto contexto;
+        protected IContexto contexto;
         protected IDbSet<T> dataBase;
 
         public BaseDao(IUnitOfWork unitOfWork)
@@ -21,7 +21,7 @@ namespace LojaVirtual.Infraestrutura
             if (unitOfWork == null)
                 throw new ArgumentNullException("unitOfWork");
 
-            contexto = unitOfWork as Contexto;
+            contexto = unitOfWork as IContexto;
 
             if (contexto == null)
                 throw new ArgumentNullException("unitOfWork");
@@ -94,7 +94,7 @@ namespace LojaVirtual.Infraestrutura
                         entry.State = EntityState.Modified;
                     }
                 }
-                contexto.SaveChanges();
+                contexto.Save();
                 return true;
             }
             catch

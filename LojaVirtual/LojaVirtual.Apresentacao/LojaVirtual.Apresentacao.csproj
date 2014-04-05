@@ -150,11 +150,14 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MercadoriaController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BarraMenu.cs" />
+    <Compile Include="Helpers\SubmitAttribute.cs" />
     <Compile Include="Helpers\Validacao.cs" />
     <Compile Include="Mappers\AutoMapperRegister.cs" />
     <Compile Include="Mappers\ViewParaModeloFotoResolver.cs" />
@@ -164,6 +167,8 @@
     <Compile Include="Mappers\ViewParaModeloMappingProfile.cs" />
     <Compile Include="Model\FabricaDeImagem.cs" />
     <Compile Include="Model\Imagem.cs" />
+    <Compile Include="ViewModels\UsuarioViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="Paginacao\Paginacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -275,6 +280,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Mercadoria\Editar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Login\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Cadastrar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

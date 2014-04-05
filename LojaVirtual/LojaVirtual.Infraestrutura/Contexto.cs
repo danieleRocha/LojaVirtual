@@ -4,7 +4,7 @@ using LojaVirtual.Infraestrutura.Maps;
 
 namespace LojaVirtual.Infraestrutura
 {
-    public class Contexto : DbContext,IUnitOfWork
+    public class Contexto : ContextoBase
     {
         //public Contexto()
         //    : base("Name=BaseDeDadosLojaVirtual")
@@ -17,17 +17,5 @@ namespace LojaVirtual.Infraestrutura
         public DbSet<CategoriaMap> Categoria { get; set; }
         public DbSet<FotoMap> Foto { get; set; }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<MercadoriaMap>().HasRequired(c=>c.Categorias).WillCascadeOnDelete();
-
-        //    base.OnModelCreating(modelBuilder);
-        //}
-        
-        public void Save()
-        {
-            base.SaveChanges();
-        }
-       
     }
 }

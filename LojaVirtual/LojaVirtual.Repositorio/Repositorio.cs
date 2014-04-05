@@ -12,11 +12,11 @@ namespace LojaVirtual.Repositorio
         where TData : class
     {
         private IDao<TData> dao;
-        private Contexto contexto;
+        private IContexto contexto;
 
         public Repositorio()
         {
-            contexto = FabricaDeContexto.Instancia().ObterContexto();
+            contexto = FabricaDeContexto.Instancia().ObterContexto<TData>();
             dao = FabricaDeDaos.Instancia().ObterDao<TData>(contexto);
         }
 

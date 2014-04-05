@@ -1,23 +1,37 @@
 ﻿
+using LojaVirtual.Infraestrutura.Autenticacao;
+
 namespace LojaVirtual.Infraestrutura
 {
     public class BancoDeDados
     {
-        readonly Contexto dataBase;
+        readonly Contexto baseDados;
+        private readonly ContextoAutenticacao baseAutenticacao;
 
         public BancoDeDados()
         {
-            dataBase = new Contexto();
+            baseDados = new Contexto();
+            baseAutenticacao = new ContextoAutenticacao();
         }
 
-        public void Criar()
+        public void CriarBaseDados()
         {
-            dataBase.Database.Create();
+            baseDados.Database.Create();
         }
 
-        public void Excluir()
+        public void ExcluirBaseDados()
         {
-            dataBase.Database.Delete();
+            baseDados.Database.Delete();
+        }
+
+        public void CriarBaseAutenticacao()
+        {
+            baseAutenticacao.Database.Create();
+        }
+
+        public void ExcluirBaseAutenticacao()
+        {
+            baseAutenticacao.Database.Delete();
         }
     }
 }

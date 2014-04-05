@@ -1,21 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Infrastructure;
+using LojaVirtual.Infraestrutura.Autenticacao;
 
 namespace LojaVirtual.Infraestrutura.Maps
 {
-    [Table("Produto")]
-    public class ProdutoMap : IMap
+    [Table("Permissao")]
+    public class PermissaoMap : IMap
     {
         [Key]
         public Guid Id { get; set; }
 
-        public string Tamanho { get; set; }
-        public string Estado { get; set; }
-
         [Required]
-        public virtual MercadoriaMap Mercadoria { get; set; }
+        public string Nome { get; set; }
+
+        public virtual ICollection<UsuarioMap> Usuarios { get; set; }
 
         public void Atualizar(IContexto contexto)
         {

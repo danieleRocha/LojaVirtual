@@ -21,10 +21,10 @@
 
 @using (Html.BeginForm())
 {
-    @Html.ValidationSummaryBootstrap();
+    @Html.ValidationSummaryBootstrap()
     
     <legend>Editar Categoria</legend>
-    <label><strong>Nome</strong></label>
+    <label><strong>Nome</strong><strong style="color: red">*</strong></label>
     <div class="control-group @if (!ViewData.ModelState.IsValidField("Nome"))
                               { @Html.Raw("error")}">
         <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
@@ -37,7 +37,7 @@
                            new List<SelectListItem>(mercadoriasCadastradas.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString(), Selected = (Model.Mercadorias.FirstOrDefault(m => m.Id == c.Id) != null) }).ToList()),
                            new { @class = "input-large" })
     </div>
-       
+    <label style="color: red">*Campo obrigatório.</label>      
     <p>
         <input type="submit" name="Editar" value="Confirmar" class="btn btn-primary" />
         @Html.ActionLink("Voltar", "Listar", new { }, new { @class = "btn btn-inverse" })

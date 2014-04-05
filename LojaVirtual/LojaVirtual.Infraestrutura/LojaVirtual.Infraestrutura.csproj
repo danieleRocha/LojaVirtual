@@ -33,17 +33,28 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Autenticacao\ContextoAutenticacao.cs" />
     <Compile Include="BancoDeDados.cs" />
     <Compile Include="BaseDao.cs" />
     <Compile Include="Contexto.cs" />
+    <Compile Include="ContextoBase.cs" />
+    <Compile Include="Daos\PermissaoDao.cs" />
+    <Compile Include="Daos\UsuarioDao.cs" />
+    <Compile Include="Daos\EnderecoDao.cs" />
+    <Compile Include="Daos\TelefoneDao.cs" />
     <Compile Include="Daos\FotoDao.cs" />
-    <Compile Include="NewBaseDao.cs" />
+    <Compile Include="IContexto.cs" />
+    <Compile Include="Maps\PermissaoMap.cs" />
+    <Compile Include="Maps\EnderecoMap.cs" />
+    <Compile Include="Maps\TelefoneMap.cs" />
+    <Compile Include="Maps\UsuarioMap.cs" />
     <Compile Include="FabricaDeContexto.cs" />
     <Compile Include="Maps\CategoriaMap.cs" />
     <Compile Include="Maps\FotoMap.cs" />

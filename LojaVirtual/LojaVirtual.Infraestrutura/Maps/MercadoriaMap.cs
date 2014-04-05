@@ -33,9 +33,9 @@ namespace LojaVirtual.Infraestrutura.Maps
             Categorias = new Collection<CategoriaMap>();
         }
 
-        public void Atualizar(Contexto contexto)
+        public void Atualizar(IContexto contexto)
         {
-            var mercadoriaParaAtualizar = contexto.Mercadoria.Find(Id);
+            var mercadoriaParaAtualizar = ((Contexto)contexto).Mercadoria.Find(Id);
             if (mercadoriaParaAtualizar != null)
             {
                 var fotosParaRemover = new List<FotoMap>();
@@ -88,7 +88,7 @@ namespace LojaVirtual.Infraestrutura.Maps
             }
         }
 
-        public void RemoverDependencias(Contexto contexto)
+        public void RemoverDependencias(IContexto contexto)
         {
             //Manter vazio: Dependências são removidas automaticamente.
         }

@@ -28,7 +28,7 @@
      @Html.ValidationSummaryBootstrap()
     
     <legend>Editar Mercadoria</legend>
-    <label><strong>Nome</strong></label>
+    <label><strong>Nome</strong><strong style="color: red">*</strong></label>
     <div class="control-group @if (!ViewData.ModelState.IsValidField("Nome"))
                               { @Html.Raw("error")}">
         <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
@@ -37,7 +37,7 @@
     
     <label><strong>Descrição</strong></label>
     <div>@Html.TextAreaFor(a => a.Descricao, new { @class = "span7", @rows = 5, @id = "texto" })</div>
-    <label><strong>Preço</strong></label>
+    <label><strong>Preço</strong><strong style="color: red">*</strong></label>
     
     <div class="control-group @if (!ViewData.ModelState.IsValidField("Preco"))
                               { @Html.Raw("error")}">
@@ -47,7 +47,7 @@
         </div>
         <div>@Html.ValidationMessageFor(a => a.Preco, string.Empty, new { @class = "text-error" })</div>
     </div>
-    <label><strong>Categorias</strong></label>
+    <label><strong>Categorias</strong><strong style="color: red">*</strong></label>
     <div class="control-group @if (!ViewData.ModelState.IsValidField("Cat"))
                               { @Html.Raw("error")}">
         <div>@Html.ListBox(MercadoriasViewModel.CategoriasSelecionadas,
@@ -57,7 +57,7 @@
         <div>@Html.ValidationMessage("Cat", new { @class = "text-error" })</div>
     </div>  
     
-    <label><strong>Cores</strong></label>
+    <label><strong>Cores</strong><strong style="color: red">*</strong></label>
     <div class="control-group @if (!ViewData.ModelState.IsValidField("Cor"))
                               { @Html.Raw("error")}">
         <div>@Html.ListBox(MercadoriasViewModel.Cores,
@@ -67,14 +67,14 @@
         <div>@Html.ValidationMessage("Cor", new { @class = "text-error" })</div>
     </div>
     
-    <label><strong>Quantidade de Tamanhos Disponíveis</strong></label>
+    <label><strong>Quantidade de Tamanhos Disponíveis</strong><strong style="color: red">*</strong></label>
     <div class="control-group @if (!ViewData.ModelState.IsValidField("QuantidadeDeTamanhos"))
                               { @Html.Raw("error")}">
         <div>@Html.TextBoxFor(a => a.QuantidadeDeTamanhos, new { @class = "input-large", @id = "Tamanho" })</div>
         <div>@Html.ValidationMessageFor(a => a.QuantidadeDeTamanhos, string.Empty, new { @class = "text-error" })</div>
     </div> 
     
-    <label><strong>Tamanhos</strong></label>
+    <label><strong>Tamanhos</strong><strong style="color: red">*</strong></label>
     <div class="control-group @if (!ViewData.ModelState.IsValidField("Tamanho"))
                               { @Html.Raw("error")}">
         <table class="table table-bordered table table-striped" id="tabelaTamanho">
@@ -91,7 +91,7 @@
         }
     </div>
     <div>
-        <label><strong>Adicionar Fotos</strong></label>
+        <label><strong>Adicionar Fotos</strong><strong style="color: red">*</strong></label>
         <div class="control-group @if (!ViewData.ModelState.IsValidField("Foto"))
                                   { @Html.Raw("error")}">
             <ul class="inline">
@@ -159,7 +159,7 @@
             <div>@Html.ValidationMessage("Foto", new { @class = "text-error" })</div>
          </div>
     </div>
-        
+    <label style="color: red">*Campos obrigatórios.</label>       
     <p>
         <input type="submit" name="Editar" value="Confirmar" class="btn btn-primary" />
         @Html.ActionLink("Voltar", "Listar", new { }, new { @class = "btn btn-inverse" })

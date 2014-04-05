@@ -1,11 +1,10 @@
 ﻿@using System.Globalization
 @using LojaVirtual.Apresentacao.Helpers
 @using LojaVirtual.Apresentacao.ViewModels
-@using LojaVirtual.Modelo
-@model CategoriaViewModel
+@model UsuarioViewModel
 
 @{
-    List<Mercadoria> mercadoriasCadastradas = (List<Mercadoria>)ViewData[CategoriasViewModel.MercadoriasCadastradas];     
+    
 }
 
 <!DOCTYPE html>
@@ -23,7 +22,8 @@
 {
     @Html.ValidationSummaryBootstrap()
         
-    <legend>Cadastro de nova Categoria</legend>
+    <legend>Cadastro de novo Cliente</legend>
+    
     <label><strong>Nome</strong><strong style="color: red">*</strong></label>
         
     <div class="control-group @if (!ViewData.ModelState.IsValidField("Nome"))
@@ -31,13 +31,27 @@
         <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
         <div>@Html.ValidationMessageFor(a => a.Nome, string.Empty, new { @class = "text-error" })</div>
     </div>  
-    <label><strong>Descrição</strong></label>
-    <div>@Html.TextAreaFor(a => a.Descricao, new { @class = "span7", @rows = 5, @id = "texto" })</div>
-    <label><strong>Mercadorias</strong></label>
-    <div>@Html.ListBox(CategoriasViewModel.MercadoriasSelecionadas,
-                           new List<SelectListItem>(mercadoriasCadastradas.Select(c => new SelectListItem { Text = c.Nome.ToString(CultureInfo.InvariantCulture), Value = c.Id.ToString() }).ToList()),
-                           new { @class = "input-large" })
-    </div>
+    <label><strong>CPF</strong><strong style="color: red">*</strong></label>
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("Cpf"))
+                              { @Html.Raw("error")}">
+        <div>@Html.TextBoxFor(a => a.Cpf, new { @class = "input-xxlarge" })</div>
+        <div>@Html.ValidationMessageFor(a => a.Cpf, string.Empty, new { @class = "text-error" })</div>
+    </div> 
+    
+    <label><strong>Data de nascimento</strong><strong style="color: red">*</strong></label>
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("DataDeNascimento"))
+                              { @Html.Raw("error")}">
+        <div>@Html.TextBoxFor(a => a.DataDeNascimento, new { @class = "input-xxlarge" })</div>
+        <div>@Html.ValidationMessageFor(a => a.DataDeNascimento, string.Empty, new { @class = "text-error" })</div>
+    </div> 
+    
+    <label><strong>E-mail</strong><strong style="color: red">*</strong></label>
+    <div class="control-group @if (!ViewData.ModelState.IsValidField("Email"))
+                              { @Html.Raw("error")}">
+        <div>@Html.TextBoxFor(a => a.Email, new { @class = "input-xxlarge" })</div>
+        <div>@Html.ValidationMessageFor(a => a.Email, string.Empty, new { @class = "text-error" })</div>
+    </div> 
+    
     <label style="color: red">*Campo obrigatório.</label>   
     <p>
         <input type="submit" name="Adicionar" value="Cadastrar" class="btn btn-primary" />

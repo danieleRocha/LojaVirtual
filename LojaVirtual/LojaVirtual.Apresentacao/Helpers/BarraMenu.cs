@@ -35,5 +35,20 @@ namespace LojaVirtual.Apresentacao.Helpers
             return new MvcHtmlString(html);
         }
 
+        public static MvcHtmlString Principal()
+        {
+            string html = "";
+
+            html = String.Format("<div class=\"navbar\">");
+            html = String.Format("{0}    <div class=\"navbar-inner\">", html);
+            html = String.Format("{0}        <ul class=\"nav  pull-right\" role=\"navigation\">", html);
+            html = String.Format("{0}            <li><a tabindex=\"-1\" href=\"/Login/Login/\"><i class=\"icon-user\"></i> Entrar</a></li>", html);//Menu Entrar
+            html = String.Format("{0}        </ul>", html);
+            html = String.Format("{0}    </div>", html);
+            html = String.Format("{0}</div>", html);
+
+            return new MvcHtmlString(html);
+        }
+
     }
 }

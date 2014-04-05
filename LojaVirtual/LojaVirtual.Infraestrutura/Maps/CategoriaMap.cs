@@ -24,9 +24,9 @@ namespace LojaVirtual.Infraestrutura.Maps
             Mercadorias = new Collection<MercadoriaMap>();
         }
 
-        public void Atualizar(Contexto contexto)
+        public void Atualizar(IContexto contexto)
         {
-            var categoriaParaAtualizar = contexto.Categoria.Find(Id);
+            var categoriaParaAtualizar = ((Contexto)contexto).Categoria.Find(Id);
             if (categoriaParaAtualizar != null)
             {
                 var mercadoriasParaRemover = new List<MercadoriaMap>();
@@ -48,7 +48,7 @@ namespace LojaVirtual.Infraestrutura.Maps
                     bool adicionar = categoriaParaAtualizar.Mercadorias.All(merc => merc.Id != mercadoria.Id);
                     if (adicionar)
                     {
-                        var merc = contexto.Mercadoria.Find(mercadoria.Id);
+                        var merc = ((Contexto)contexto).Mercadoria.Find(mercadoria.Id);
                         if (merc != null)
                         {                           
                             categoriaParaAtualizar.Mercadorias.Add(merc);
@@ -63,7 +63,7 @@ namespace LojaVirtual.Infraestrutura.Maps
             }
         }
         
-        public void RemoverDependencias(Contexto contexto)
+        public void RemoverDependencias(IContexto contexto)
         {
             if (Mercadorias.Count == 0)
                 return;

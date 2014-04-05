@@ -1,0 +1,97 @@
+﻿@using LojaVirtual.Apresentacao.Helpers
+@model LojaVirtual.Apresentacao.ViewModels.LoginViewModel
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
+    <link href="~/Content/jasny-bootstrap/css/jasny-bootstrap.css" media="screen" rel="stylesheet" />
+    <title>Identificação</title>
+</head>
+
+@using (Html.BeginForm())
+{
+    <legend>Identificação</legend>
+    <p>
+    </p>
+    <ul class="unstyled">
+        <li class="span5">
+            <h4>Já sou cliente</h4>
+            @if (ViewBag.Autenticacao)
+            {
+                @Html.ValidationSummaryBootstrap()
+            }
+            <label><strong>E-mail</strong><strong style="color: red">*</strong></label>
+            <div class="control-group @if (!ViewData.ModelState.IsValidField("Email"))
+                                      { @Html.Raw("error")}">
+                <div>@Html.TextBoxFor(a => a.Email, new { @class = "input-xlarge", @placeholder = "Digite seu e-mail" })</div>
+                <div>@Html.ValidationMessageFor(a => a.Email, string.Empty, new { @class = "text-error" })</div>
+                <div>@Html.ActionLink("Esqueceu seu e-mail?", "RecuperarEmail", new { })</div>
+            </div>
+            <label><strong>Senha</strong><strong style="color: red">*</strong></label>
+            <div class="control-group @if (!ViewData.ModelState.IsValidField("Senha"))
+                                      { @Html.Raw("error")}">
+                <div>@Html.TextBoxFor(a => a.Senha, new { @class = "input-xlarge", @type = "password", @placeholder = "Digite sua senha" })</div>
+                <div>@Html.ValidationMessageFor(a => a.Senha, string.Empty, new { @class = "text-error" })</div>
+                <div>@Html.ActionLink("Esqueceu sua senha?", "RecuperarSenha", new { })</div>
+            </div>
+
+            <label style="color: red">*Campos obrigatórios.</label>
+            <p>
+                <input type="submit" name="Autenticar" value="Autenticar" class="btn btn-primary" /> 
+            </p>
+        </li>
+        <li class="span5">
+            <h4>Ainda não sou cliente</h4>
+            @if (ViewBag.Cadastro)
+            {
+                @Html.ValidationSummaryBootstrap()
+            }
+            <label><strong>E-mail</strong><strong style="color: red">*</strong></label>
+            <div class="control-group @if (!ViewData.ModelState.IsValidField("EmailCadastro"))
+                                      { @Html.Raw("error")}">
+                <div>@Html.TextBoxFor(a => a.EmailCadastro, new { @class = "input-xlarge", @placeholder = "Digite seu e-mail" })</div>
+                <div>@Html.ValidationMessageFor(a => a.EmailCadastro, string.Empty, new { @class = "text-error" })</div>
+            </div>
+
+            <label style="color: red">*Campo obrigatório.</label>
+            <p>
+                <input type="submit" name="Cadastrar" value="Cadastrar" class="btn btn-primary" />              
+            </p>
+        </li>
+    </ul>
+    
+    <a id="mm" href="#myModal" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel" class="text-error">Erro!</h3>
+        </div>
+        <div class="modal-body">
+            <p class="text-error">@ViewBag.Mensagem</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        </div>
+    </div>
+    
+    
+    <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.js"></script>    
+    <script src="~/Content/jasny-bootstrap/js/jasny-bootstrap.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            var f = '@ViewBag.Errou';
+            if (f == "True") {
+                document.getElementById('mm').click();
+            }
+        });
+    </script>
+}
+
+
+
+</html>

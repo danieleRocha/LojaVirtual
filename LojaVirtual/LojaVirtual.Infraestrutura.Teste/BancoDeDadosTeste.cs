@@ -17,7 +17,13 @@ namespace LojaVirtual.Infraestrutura.Teste
         [TestMethod]
         public void Criar()
         {
-            banco.Criar();
+            banco.CriarBaseDados();
+        }
+
+        [TestMethod]
+        public void CriarBaseAutenticacao()
+        {
+            banco.CriarBaseAutenticacao();
         }
 
         //[TestMethod]
@@ -29,8 +35,15 @@ namespace LojaVirtual.Infraestrutura.Teste
         [TestMethod]
         public void Recriar()
         {
-            banco.Excluir();
-            banco.Criar();
+            banco.ExcluirBaseDados();
+            banco.CriarBaseDados();
+        }
+
+        [TestMethod]
+        public void RecriarBaseAutenticacao()
+        {
+            banco.ExcluirBaseAutenticacao();
+            banco.CriarBaseAutenticacao();
         }
     }
 }

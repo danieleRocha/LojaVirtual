@@ -19,12 +19,12 @@ namespace LojaVirtual.Infraestrutura.Maps
         [Required]
         public virtual MercadoriaMap Mercadoria { get; set; }
 
-        public void Atualizar(Contexto contexto)
+        public void Atualizar(IContexto contexto)
         {
            
         }
         
-        public void RemoverDependencias(Contexto contexto)
+        public void RemoverDependencias(IContexto contexto)
         {
             
         }

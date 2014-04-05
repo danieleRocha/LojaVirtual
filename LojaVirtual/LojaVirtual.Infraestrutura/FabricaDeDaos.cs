@@ -9,6 +9,10 @@ namespace LojaVirtual.Infraestrutura
         private MercadoriaDao MercadoriaDao { get; set; }
         private CategoriaDao CategoriaDao { get; set; }
         private FotoDao FotoDao { get; set; }
+        private TelefoneDao TelefoneDao { get; set; }
+        private UsuarioDao UsuarioDao { get; set; }
+        private EnderecoDao EnderecoDao { get; set; }
+        private PermissaoDao PermissaoDao { get; set; }
 
         public static FabricaDeDaos Instancia()
         {
@@ -20,7 +24,7 @@ namespace LojaVirtual.Infraestrutura
             internal static readonly FabricaDeDaos instancia = new FabricaDeDaos();
         }
 
-        public IDao<T> ObterDao<T>(Contexto unitOfWork) where T : class
+        public IDao<T> ObterDao<T>(IContexto unitOfWork) where T : class
         {
             IDao<T> dao = null;
 
@@ -51,6 +55,34 @@ namespace LojaVirtual.Infraestrutura
                     FotoDao = new FotoDao(unitOfWork);
 
                 dao = (IDao<T>)FotoDao;
+            }
+            else if (typeof(T) == typeof(UsuarioMap))
+            {
+                if (UsuarioDao == null)
+                    UsuarioDao = new UsuarioDao(unitOfWork);
+
+                dao = (IDao<T>)UsuarioDao;
+            }
+            else if (typeof(T) == typeof(TelefoneMap))
+            {
+                if (TelefoneDao == null)
+                    TelefoneDao = new TelefoneDao(unitOfWork);
+
+                dao = (IDao<T>)TelefoneDao;
+            }
+            else if (typeof(T) == typeof(EnderecoMap))
+            {
+                if (EnderecoDao == null)
+                    EnderecoDao = new EnderecoDao(unitOfWork);
+
+                dao = (IDao<T>)EnderecoDao;
+            }
+            else if (typeof(T) == typeof(PermissaoMap))
+            {
+                if (PermissaoDao == null)
+                    PermissaoDao = new PermissaoDao(unitOfWork);
+
+                dao = (IDao<T>)PermissaoDao;
             }
             
             return dao;

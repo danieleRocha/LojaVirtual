@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace LojaVirtual.Servico
 {
-    public interface IServico<T> where T : class 
+    public class Seguranca 
     {
-
+        public static bool AutenticarUsuario(string login, string senha)
+        {
+            return false;
+        }
     }
 }
