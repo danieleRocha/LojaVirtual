@@ -9,7 +9,7 @@ using LojaVirtual.Modelo;
 
 namespace LojaVirtual.Repositorio.Mappers
 {
-    public class DadosParaModeloResolver:ValueResolver<MercadoriaMap,List<string>>
+    public class DadosParaModeloMercadoriaResolver:ValueResolver<MercadoriaMap,List<string>>
     {
         protected override List<string> ResolveCore(MercadoriaMap mercadoriaMap)
         {

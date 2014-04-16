@@ -12,9 +12,14 @@ namespace LojaVirtual.Repositorio.Mappers
         {
             Mapper.CreateMap<Produto, ProdutoMap>();
             Mapper.CreateMap<Mercadoria, MercadoriaMap>();
-            Mapper.CreateMap<Mercadoria, MercadoriaMap>().ForMember(dest => dest.Cores, opt => opt.ResolveUsing<ModeloParaDadosResolver>().ConstructedBy(() => new ModeloParaDadosResolver()));
+            Mapper.CreateMap<Mercadoria, MercadoriaMap>().ForMember(dest => dest.Cores, opt => opt.ResolveUsing<ModeloParaDadosMercadoriaResolver>().ConstructedBy(() => new ModeloParaDadosMercadoriaResolver()));
             Mapper.CreateMap<Categoria, CategoriaMap>();
             Mapper.CreateMap<Foto, FotoMap>();
+            Mapper.CreateMap<Usuario, UsuarioMap>();
+            Mapper.CreateMap<Permissao, PermissaoMap>();
+            Mapper.CreateMap<Telefone, TelefoneMap>();
+            Mapper.CreateMap<Endereco, EnderecoMap>();
+            //Mapper.CreateMap<Permissao, PermissaoMap>().ForMember(dest => dest.Tipo, opt => opt.ResolveUsing<ModeloParaDadosPermissaoResolver>().ConstructedBy(() => new ModeloParaDadosPermissaoResolver()));
         }
     }
 }

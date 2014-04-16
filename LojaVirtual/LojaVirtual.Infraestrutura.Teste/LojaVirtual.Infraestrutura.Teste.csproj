@@ -75,6 +75,10 @@
       <Project>{C8FC2371-B2D3-454E-8259-F8C61C8AD97D}</Project>
       <Name>LojaVirtual.Modelo</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LojaVirtual.Repositorio\LojaVirtual.Repositorio.csproj">
+      <Project>{95396B57-D038-48FE-84DD-DAA4561056CD}</Project>
+      <Name>LojaVirtual.Repositorio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

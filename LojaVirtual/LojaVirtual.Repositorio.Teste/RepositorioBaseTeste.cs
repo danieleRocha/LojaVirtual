@@ -24,5 +24,6 @@ namespace LojaVirtual.Repositorio.Teste
 
             Assert.AreNotEqual(lista.Count,0);
         }
+
     }
 }

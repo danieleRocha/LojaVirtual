@@ -5,11 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using LojaVirtual.Apresentacao.Helpers;
 using LojaVirtual.Apresentacao.ViewModels;
+using LojaVirtual.Modelo;
+using LojaVirtual.Repositorio;
 
 namespace LojaVirtual.Apresentacao.Controllers
 {
     public class LoginController : Controller
     {
+        private IRepositorio<Usuario> repositorioDeUsuarios;
+
+        public LoginController(IRepositorio<Usuario> repositorioDeUsuarios)
+        {
+            this.repositorioDeUsuarios = repositorioDeUsuarios;
+        }
+
         [HttpGet]
         public ActionResult Login()
         {
@@ -30,6 +39,16 @@ namespace LojaVirtual.Apresentacao.Controllers
                 ViewBag.Cadastro = true;
                 ViewBag.Autenticacao = false;
                 return View("Login", loginViewModel);
+            }
+
+            if (repositorioDeUsuarios.ObterTodos().Any(usuario => usuario.Email == loginViewModel.EmailCadastro))
+            {
+                ViewBag.Cadastro = false;
+                ViewBag.Autenticacao = false;
+                ViewBag.Errou = true;
+                ViewBag.Mensagem =
+                    "Este e-mail já foi cadastrado. Por favor digite o e-mail e a senha nos campos ao lado.";
+                return View(loginViewModel);
             }
 
             return RedirectToAction("Cadastrar","Usuario", new { email = loginViewModel.EmailCadastro });

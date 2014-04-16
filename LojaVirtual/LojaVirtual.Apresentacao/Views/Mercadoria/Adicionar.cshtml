@@ -88,77 +88,77 @@
         </table>
         @foreach (var msg in ViewData.ModelState.Where(tam => tam.Key == "Tamanho").SelectMany(tam => tam.Value.Errors))
         {
-            <div>@Html.ValidationMessage("Tamanho",msg.ErrorMessage, new { @class = "text-error" })</div>
+            <div>@Html.ValidationMessage("Tamanho", msg.ErrorMessage, new { @class = "text-error" })</div>
         }
     </div>
     <div>
         <label><strong>Adicionar Fotos</strong><strong style="color: red">*</strong></label>
         <div class="control-group @if (!ViewData.ModelState.IsValidField("Foto"))
-                              { @Html.Raw("error")}">
+                                  { @Html.Raw("error")}">
             <ul class="inline">
-            @for (int i = 0; i < MercadoriasViewModel.NumeroDeFotosPermitidas; i++)
-            {
-                var nome = "imagem" + i;
-                var nomeFoto = "foto" + i;
-                var nome2 = "imagem" + i + i;
-                var foto = "../../Content/SemImagem.gif";
-                var nomeImagem = nome + "Nome";
-                var conteudoImagem = nome + "Conteudo";
-                var tamanhoImagem = nome + "Tamanho";
-                var formatoImagem = nome + "Formato";
+                @for (int i = 0; i < MercadoriasViewModel.NumeroDeFotosPermitidas; i++)
+                {
+                    var nome = "imagem" + i;
+                    var nomeFoto = "foto" + i;
+                    var nome2 = "imagem" + i + i;
+                    var foto = "../../Content/SemImagem.gif";
+                    var nomeImagem = nome + "Nome";
+                    var conteudoImagem = nome + "Conteudo";
+                    var tamanhoImagem = nome + "Tamanho";
+                    var formatoImagem = nome + "Formato";
 
-                if (Model.Imagens.Count > i)
-                {
-                    foto = Model.Imagens[i].ConteudoMisto;
-                }
+                    if (Model.Imagens.Count > i)
+                    {
+                        foto = Model.Imagens[i].ConteudoMisto;
+                    }
 
-                if (foto == "../../Content/SemImagem.gif")
-                {
-                <li class="fileupload fileupload-new" data-provides="fileupload" data-name="images">
-                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="images" />
-                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                        <img src=@foto alt="..."/>
-                    </div>
-                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                    <div>
-                        <span class="btn btn-file">
-                            <span class="fileupload-new">Procurar Imagem...</span>
-                            <span class="fileupload-exists">Alterar</span>
-                            <input type="file" />
+                    if (foto == "../../Content/SemImagem.gif")
+                    {
+                    <li class="fileupload fileupload-new" data-provides="fileupload" data-name="images">
+                        <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="images" />
+                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                            <img src=@foto alt="..."/>
+                        </div>
+                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                        <div>
+                            <span class="btn btn-file">
+                                <span class="fileupload-new">Procurar Imagem...</span>
+                                <span class="fileupload-exists">Alterar</span>
+                                <input type="file" />
+                            </span>
+                            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                        </div>
+                    </li>
+                    }
+                    else
+                    {
+                    <li class="fileupload fileupload-exists" data-provides="fileupload" data-name="images">
+                        <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="images" />
+                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                            <img src="../../Content/SemImagem.gif" />
+                        </div>
+                        <span class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+                            <img src=@foto alt="..." >
                         </span>
-                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
-                    </div>
-                </li>
+                        <div>
+                            <span class="btn btn-file">
+                                <span class="fileupload-new">Procurar Imagem...</span>
+                                <span class="fileupload-exists">Alterar</span>
+                                <input type="file" id=@nomeFoto />
+                                @Html.Hidden(nome, foto, new { @id = nome2 })
+                                @Html.Hidden(nomeImagem, Model.Imagens[i].Nome)
+                                @Html.Hidden(conteudoImagem, Model.Imagens[i].Conteudo)
+                                @Html.Hidden(tamanhoImagem, Model.Imagens[i].Tamanho)
+                                @Html.Hidden(formatoImagem, Model.Imagens[i].Formato)
+                            </span>
+                            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" id=@nome>Excluir</a>
+                        </div>
+                    </li>​
+                    }
                 }
-                else
-                {
-                <li class="fileupload fileupload-exists" data-provides="fileupload" data-name="images">
-                    <input type="file" style="visibility: hidden; position: absolute; top: 0; left: 0" name="images" />
-                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                        <img src="../../Content/SemImagem.gif" />
-                    </div>
-                    <span class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
-                        <img src=@foto alt="..." >
-                    </span>
-                    <div>
-                        <span class="btn btn-file">
-                            <span class="fileupload-new">Procurar Imagem...</span>
-                            <span class="fileupload-exists">Alterar</span>
-                            <input type="file" id=@nomeFoto />
-                            @Html.Hidden(nome, foto, new { @id = nome2 })
-                            @Html.Hidden(nomeImagem, Model.Imagens[i].Nome)
-                            @Html.Hidden(conteudoImagem, Model.Imagens[i].Conteudo)
-                            @Html.Hidden(tamanhoImagem,  Model.Imagens[i].Tamanho)
-                            @Html.Hidden(formatoImagem, Model.Imagens[i].Formato)
-                        </span>
-                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" id=@nome>Excluir</a>
-                    </div>
-                </li>​
-                }
-            }
-        </ul>
+            </ul>
             <div>@Html.ValidationMessage("Foto", new { @class = "text-error" })</div>
-         </div>
+        </div>
     </div>
     <label style="color: red">*Campos obrigatórios.</label>       
     <p>

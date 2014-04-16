@@ -9,7 +9,7 @@ namespace LojaVirtual.Apresentacao.Mappers
        protected override void Configure()
        {
            Mapper.CreateMap<CategoriaViewModel, Categoria>();
-           Mapper.CreateMap<MercadoriaViewModel, Mercadoria>();
+           Mapper.CreateMap<UsuarioViewModel, Usuario>();
 
            var mapperMercadoria = Mapper.CreateMap<MercadoriaViewModel,Mercadoria>();
            mapperMercadoria.ForMember(dest => dest.Fotos, opt => opt.ResolveUsing<ViewParaModeloFotoResolver>().ConstructedBy(() => new ViewParaModeloFotoResolver()));

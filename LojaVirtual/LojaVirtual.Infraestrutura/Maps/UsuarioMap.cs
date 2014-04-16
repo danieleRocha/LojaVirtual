@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Infrastructure;
@@ -34,10 +35,15 @@ namespace LojaVirtual.Infraestrutura.Maps
         public virtual ICollection<TelefoneMap> Telefones { get; set; }
 
         [Required]
-        public virtual ICollection<EnderecoMap> Enderecos { get; set; }
+        public EnderecoMap Endereco { get; set; }
 
         [Required]
         public virtual PermissaoMap Permissao { get; set; }
+
+        public UsuarioMap()
+        {
+            Telefones = new Collection<TelefoneMap>();
+        }
 
         public void Atualizar(IContexto contexto)
         {

@@ -38,6 +38,10 @@ namespace LojaVirtual.Apresentacao
               new ContainerControlledLifetimeManager());
           container.RegisterType<IRepositorio<Mercadoria>, Repositorio<Mercadoria, MercadoriaMap>>(
               new ContainerControlledLifetimeManager());
+          container.RegisterType<IRepositorio<Usuario>, Repositorio<Usuario, UsuarioMap>>(
+              new ContainerControlledLifetimeManager());
+          container.RegisterType<IRepositorio<Permissao>, Repositorio<Permissao, PermissaoMap>>(
+              new ContainerControlledLifetimeManager());
       }
   }
 }

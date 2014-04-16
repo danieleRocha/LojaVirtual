@@ -10,6 +10,31 @@ namespace LojaVirtual.Modelo
     public class Permissao:ITipo
     {
         public Guid Id { get; set; }
-        public List<Usuario> Usuarios { get; set; }
+        public Tipos Tipo { get; set; }
+        private List<Usuario> usuarios = new List<Usuario>();
+
+        public IEnumerable<Usuario> Usuarios
+        {
+            get { return usuarios; }
+        }
+        
+        public enum Tipos
+        {
+            Administrador,
+            Gerente,
+            Cliente
+        }
+
+        public void AdicionarUsuario(Usuario usuario)
+        {
+            if (usuarios.FirstOrDefault(p => p.Id == usuario.Id) == null)
+                usuarios.Add(usuario);
+        }
+
+        public void RemoverUsuario(Usuario usuario)
+        {
+            if (usuarios.FirstOrDefault(p => p.Id == usuario.Id) == null)
+                usuarios.Remove(usuario);
+        }
     }
 }

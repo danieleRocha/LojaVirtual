@@ -8,7 +8,7 @@ using LojaVirtual.Modelo;
 
 namespace LojaVirtual.Repositorio.Mappers
 {
-    public class ModeloParaDadosResolver:ValueResolver<Mercadoria,string>
+    public class ModeloParaDadosMercadoriaResolver:ValueResolver<Mercadoria,string>
     {
         protected override string ResolveCore(Mercadoria source)
         {
