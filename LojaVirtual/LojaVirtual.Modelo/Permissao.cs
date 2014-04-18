@@ -12,10 +12,14 @@ namespace LojaVirtual.Modelo
         public Guid Id { get; set; }
         public Tipos Tipo { get; set; }
         private List<Usuario> usuarios = new List<Usuario>();
+        public static readonly string Gerente = Tipos.Gerente.ToString();
+        public static readonly string Administrador = Tipos.Administrador.ToString();
+        public static readonly string Cliente = Tipos.Cliente.ToString();
 
         public IEnumerable<Usuario> Usuarios
         {
             get { return usuarios; }
+            set { usuarios = value.ToList(); }
         }
         
         public enum Tipos

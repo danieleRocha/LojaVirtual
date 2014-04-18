@@ -20,6 +20,8 @@ namespace LojaVirtual.Apresentacao.ViewModels
         [Required(AllowEmptyStrings = false, ErrorMessage = "* Por favor informe seu e-mail.")]
         [EmailAddress(ErrorMessage = "* E-mail inválido.")]
         public string EmailCadastro { get; set; }
+
+        public string Cpf { get; set; }
     
     }
 

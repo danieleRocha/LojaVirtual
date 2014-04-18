@@ -53,7 +53,7 @@ namespace LojaVirtual.Apresentacao.Helpers
 
             div.InnerHtml += "<strong>Atenção!</strong> - " + message;
 
-            if (errorCount > 1)
+            if (errorCount > 0)
             {
                 var ul = new TagBuilder("ul");
 

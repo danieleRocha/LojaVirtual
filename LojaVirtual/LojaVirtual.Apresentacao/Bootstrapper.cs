@@ -3,6 +3,7 @@ using LojaVirtual.Infraestrutura.Daos;
 using LojaVirtual.Infraestrutura.Maps;
 using LojaVirtual.Modelo;
 using LojaVirtual.Repositorio;
+using LojaVirtual.Servico;
 using Microsoft.Practices.Unity;
 using Unity.Mvc4;
 
@@ -41,6 +42,8 @@ namespace LojaVirtual.Apresentacao
           container.RegisterType<IRepositorio<Usuario>, Repositorio<Usuario, UsuarioMap>>(
               new ContainerControlledLifetimeManager());
           container.RegisterType<IRepositorio<Permissao>, Repositorio<Permissao, PermissaoMap>>(
+              new ContainerControlledLifetimeManager());
+          container.RegisterType<ISeguranca, Seguranca>(
               new ContainerControlledLifetimeManager());
       }
   }

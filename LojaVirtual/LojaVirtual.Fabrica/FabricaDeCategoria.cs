@@ -17,7 +17,7 @@ namespace LojaVirtual.Fabrica
             internal static readonly FabricaDeCategoria instancia = new FabricaDeCategoria();
         }
 
-        public void ObterCategoria(Categoria categoria)
+        public void CriarCategoria(Categoria categoria)
         {
             categoria.Id = Guid.NewGuid();
         }

@@ -12,10 +12,8 @@ namespace LojaVirtual.Infraestrutura.Maps
         [Key]
         public Guid Id { get; set; }
 
-        [Required]
         public string Ddd { get; set; }
 
-        [Required]
         public string Numero { get; set; }
 
         public string Tipo { get; set; }

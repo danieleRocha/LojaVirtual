@@ -203,6 +203,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -239,6 +240,10 @@
     <ProjectReference Include="..\LojaVirtual.Repositorio\LojaVirtual.Repositorio.csproj">
       <Project>{95396B57-D038-48FE-84DD-DAA4561056CD}</Project>
       <Name>LojaVirtual.Repositorio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LojaVirtual.Servico\LojaVirtual.Servico.csproj">
+      <Project>{E315F9CE-02BE-4BC1-A942-3208866A4FF1}</Project>
+      <Name>LojaVirtual.Servico</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +291,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Usuario\Cadastrar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\NaoAutorizado.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -35,6 +35,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FabricaDeSeguranca.cs" />
     <Compile Include="FabricaDeUsuario.cs" />
     <Compile Include="FabricaDeCategoria.cs" />
     <Compile Include="FabricaDeFoto.cs" />
@@ -46,6 +47,14 @@
     <ProjectReference Include="..\LojaVirtual.Modelo\LojaVirtual.Modelo.csproj">
       <Project>{C8FC2371-B2D3-454E-8259-F8C61C8AD97D}</Project>
       <Name>LojaVirtual.Modelo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LojaVirtual.Repositorio\LojaVirtual.Repositorio.csproj">
+      <Project>{95396B57-D038-48FE-84DD-DAA4561056CD}</Project>
+      <Name>LojaVirtual.Repositorio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LojaVirtual.Servico\LojaVirtual.Servico.csproj">
+      <Project>{E315F9CE-02BE-4BC1-A942-3208866A4FF1}</Project>
+      <Name>LojaVirtual.Servico</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

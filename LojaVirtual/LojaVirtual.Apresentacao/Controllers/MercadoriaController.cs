@@ -12,6 +12,7 @@ using LojaVirtual.Apresentacao.ViewModels;
 using LojaVirtual.Fabrica;
 using LojaVirtual.Modelo;
 using LojaVirtual.Repositorio;
+using LojaVirtual.Servico;
 
 namespace LojaVirtual.Apresentacao.Controllers
 {
@@ -27,6 +28,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         }
 
         [HttpGet]
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Adicionar()
         {
             ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
@@ -35,6 +37,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         }
 
         [HttpPost]
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Adicionar(MercadoriaViewModel mercadoriaViewModel, FormCollection form,
                                       HttpPostedFileBase file)
         {
@@ -157,6 +160,7 @@ namespace LojaVirtual.Apresentacao.Controllers
             return View(mercadoriaViewModel);
         }
 
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Listar(int? pagina)
         {
             var mercadorias = Mapper.Map<IEnumerable<Mercadoria>, IEnumerable<MercadoriaViewModel>>(repositorioDeMercadorias.ObterTodos());
@@ -166,12 +170,14 @@ namespace LojaVirtual.Apresentacao.Controllers
             return View(paginacao);
         }
 
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Excluir(Guid id, int pagina)
         {
             bool removido = repositorioDeMercadorias.Excluir(id);
             return RedirectToAction("Listar", new { pagina = pagina });
         }
 
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Detalhes(Guid id)
         {
             var mercadoria = Mapper.Map<Mercadoria, MercadoriaViewModel>(repositorioDeMercadorias.Obter(id));
@@ -188,6 +194,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         }
 
         [HttpGet]
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Editar(Guid id)
         {
             ViewData[MercadoriasViewModel.Mercadorias]= new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
@@ -205,6 +212,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         }
 
         [HttpPost]
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Editar(MercadoriaViewModel mercadoriaViewModel, FormCollection form)
         {
             if (form[MercadoriasViewModel.CategoriasSelecionadas] != null)

@@ -18,6 +18,7 @@ namespace LojaVirtual.Infraestrutura.Maps
         [Required]
         public string Tipo { get; set; }
 
+        [Required]
         public virtual ICollection<UsuarioMap> Usuarios { get; set; }
 
         public PermissaoMap()

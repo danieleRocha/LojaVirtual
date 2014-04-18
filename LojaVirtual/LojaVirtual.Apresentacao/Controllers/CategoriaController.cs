@@ -9,6 +9,7 @@ using LojaVirtual.Apresentacao.ViewModels;
 using LojaVirtual.Fabrica;
 using LojaVirtual.Modelo;
 using LojaVirtual.Repositorio;
+using LojaVirtual.Servico;
 
 namespace LojaVirtual.Apresentacao.Controllers
 {
@@ -24,6 +25,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         }
 
         [HttpGet]
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Adicionar()
         {
             ViewData[CategoriasViewModel.MercadoriasCadastradas] = repositorioDeMercadorias.ObterTodos();
@@ -31,6 +33,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         }
 
         [HttpPost]
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Adicionar(CategoriaViewModel categoriaViewModel, FormCollection form)
         {
             if (!ModelState.IsValid)
@@ -51,7 +54,7 @@ namespace LojaVirtual.Apresentacao.Controllers
             }
 
             var categoria = Mapper.Map<CategoriaViewModel, Categoria>(categoriaViewModel);
-            FabricaDeCategoria.Instancia().ObterCategoria(categoria);
+            FabricaDeCategoria.Instancia().CriarCategoria(categoria);
 
             bool adicionado = repositorioDeCategorias.Adicionar(categoria);
 
@@ -64,6 +67,7 @@ namespace LojaVirtual.Apresentacao.Controllers
             return View();
         }
 
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Listar(int? pagina)
         {
             var categorias = Mapper.Map<IEnumerable<Categoria>, IEnumerable<CategoriaViewModel>>(repositorioDeCategorias.ObterTodos());
@@ -73,12 +77,14 @@ namespace LojaVirtual.Apresentacao.Controllers
             return View(paginacao);
         }
 
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Detalhes(Guid id)
         {
             var categoria = Mapper.Map<Categoria, CategoriaViewModel>(repositorioDeCategorias.Obter(id));
             return View(categoria);
         }
 
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Excluir(Guid id, int? pagina)
         {
             bool removido = repositorioDeCategorias.Excluir(id);
@@ -86,6 +92,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         }
 
         [HttpGet]
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Editar(Guid id)
         {
             ViewData[CategoriasViewModel.MercadoriasCadastradas] = repositorioDeMercadorias.ObterTodos();
@@ -96,6 +103,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         }
 
         [HttpPost]
+        [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult Editar(CategoriaViewModel categoriaViewModel)
         {
             var categoriaModel = Mapper.Map<Categoria, CategoriaViewModel>(repositorioDeCategorias.Obter(categoriaViewModel.Id));

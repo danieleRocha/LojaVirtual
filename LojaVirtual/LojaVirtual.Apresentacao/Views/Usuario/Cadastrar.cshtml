@@ -41,7 +41,7 @@
     <div class="control-group @if (!ViewData.ModelState.IsValidField("Cpf"))
                               { @Html.Raw("error")}">
         <div>
-            <input type="text" name="cpf" class="input-large form-control" value=@Model.Cpf data-mask="999.999.999-99">
+            <input type="text" name="cpf" class="input-large form-control" value=@Model.Cpf data-newmask="999.999.999-99">
         </div>
         <div>@Html.ValidationMessageFor(a => a.Cpf, string.Empty, new { @class = "text-error" })</div>
     </div> 
@@ -50,7 +50,7 @@
     <div class="control-group @if (!ViewData.ModelState.IsValidField("DataDeNascimento"))
                               { @Html.Raw("error")}">
         <div>
-            <input type="text" name="dataDeNascimento" class="input-large form-control" value=@Model.DataDeNascimento data-mask="99/99/9999">
+            <input type="text" name="dataDeNascimento" class="input-large form-control" value=@Model.DataDeNascimento data-newmask="99/99/9999">
         </div>
         <div>@Html.ValidationMessageFor(a => a.DataDeNascimento, string.Empty, new { @class = "text-error" })</div>
     </div> 
@@ -77,7 +77,7 @@
             </td>
             <td>
                 <div>
-                    <input type="text" name="telefoneResidencial" class="input-medium form-control" value=@Model.TelefoneResidencial data-mask="(99)9999-9999">
+                    <input type="text" name="telefoneResidencial" class="input-medium form-control" value=@Model.TelefoneResidencial data-newmask="(00)00009-0000">
                 </div>
             </td>
         </tr>
@@ -93,7 +93,7 @@
                 <div class="control-group @if (!ViewData.ModelState.IsValidField("TelefoneCelular"))
                                           { @Html.Raw("error")}">
                     <div>
-                        <input type="text" name="telefoneCelular" class="input-medium form-control" value=@Model.TelefoneCelular data-mask="(99)99999-9999">
+                        <input type="text" name="telefoneCelular" class="input-medium form-control" value=@Model.TelefoneCelular data-newmask="(00)00009-0000">
                     </div>
                     <div>@Html.ValidationMessageFor(a => a.TelefoneCelular, string.Empty, new { @class = "text-error" })</div>
                 </div>
@@ -154,7 +154,7 @@
                 <div>
                     <div class="control-group @if (!ViewData.ModelState.IsValidField("CEP"))
                                               { @Html.Raw("error")}">
-                        <input type="text" name="CEP" class="input-medium form-control" value=@Model.CEP data-mask="99.999-999">
+                        <input type="text" name="CEP" class="input-medium form-control" value=@Model.CEP data-newmask="99.999-999">
                         <div>@Html.ValidationMessageFor(a => a.CEP, string.Empty, new { @class = "text-error" })</div>
                     </div>
                 </div>
@@ -229,6 +229,7 @@
     
     
     <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.mask.min.js"></script>
     <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.js"></script>    
     <script src="~/Content/jasny-bootstrap/js/jasny-bootstrap.js"></script>
     <script>

@@ -116,6 +116,8 @@ namespace LojaVirtual.Apresentacao.ViewModels
         private Telefone ObterTelefone(Telefone.TipoDeTelefone tipo, string telefone)
         {
             var tel = new Telefone() { Tipo = tipo };
+            if (string.IsNullOrEmpty(telefone))
+                return tel;
             var charTelefone = telefone.ToCharArray();
             int dd = 0;
 

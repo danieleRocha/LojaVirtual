@@ -17,9 +17,14 @@ namespace LojaVirtual.Fabrica
             internal static readonly FabricaDeUsuario instancia = new FabricaDeUsuario();
         }
 
-        public void ObterUsuario(Usuario usuario)
+        public void CriarUsuario(Usuario usuario)
         {
             usuario.Id = Guid.NewGuid();
+            usuario.Endereco.Id = Guid.NewGuid();
+            foreach (var telefone in usuario.Telefones)
+            {
+                telefone.Id = Guid.NewGuid();
+            }
         }
     }
 }

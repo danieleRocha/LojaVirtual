@@ -8,6 +8,7 @@ using LojaVirtual.Apresentacao.ViewModels;
 using LojaVirtual.Fabrica;
 using LojaVirtual.Modelo;
 using LojaVirtual.Repositorio;
+using LojaVirtual.Servico;
 
 namespace LojaVirtual.Apresentacao.Controllers
 {
@@ -15,11 +16,12 @@ namespace LojaVirtual.Apresentacao.Controllers
     {
         private IRepositorio<Usuario> repositorioDeUsuarios;
         private IRepositorio<Permissao> repositorioDePermissoes;
-
+        
         public UsuarioController(IRepositorio<Usuario> repositorioDeUsuarios, IRepositorio<Permissao> repositorioDePermissoes)
         {
             this.repositorioDeUsuarios = repositorioDeUsuarios;
             this.repositorioDePermissoes = repositorioDePermissoes;
+            
         }
 
         public ActionResult Cadastrar(string email)
@@ -32,6 +34,19 @@ namespace LojaVirtual.Apresentacao.Controllers
         [HttpPost]
         public ActionResult Cadastrar(UsuarioViewModel usuarioViewModel)
         {
+            string mensagem = "Não foi possível realizar o cadastro. Por favor tente mais tarde.";
+
+            if (Seguranca.Autenticacao.EmailJaFoiCadastrado(usuarioViewModel.Email))
+            {
+               mensagem = "Este e-mail já foi cadastrado. Por favor informe um novo e-mail.";
+                goto errou;
+            }
+            if (Seguranca.Autenticacao.CpfJaFoiCadastrado(usuarioViewModel.Cpf))
+            {
+                mensagem = "Este CPF já foi cadastrado. Por favor informe um novo CPF.";
+                goto errou;
+            }
+
             if (!ModelState.IsValid)
             {
                 ModelState nascimento = null;
@@ -53,7 +68,7 @@ namespace LojaVirtual.Apresentacao.Controllers
 
             var usuario = Mapper.Map<UsuarioViewModel, Usuario>(usuarioViewModel);
 
-            FabricaDeUsuario.Instancia().ObterUsuario(usuario);
+            FabricaDeUsuario.Instancia().CriarUsuario(usuario);
 
             bool adicionado = false;
 
@@ -65,13 +80,17 @@ namespace LojaVirtual.Apresentacao.Controllers
                     adicionado = repositorioDePermissoes.Editar(permissao);
                 }
             }
-            
-            if (adicionado)
-                return RedirectToAction("Index","Home");
 
+            if (adicionado)
+            {
+                Seguranca.Autenticacao.AutenticarUsuario(usuario.Email, usuario.Senha);
+                return RedirectToAction("Index", "Home");
+            }
+
+            errou:
             ViewBag.Errou = true;
-            ViewBag.Mensagem = "Não foi possível realizar o cadastro. Por favor tente mais tarde.";
-            return View();
+            ViewBag.Mensagem = mensagem;
+            return View("Cadastrar", usuarioViewModel);
         }
 
     }

@@ -43,6 +43,7 @@ namespace LojaVirtual.Apresentacao.Helpers
             html = String.Format("{0}    <div class=\"navbar-inner\">", html);
             html = String.Format("{0}        <ul class=\"nav  pull-right\" role=\"navigation\">", html);
             html = String.Format("{0}            <li><a tabindex=\"-1\" href=\"/Login/Login/\"><i class=\"icon-user\"></i> Entrar</a></li>", html);//Menu Entrar
+            html = String.Format("{0}            <li><a tabindex=\"-1\" href=\"/Login/Logout/\"><i class=\"icon-off\"></i> Sair</a></li>", html);//Menu Sair
             html = String.Format("{0}        </ul>", html);
             html = String.Format("{0}    </div>", html);
             html = String.Format("{0}</div>", html);
