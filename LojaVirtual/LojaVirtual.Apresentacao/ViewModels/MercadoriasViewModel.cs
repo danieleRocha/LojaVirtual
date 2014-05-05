@@ -21,6 +21,21 @@ namespace LojaVirtual.Apresentacao.ViewModels
             get { return categoriasDisponiveis != null ? categoriasDisponiveis.AsReadOnly() : new List<Categoria>().AsReadOnly(); }
         }
 
+        private List<Categoria> todasCategoriasDisponiveis;
+
+        public ReadOnlyCollection<Categoria> TodasCategoriasDisponiveis
+        {
+            get
+            {
+                if (todasCategoriasDisponiveis == null)
+                {
+                    todasCategoriasDisponiveis = new List<Categoria> {new Categoria() {Nome = "Todas as Categorias"}};
+                    todasCategoriasDisponiveis.AddRange(CategoriasDisponiveis);
+                }
+                return todasCategoriasDisponiveis.AsReadOnly();
+            }
+        }
+
         public static string TamanhosDisponiveis
         {
             get { return ObterTamanhosDisponiveis(); }

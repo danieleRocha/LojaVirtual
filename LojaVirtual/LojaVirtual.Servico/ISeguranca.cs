@@ -8,6 +8,6 @@ namespace LojaVirtual.Servico
 {
     public interface ISeguranca
     {
-        void CriarAutenticacaoEAutorizacao();
+        
     }
 }

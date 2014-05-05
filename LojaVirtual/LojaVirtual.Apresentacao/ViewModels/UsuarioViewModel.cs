@@ -97,6 +97,17 @@ namespace LojaVirtual.Apresentacao.ViewModels
             }
         }
 
+        public string Tratamento
+        {
+            get
+            {
+                if (Sexo == Usuario.Sexos.Femenino)
+                    return "Seja bem vinda, ";
+                
+                    return "Seja bem vindo, ";
+            }
+        }
+
         public static IEnumerable<Usuario.Sexos> Sexos = Enum.GetValues(typeof(Usuario.Sexos)).Cast<Usuario.Sexos>();
 
         public static IEnumerable<Endereco.Estados> EstadosDisponiveis = Enum.GetValues(typeof(Endereco.Estados)).Cast<Endereco.Estados>();
@@ -110,6 +121,9 @@ namespace LojaVirtual.Apresentacao.ViewModels
 
         private string ObterTelefone(Telefone telefone)
         {
+            if ((telefone.Ddd == null) && (telefone.Numero == null))
+                return null;
+
             return "(" + telefone.Ddd + ")" + telefone.Numero;
         }
 

@@ -1,0 +1,140 @@
+﻿.text-plum {
+  color: #9370db;
+}
+
+a.text-plum:hover,
+a.text-plum:focus {
+  color: #9400d3;
+}
+
+.navbar-plum .nav > .active > a > [class^="icon-"],
+.navbar-plum .nav > .active > a > [class*=" icon-"] {
+	background-image: url("../../bootstrap/img/glyphicons-halflings-white.png");
+}
+
+.btn-plum.active
+{
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.btn-plum {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #9370db;
+  *background-color: #9370db;
+  background-image: -moz-linear-gradient(top,  #9370db, #9370db);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#9370db), to(#9400d3));
+  background-image: -webkit-linear-gradient(top, #9370db, #9400d3);
+  background-image: -o-linear-gradient(top, #9370db, #9400d3);
+  background-image: linear-gradient(to bottom, #9370db, #9400d3);
+  background-repeat: repeat-x;
+  border-color: #9400d3 #9400d3 #483d8b;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9370db', endColorstr='#ff9400d3', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+ 
+}
+
+
+.btn-plum:hover,
+.btn-plum:focus,
+.btn-plum:active,
+.btn-plum.active,
+.btn-plum.disabled,
+.btn-plum[disabled] {
+  color: #ffffff;
+  background-color: #9400d3;
+  *background-color: #9400d3;
+}
+
+.btn-plum .caret
+{
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  margin: 0 auto;
+}
+
+
+textarea:focus,
+select:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+	border-color: #9370db;
+	outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+  
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #9370db;
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #9370db;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #9370db;
+}
+
+.well,
+.nav-tabs.nav-stacked > li >a
+{
+  color: #000000;
+  background-color: #fafafa;
+  background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+  background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+  background-repeat: repeat-x;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+  *zoom: 1;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  
+}
+
+option:hover,
+option:focus,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.nav-tabs.nav-stacked > li > a:hover,
+.nav-tabs.nav-stacked > li > a:focus {
+    background-color: #9370db;
+	background-image: none;
+	color: #ffffff;
+}
+
+.well-verysmall {
+  padding: 0px;
+  -webkit-border-radius: -5px;
+     -moz-border-radius: -5px;
+          border-radius: -5px;
+}
+
+.dropdown:hover,
+.dropdown:focus {
+	color: #ffffff;
+	text-shadow: 0 1px 1px #000000, 0 0 8px #9370db;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #9370db;
+	text-decoration: none;
+}
+
+.backImage {
+	background-image:  url("../img/Fundo.jpg");
+}

@@ -22,7 +22,7 @@
 {
     @Html.ValidationSummaryBootstrap()
         
-    <legend>Cadastro de novo Cliente</legend>
+    <legend>Cadastro do Cliente</legend>
     
     <label><strong>Nome</strong><strong style="color: red">*</strong></label>
         
@@ -208,8 +208,8 @@
     </div> 
     <label style="color: red">*Campo obrigatório.</label>   
     <p>
-        <input type="submit" name="Cadastrar" value="Cadastrar" class="btn btn-plum" />
-        @Html.ActionLink("Voltar", "Login", "Login", new { }, new { @class = "btn btn-inverse" })
+        <input type="submit" name="Salvar" value="Salvar" class="btn btn-plum" />
+        @Html.ActionLink("Voltar", "Index", "Home", new { }, new { @class = "btn btn-inverse" })
     </p>
     
     
@@ -239,14 +239,14 @@
                 document.getElementById('mm').click();
             }
         });
-        
-       
-            $("#selectSexo").click(function () {
-                $("option", $(this)).hover(function (index) {
-                    $(this).css("backgroundColor", "yellow");
-                    });
+
+
+        $("#selectSexo").click(function () {
+            $("option", $(this)).hover(function (index) {
+                $(this).css("backgroundColor", "yellow");
             });
-        
+        });
+
     </script>
 }
 

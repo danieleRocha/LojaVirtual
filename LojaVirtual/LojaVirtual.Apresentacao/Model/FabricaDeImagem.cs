@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using LojaVirtual.Modelo;
@@ -29,6 +30,25 @@ namespace LojaVirtual.Apresentacao.Model
                     Nome = nome,
                     Tamanho = Convert.ToInt32(tamanho)
                 };
+        }
+
+        public Imagem CriarImagem(string nome,string tipo, Stream stream)
+        {
+            var binaryData = new Byte[stream.Length];
+            stream.Read(binaryData, 0,(int)stream.Length);
+            var base64String = Convert.ToBase64String(binaryData, 0, binaryData.Length);
+
+            var foto = new Imagem()
+            {
+                Id = Guid.NewGuid(),
+                ConteudoMisto = "data:image/" + tipo + ";base64," + base64String,
+                Nome = nome,
+                Conteudo = base64String,
+                Tamanho = (int)stream.Length,
+                Formato = tipo
+            };
+
+            return foto;
         }
 
         public List<Imagem> CriarImagens(IEnumerable<Foto> fotos)

@@ -148,10 +148,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\CarrinhoController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MercadoriaController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -167,6 +169,8 @@
     <Compile Include="Mappers\ViewParaModeloMappingProfile.cs" />
     <Compile Include="Model\FabricaDeImagem.cs" />
     <Compile Include="Model\Imagem.cs" />
+    <Compile Include="Model\MimeType.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\UsuarioViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
@@ -179,16 +183,36 @@
     <Compile Include="ViewModels\MercadoriaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
-    <Content Include="Content\bootstrap\css\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\css\bs-docs.css" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\bootstrap\img\Logotipo.png" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap\js\jquery.js" />
     <Content Include="Content\bootstrap\img\ControleDeEstoque.jpg" />
+    <Content Include="Content\Dani-bootstrap\css\Dani-bootstrap.css" />
+    <Content Include="Content\Dani-bootstrap\img\Boleto.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Cadastro.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Caminhao.ico" />
+    <Content Include="Content\Dani-bootstrap\img\CarrinhoCheio.ico" />
+    <Content Include="Content\Dani-bootstrap\img\CarrinhoVazio.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Cartao.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Conversa.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Dinheiro.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Entrar.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Facebook.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Fundo.jpg" />
+    <Content Include="Content\Dani-bootstrap\img\Loja.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Meusdados.png" />
+    <Content Include="Content\Dani-bootstrap\img\PagSeguro.png" />
+    <Content Include="Content\Dani-bootstrap\img\Pata.png" />
+    <Content Include="Content\Dani-bootstrap\img\Paypal.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Sair.png" />
+    <Content Include="Content\Dani-bootstrap\img\Santander.gif" />
+    <Content Include="Content\Dani-bootstrap\img\Tigre.ico" />
     <Content Include="Content\jasny-bootstrap\css\jasny-bootstrap-responsive.css" />
     <Content Include="Content\jasny-bootstrap\css\jasny-bootstrap-responsive.min.css" />
     <Content Include="Content\jasny-bootstrap\css\jasny-bootstrap.css" />
@@ -216,7 +240,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -260,7 +284,9 @@
     <Content Include="Content\jasny-bootstrap\font\iconic_stroke.woff" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Apresentacao.config" />
+    <Content Include="Apresentacao.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categoria\Adicionar.cshtml" />
@@ -294,6 +320,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\NaoAutorizado.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Carrinho\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Carrinho\Carrinho.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Produto\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Produto\Produto.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\Editar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

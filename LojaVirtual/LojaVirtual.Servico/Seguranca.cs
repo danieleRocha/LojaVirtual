@@ -11,25 +11,27 @@ namespace LojaVirtual.Servico
     public class Seguranca : ISeguranca
     {
         private static Autenticacao autenticacao;
+
         public static Autenticacao Autenticacao
         {
-            get { return autenticacao; }
-        }
-        private static Autorizacao autorizacao;
-        public static Autorizacao Autorizacao
-        {
-            get { return autorizacao; }
+            get
+            {
+                if (autenticacao == null)
+                    autenticacao = new Autenticacao();
+                return autenticacao;
+            }
         }
 
-        public Seguranca()
+        private static Autorizacao autorizacao;
+
+        public static Autorizacao Autorizacao
         {
-           CriarAutenticacaoEAutorizacao();
-        }
-        
-        public void CriarAutenticacaoEAutorizacao()
-        {
-            autenticacao = new Autenticacao();
-            autorizacao = new Autorizacao();
+            get
+            {
+                if (autorizacao == null)
+                    autorizacao = new Autorizacao();
+                return autorizacao;
+            }
         }
     }
 }
