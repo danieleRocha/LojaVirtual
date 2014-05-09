@@ -1,5 +1,12 @@
 ﻿@using LojaVirtual.Apresentacao.Helpers
+@using LojaVirtual.Apresentacao.ViewModels
 @model LojaVirtual.Apresentacao.ViewModels.LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];
+ }
+
 
 <!DOCTYPE html>
 
@@ -15,56 +22,75 @@
 
 @using (Html.BeginForm())
 {
-    <legend>Identificação</legend>
-    <p>
-    </p>
-    <ul class="unstyled">
-        <li class="span5">
-            <h4>Já sou cliente</h4>
-            @if (ViewBag.Autenticacao)
-            {
-                @Html.ValidationSummaryBootstrap()
-            }
-            <label><strong>E-mail</strong><strong style="color: red">*</strong></label>
-            <div class="control-group @if (!ViewData.ModelState.IsValidField("Email"))
-                                      { @Html.Raw("error")}">
-                <div>@Html.TextBoxFor(a => a.Email, new { @class = "input-xlarge", @placeholder = "Digite seu e-mail" })</div>
-                <div>@Html.ValidationMessageFor(a => a.Email, string.Empty, new { @class = "text-error" })</div>
-                <a id="mmCpf" href="#RecupEmail" data-toggle="modal" style="color: #9370db">Esqueceu seu e-mail?</a>
-            </div>
-            <label><strong>Senha</strong><strong style="color: red">*</strong></label>
-            <div class="control-group @if (!ViewData.ModelState.IsValidField("Senha"))
-                                      { @Html.Raw("error")}">
-                <div>@Html.TextBoxFor(a => a.Senha, new { @class = "input-xlarge", @type = "password", @placeholder = "Digite sua senha" })</div>
-                <div>@Html.ValidationMessageFor(a => a.Senha, string.Empty, new { @class = "text-error" })</div>
-                <a id="mmSenha" href="#RecupSenha" data-toggle="modal" style="color: #9370db">Esqueceu sua senha?</a>
-            </div>
+    <div id="header">
+        <!-- Seção de login -->
+        @Html.Partial("CabecalhoUsuario")
+       @*<!-- Barra Principal -->
+        @Html.Partial("CabecalhoBusca",mercadorias)*@
 
-            <label style="color: red">*Campos obrigatórios.</label>
-            <p>
-                <input type="submit" name="Autenticar" value="Autenticar" class="btn btn-plum" />
-            </p>
-        </li>
-        <li class="span5">
-            <h4>Ainda não sou cliente</h4>
-            @if (ViewBag.Cadastro)
-            {
-                @Html.ValidationSummaryBootstrap()
-            }
-            <label><strong>E-mail</strong><strong style="color: red">*</strong></label>
-            <div class="control-group @if (!ViewData.ModelState.IsValidField("EmailCadastro"))
-                                      { @Html.Raw("error")}">
-                <div>@Html.TextBoxFor(a => a.EmailCadastro, new { @class = "input-xlarge", @placeholder = "Digite seu e-mail" })</div>
-                <div>@Html.ValidationMessageFor(a => a.EmailCadastro, string.Empty, new { @class = "text-error" })</div>
-            </div>
-
-            <label style="color: red">*Campo obrigatório.</label>
-            <p>
-                <input type="submit" name="Cadastrar" value="Cadastrar" class="btn btn-plum" />
-            </p>
-        </li>
-    </ul>
+    </div>
     
+    <div class="container">
+
+        <legend>Identificação</legend>
+        <p>
+        </p>
+        
+        <ul class="unstyled">
+            <li class="span5">
+                <div class="well">
+                    <h4>Já sou cliente</h4>
+                    <p>&nbsp;</p>
+                    @if (ViewBag.Autenticacao)
+                    {
+                        @Html.ValidationSummaryBootstrap()
+                    }
+                    <label><strong>E-mail</strong><strong style="color: red">*</strong></label>
+                    <div class="control-group @if (!ViewData.ModelState.IsValidField("Email"))
+                                              { @Html.Raw("error")}">
+                        <div>@Html.TextBoxFor(a => a.Email, new { @class = "input-xlarge", @placeholder = "Digite seu e-mail" })</div>
+                        <div>@Html.ValidationMessageFor(a => a.Email, string.Empty, new { @class = "text-error" })</div>
+                        <a id="mmCpf" href="#RecupEmail" data-toggle="modal" style="color: #9370db">Esqueceu seu e-mail?</a>
+                    </div>
+                    <label><strong>Senha</strong><strong style="color: red">*</strong></label>
+                    <div class="control-group @if (!ViewData.ModelState.IsValidField("Senha"))
+                                              { @Html.Raw("error")}">
+                        <div>@Html.TextBoxFor(a => a.Senha, new { @class = "input-xlarge", @type = "password", @placeholder = "Digite sua senha" })</div>
+                        <div>@Html.ValidationMessageFor(a => a.Senha, string.Empty, new { @class = "text-error" })</div>
+                        <a id="mmSenha" href="#RecupSenha" data-toggle="modal" style="color: #9370db">Esqueceu sua senha?</a>
+                    </div>
+
+                    <label style="color: red">*Campos obrigatórios.</label>
+                    <p>
+                        <input type="submit" name="Autenticar" value="Autenticar" class="btn btn-plum" />
+                    </p>
+                </div>
+            </li>
+            <li class="span5">
+                <div class="well">
+                    <h4>Ainda não sou cliente</h4>
+                    <p>&nbsp;</p>
+                    @if (ViewBag.Cadastro)
+                    {
+                        @Html.ValidationSummaryBootstrap()
+                    }
+                    <label><strong>E-mail</strong><strong style="color: red">*</strong></label>
+                    <div class="control-group @if (!ViewData.ModelState.IsValidField("EmailCadastro"))
+                                              { @Html.Raw("error")}">
+                        <div>@Html.TextBoxFor(a => a.EmailCadastro, new { @class = "input-xlarge", @placeholder = "Digite seu e-mail" })</div>
+                        <div>@Html.ValidationMessageFor(a => a.EmailCadastro, string.Empty, new { @class = "text-error" })</div>
+                    </div>
+
+                    <label style="color: red">*Campo obrigatório.</label>
+                    <p>
+                        <input type="submit" name="Cadastrar" value="Cadastrar" class="btn btn-plum" />
+                    </p>
+                </div>
+            </li>
+        </ul>
+        @Html.Partial("Informacoes")
+    </div>
+     @Html.Partial("Rodape")
     <a id="mm" href="#myModal" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
@@ -201,7 +227,7 @@
                 return true;
             }
         });
-        
+
         $('#RecuperarSenhaSubmit').click(function () {
 
             if ($('#email').val() === "") {

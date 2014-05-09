@@ -1,10 +1,9 @@
-﻿@using System.Globalization
-@using LojaVirtual.Apresentacao.Helpers
+﻿@using LojaVirtual.Apresentacao.Helpers
 @using LojaVirtual.Apresentacao.ViewModels
 @model UsuarioViewModel
 
 @{
-    
+    var mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];
 }
 
 <!DOCTYPE html>
@@ -20,198 +19,273 @@
 
 @using (Html.BeginForm())
 {
+    <div id="header">
+        <!-- Seção de login -->
+        @Html.Partial("CabecalhoUsuario", Model)
+       @* <!-- Barra Principal -->
+        @Html.Partial("CabecalhoBusca", mercadorias)*@
+
+    </div>
+    
     @Html.ValidationSummaryBootstrap()
         
-    <legend>Cadastro do Cliente</legend>
-    
-    <label><strong>Nome</strong><strong style="color: red">*</strong></label>
-        
-    <div class="control-group @if (!ViewData.ModelState.IsValidField("Nome"))
-                              { @Html.Raw("error")}">
-        <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
-        <div>@Html.ValidationMessageFor(a => a.Nome, string.Empty, new { @class = "text-error" })</div>
-    </div>  
-    <label><strong>E-mail</strong><strong style="color: red">*</strong></label>
-    <div class="control-group @if (!ViewData.ModelState.IsValidField("Email"))
-                              { @Html.Raw("error")}">
-        <div>@Html.TextBoxFor(a => a.Email, new { @class = "input-xxlarge" })</div>
-        <div>@Html.ValidationMessageFor(a => a.Email, string.Empty, new { @class = "text-error" })</div>
+    <div id="mainBody">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar ================================================== -->
+                <div id="sidebar" class="span2-5">
+                    <ul class="nav nav-tabs nav-stacked">
+                        <li>@Html.ActionLink("Minhas Compras", "MinhasCompras", "Usuario", new { }, new { })</li>
+                        <li>@Html.ActionLink("Meus Dados", "Editar", "Usuario", new { }, new { })</li>
+                    </ul>
+                </div>
+
+                <!-- Sidebar end=============================================== -->
+                
+                <div class="span9-5">
+                    <div class="well">
+                        <legend>Dados do Cliente</legend>
+
+                        <label><strong>Nome</strong><strong style="color: red">*</strong></label>
+
+                        <div class="control-group @if (!ViewData.ModelState.IsValidField("Nome"))
+                                                  { @Html.Raw("error")}">
+                            <div>@Html.TextBoxFor(a => a.Nome, new { @class = "input-xxlarge" })</div>
+                            <div>@Html.ValidationMessageFor(a => a.Nome, string.Empty, new { @class = "text-error" })</div>
+                        </div>
+                        <label><strong>E-mail</strong><strong style="color: red">*</strong></label>
+                        <div class="control-group @if (!ViewData.ModelState.IsValidField("Email"))
+                                                  { @Html.Raw("error")}">
+                            <div>@Html.TextBoxFor(a => a.Email, new { @class = "input-xxlarge" })</div>
+                            <div>@Html.ValidationMessageFor(a => a.Email, string.Empty, new { @class = "text-error" })</div>
+                        </div>
+                        <label><strong>CPF</strong><strong style="color: red">*</strong></label>
+                        <div class="control-group @if (!ViewData.ModelState.IsValidField("Cpf"))
+                                                  { @Html.Raw("error")}">
+                            <div>
+                                <input type="text" name="cpf" class="input-large" value=@Model.Cpf data-newmask="999.999.999-99">
+                            </div>
+                            <div>@Html.ValidationMessageFor(a => a.Cpf, string.Empty, new { @class = "text-error" })</div>
+                        </div>
+
+                        <label><strong>Data de nascimento</strong><strong style="color: red">*</strong></label>
+                        <div class="control-group @if (!ViewData.ModelState.IsValidField("DataDeNascimento"))
+                                                  { @Html.Raw("error")}">
+                            <div>
+                                <input type="text" name="dataDeNascimento" class="input-large " value=@Model.DataDeNascimento data-newmask="99/99/9999">
+                            </div>
+                            <div>@Html.ValidationMessageFor(a => a.DataDeNascimento, string.Empty, new { @class = "text-error" })</div>
+                        </div>
+
+                        <label><strong>Sexo</strong><strong style="color: red">*</strong></label>
+                        <div class="control-group @if (!ViewData.ModelState.IsValidField("Sex"))
+                                                  { @Html.Raw("error")}">
+                            <div id="selectSexo">@Html.DropDownListFor(a => a.Sexo, new List<SelectListItem>(UsuarioViewModel.Sexos.Select(c => new SelectListItem { Text = c.ToString(), Value = c.ToString() }).ToList()),
+                                                                       new { @class = "input-large" })
+                            </div>
+                            <div>@Html.ValidationMessageFor(a => a.Sexo, string.Empty, new { @class = "text-error" })</div>
+                        </div>
+                        <label><strong>Telefones</strong></label>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <ul class="inline">
+                                            <li>
+                                                <h6>Telefone Residencial</h6>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <input type="text" name="telefoneResidencial" class="input-medium" value=@Model.TelefoneResidencial data-newmask="(00)00009-0000">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <ul class="inline">
+                                            <li><small><strong>Telefone Celular</strong></small><small style="color: red"><strong>*</strong></small></li>
+                                        </ul>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="control-group @if (!ViewData.ModelState.IsValidField("TelefoneCelular"))
+                                                              { @Html.Raw("error")}">
+                                        <div>
+                                            <input type="text" name="telefoneCelular" class="input-medium form-control" value=@Model.TelefoneCelular data-newmask="(00)00009-0000">
+                                        </div>
+                                        <div>@Html.ValidationMessageFor(a => a.TelefoneCelular, string.Empty, new { @class = "text-error" })</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <label><strong>Endereço</strong></label>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <ul class="inline">
+                                            <li><small><strong>Endereço</strong></small><small style="color: red"><strong>*</strong></small></li>
+                                        </ul>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="control-group @if (!ViewData.ModelState.IsValidField("Logradouro"))
+                                                              { @Html.Raw("error")}">
+                                        <div>@Html.TextBoxFor(a => a.Endereco.Logradouro, new { @class = "input-xlarge" })</div>
+                                        <div>@Html.ValidationMessageFor(a => a.Logradouro, string.Empty, new { @class = "text-error" })</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label>
+                                        <ul class="inline">
+                                            <li><small><strong>Número</strong></small><small style="color: red"><strong>*</strong></small></li>
+                                        </ul>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="control-group @if (!ViewData.ModelState.IsValidField("Numero"))
+                                                              { @Html.Raw("error")}">
+                                        <div>@Html.TextBoxFor(a => a.Endereco.Numero, new { @class = "input-medium" })</div>
+                                        <div>@Html.ValidationMessageFor(a => a.Numero, string.Empty, new { @class = "text-error" })</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <ul class="inline">
+                                            <li><small><strong>Complemento</strong></small></li>
+                                        </ul>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div>@Html.TextBoxFor(a => a.Endereco.Complemento, new { @class = "input-xlarge" })</div>
+                                </td>
+                                <td>
+                                    <label>
+                                        <ul class="inline">
+                                            <li><small><strong>CEP</strong></small><small style="color: red"><strong>*</strong></small></li>
+                                        </ul>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div class="control-group @if (!ViewData.ModelState.IsValidField("CEP"))
+                                                                  { @Html.Raw("error")}">
+                                            <input type="text" name="CEP" class="input-medium" value=@Model.CEP data-newmask="99.999-999">
+                                            <div>@Html.ValidationMessageFor(a => a.CEP, string.Empty, new { @class = "text-error" })</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <ul class="inline">
+                                            <li><small><strong>Cidade</strong></small><small style="color: red"><strong>*</strong></small></li>
+                                        </ul>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="control-group @if (!ViewData.ModelState.IsValidField("Cidade"))
+                                                              { @Html.Raw("error")}">
+                                        <div>@Html.TextBoxFor(a => a.Endereco.Cidade, new { @class = "input-xlarge" })</div>
+                                        <div>@Html.ValidationMessageFor(a => a.Cidade, string.Empty, new { @class = "text-error" })</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label>
+                                        <ul class="inline">
+                                            <li><small><strong>Estado</strong></small><small style="color: red"><strong>*</strong></small></li>
+                                        </ul>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div>@Html.DropDownListFor(a => a.Endereco.Estado,
+                                                               new List<SelectListItem>(UsuarioViewModel.EstadosDisponiveis.Select(estado => new SelectListItem { Text = estado.ToString(), Value = estado.ToString() }).ToList()),
+                                                               new { @class = "input-small" })
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <label><strong>Senha</strong></label>
+                        <a id="trocaSenha" href="#minhaSenha" role="button" class="btn btn-danger" data-toggle="modal">Trocar Senha</a>
+                        <p>&nbsp;</p>
+                        <label style="color: red">*Campo obrigatório.</label>
+                        <p>&nbsp;</p>
+
+                        <p>
+                            <input id="salva" name="Salvar" value="Salvar" type="submit" class="btn btn-plum" />
+                            @Html.ActionLink("Voltar", "Index", "Home", new { }, new { @class = "btn btn-inverse" })
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+           @Html.Partial("Informacoes")
+        </div>
     </div>
-    <label><strong>CPF</strong><strong style="color: red">*</strong></label>
-    <div class="control-group @if (!ViewData.ModelState.IsValidField("Cpf"))
-                              { @Html.Raw("error")}">
-        <div>
-            <input type="text" name="cpf" class="input-large form-control" value=@Model.Cpf data-newmask="999.999.999-99">
+    @Html.Partial("Rodape")
+   
+    <div id="minhaSenha" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalSenhaLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalSenhaLabel">Trocar Senha</h3>
         </div>
-        <div>@Html.ValidationMessageFor(a => a.Cpf, string.Empty, new { @class = "text-error" })</div>
-    </div> 
-    
-    <label><strong>Data de nascimento</strong><strong style="color: red">*</strong></label>
-    <div class="control-group @if (!ViewData.ModelState.IsValidField("DataDeNascimento"))
-                              { @Html.Raw("error")}">
-        <div>
-            <input type="text" name="dataDeNascimento" class="input-large form-control" value=@Model.DataDeNascimento data-newmask="99/99/9999">
+
+        <div class="modal-body">
+            <form id="InfroTextS" method="POST">
+                <input type="hidden" name="InfroTextS" value="1">
+                <input id="TrocarS" type="submit" name="TrocarSenha" value="TrocarSenha" style="visibility: hidden" class="btn btn-primary" />
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>
+                                    <ul class="inline">
+                                        <li><small><strong>Senha antiga</strong></small><small style="color: red"><strong>*</strong></small></li>
+                                    </ul>
+                                </label>
+                            </td>
+                            <td>
+                                <input type="password" name="SenhaAntiga" id="SenhaAntiga" class="input-large"><span class="hide help-inline" style="color: red">* Campo obrigatório.</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <ul class="inline">
+                                        <li><small><strong>Nova senha</strong></small><small style="color: red"><strong>*</strong></small></li>
+                                    </ul>
+                                </label>
+                            </td>
+                            <td>
+                                <input type="password" name="NovaSenha" id="NovaSenha" class="input-large"><span class="hide help-inline" style="color: red">* Campo obrigatório.</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <ul class="inline">
+                                        <li><small><strong>Confirme a nova senha</strong></small><small style="color: red"><strong>*</strong></small></li>
+                                    </ul>
+                                </label>
+                            </td>
+                            <td>
+                                <input type="password" name="ConfirmacaoNovaSenha" id="ConfirmacaoNovaSenha" class="input-large"><span class="hide help-inline" style="color: red">* Campo obrigatório.</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
         </div>
-        <div>@Html.ValidationMessageFor(a => a.DataDeNascimento, string.Empty, new { @class = "text-error" })</div>
-    </div> 
-    
-    <label><strong>Sexo</strong><strong style="color: red">*</strong></label>
-    <div class="control-group @if (!ViewData.ModelState.IsValidField("Sex"))
-                              { @Html.Raw("error")}">
-        <div id="selectSexo">@Html.DropDownListFor(a => a.Sexo, new List<SelectListItem>(UsuarioViewModel.Sexos.Select(c => new SelectListItem { Text = c.ToString(), Value = c.ToString() }).ToList()),
-                               new { @class = "input-large" })
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+            <button class="btn btn-plum" data-dismiss="modal" id="TrocarSenhaSubmit">Confirmar</button>
+
         </div>
-        <div>@Html.ValidationMessageFor(a => a.Sexo, string.Empty, new { @class = "text-error" })</div>
-    </div> 
-    <label><strong>Telefones</strong></label>
-    <table>
-        <tr>
-            <td>
-                <div>
-                    <ul class="inline">
-                        <li>
-                            <h6>Telefone Residencial</h6>
-                        </li>
-                    </ul>
-                </div>
-            </td>
-            <td>
-                <div>
-                    <input type="text" name="telefoneResidencial" class="input-medium form-control" value=@Model.TelefoneResidencial data-newmask="(00)00009-0000">
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>
-                    <ul class="inline">
-                        <li><small><strong>Telefone Celular</strong></small><small style="color: red"><strong>*</strong></small></li>
-                    </ul>
-                </label>
-            </td>
-            <td>
-                <div class="control-group @if (!ViewData.ModelState.IsValidField("TelefoneCelular"))
-                                          { @Html.Raw("error")}">
-                    <div>
-                        <input type="text" name="telefoneCelular" class="input-medium form-control" value=@Model.TelefoneCelular data-newmask="(00)00009-0000">
-                    </div>
-                    <div>@Html.ValidationMessageFor(a => a.TelefoneCelular, string.Empty, new { @class = "text-error" })</div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <label><strong>Endereço</strong></label>
-    <table>
-        <tr>
-            <td>
-                <label>
-                    <ul class="inline">
-                        <li><small><strong>Endereço</strong></small><small style="color: red"><strong>*</strong></small></li>
-                    </ul>
-                </label>
-            </td>
-            <td>
-                <div class="control-group @if (!ViewData.ModelState.IsValidField("Logradouro"))
-                                          { @Html.Raw("error")}">
-                    <div>@Html.TextBoxFor(a => a.Endereco.Logradouro, new { @class = "input-xlarge" })</div>
-                    <div>@Html.ValidationMessageFor(a => a.Logradouro, string.Empty, new { @class = "text-error" })</div>
-                </div>
-            </td>
-            <td>
-                <label>
-                    <ul class="inline">
-                        <li><small><strong>Número</strong></small><small style="color: red"><strong>*</strong></small></li>
-                    </ul>
-                </label>
-            </td>
-            <td>
-                <div class="control-group @if (!ViewData.ModelState.IsValidField("Numero"))
-                                          { @Html.Raw("error")}">
-                    <div>@Html.TextBoxFor(a => a.Endereco.Numero, new { @class = "input-medium" })</div>
-                    <div>@Html.ValidationMessageFor(a => a.Numero, string.Empty, new { @class = "text-error" })</div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>
-                    <ul class="inline">
-                        <li><small><strong>Complemento</strong></small></li>
-                    </ul>
-                </label>
-            </td>
-            <td>
-                <div>@Html.TextBoxFor(a => a.Endereco.Complemento, new { @class = "input-xlarge" })</div>
-            </td>
-            <td>
-                <label>
-                    <ul class="inline">
-                        <li><small><strong>CEP</strong></small><small style="color: red"><strong>*</strong></small></li>
-                    </ul>
-                </label>
-            </td>
-            <td>
-                <div>
-                    <div class="control-group @if (!ViewData.ModelState.IsValidField("CEP"))
-                                              { @Html.Raw("error")}">
-                        <input type="text" name="CEP" class="input-medium form-control" value=@Model.CEP data-newmask="99.999-999">
-                        <div>@Html.ValidationMessageFor(a => a.CEP, string.Empty, new { @class = "text-error" })</div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>
-                    <ul class="inline">
-                        <li><small><strong>Cidade</strong></small><small style="color: red"><strong>*</strong></small></li>
-                    </ul>
-                </label>
-            </td>
-            <td>
-                <div class="control-group @if (!ViewData.ModelState.IsValidField("Cidade"))
-                                          { @Html.Raw("error")}">
-                    <div>@Html.TextBoxFor(a => a.Endereco.Cidade, new { @class = "input-xlarge" })</div>
-                    <div>@Html.ValidationMessageFor(a => a.Cidade, string.Empty, new { @class = "text-error" })</div>
-                </div>
-            </td>
-            <td>
-                <label>
-                    <ul class="inline">
-                        <li><small><strong>Estado</strong></small><small style="color: red"><strong>*</strong></small></li>
-                    </ul>
-                </label>
-            </td>
-            <td>
-                <div>@Html.DropDownListFor(a => a.Endereco.Estado,
-                                           new List<SelectListItem>(UsuarioViewModel.EstadosDisponiveis.Select(estado => new SelectListItem { Text = estado.ToString(), Value = estado.ToString() }).ToList()),
-                                           new { @class = "input-small" })
-                </div>
-            </td>
-        </tr>
-    </table>
-    <label><strong>Senha</strong><strong style="color: red">*</strong></label>
-    <div class="control-group @if (!ViewData.ModelState.IsValidField("Senha"))
-                              { @Html.Raw("error")}">
-        <div>@Html.PasswordFor(a => a.Senha, new { @class = "input-large" })</div>
-        <div>@Html.ValidationMessageFor(a => a.Senha, string.Empty, new { @class = "text-error" })</div>
-    </div> 
-    <label><strong>Confirmação da Senha</strong><strong style="color: red">*</strong></label>
-    <div class="control-group @if (!ViewData.ModelState.IsValidField("ConfirmacaoDaSenha"))
-                              { @Html.Raw("error")}">
-        <div>@Html.PasswordFor(a => a.ConfirmacaoDaSenha, new { @class = "input-large" })</div>
-        <div>@Html.ValidationMessageFor(a => a.ConfirmacaoDaSenha, string.Empty, new { @class = "text-error" })</div>
-    </div> 
-    <div class="control-group @if (!ViewData.ModelState.IsValidField("ConfirmaSenha"))
-                              { @Html.Raw("error")}">
-        <div>@Html.ValidationMessage("ConfirmaSenha", new { @class = "text-error" })</div>
-    </div> 
-    <label style="color: red">*Campo obrigatório.</label>   
-    <p>
-        <input type="submit" name="Salvar" value="Salvar" class="btn btn-plum" />
-        @Html.ActionLink("Voltar", "Index", "Home", new { }, new { @class = "btn btn-inverse" })
-    </p>
-    
+    </div>
     
     <a id="mm" href="#myModal" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -227,27 +301,118 @@
         </div>
     </div>
     
+    <a id="trocouSenha" href="#ConfirmaTrocaSenha" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
+    <div id="ConfirmaTrocaSenha" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalRecupSenhaLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalRecupSenhaLabel" class="text-info">Trocar Senha</h3>
+        </div>
+
+        <div class="modal-body">
+            <div>Sua senha foi alterada com sucesso.</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        </div>
+    </div>
+    
+    <a id="naoTrocouSenha" href="#NaoConfirmaTrocaSenha" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
+    <div id="NaoConfirmaTrocaSenha" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalRecupSenhaLabel2" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalRecupSenhaLabel2" class="text-info">Trocar Senha</h3>
+        </div>
+
+        <div class="modal-body">
+            <div>@ViewBag.MensagemNaoTrocouSenha</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+            <button id="NovaTentativa" class="btn btn-plum" data-dismiss="modal" aria-hidden="true">Tentar Novamente</button>
+        </div>
+    </div>
+    
+    <a id="editouDados" href="#ConfirmaEdicaoDados" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
+    <div id="ConfirmaEdicaoDados" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalRecupSenhaLabel3" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalRecupSenhaLabel3" class="text-info">Edição de Dados</h3>
+        </div>
+
+        <div class="modal-body">
+            <div>Seus dados foram alterados com sucesso.</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        </div>
+    </div>
     
     <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.mask.min.js"></script>
     <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.js"></script>    
     <script src="~/Content/jasny-bootstrap/js/jasny-bootstrap.js"></script>
     <script>
-        $(document).ready(function (e) {
+        $(document).ready(function () {
+
             var f = '@ViewBag.Errou';
+            var falhou = '@ViewBag.Falhou';
+            var troc = '@ViewBag.TrocouSenha';
+            var editou = '@ViewBag.EditouDados';
             if (f == "True") {
                 document.getElementById('mm').click();
             }
+            if (falhou == "True") {
+                document.getElementById('naoTrocouSenha').click();
+            }
+            if (troc == "True") {
+                document.getElementById('trocouSenha').click();
+            }
+            if (editou == "True") {
+                document.getElementById('editouDados').click();
+            }
+
         });
 
+        $("#NovaTentativa").click(function () {
+            document.getElementById('trocaSenha').click();
 
-        $("#selectSexo").click(function () {
-            $("option", $(this)).hover(function (index) {
-                $(this).css("backgroundColor", "yellow");
-            });
         });
 
-    </script>
+        $('#TrocarSenhaSubmit').click(function () {
+
+            var ok = true;
+
+            if ($('#SenhaAntiga').val() === "") {
+                // invalid
+                $('#SenhaAntiga').next('.help-inline').show();
+                ok = false;
+            } else {
+                $('#SenhaAntiga').next('.help-inline').hide();
+            }
+            if ($('#NovaSenha').val() === "") {
+                // invalid
+                $('#NovaSenha').next('.help-inline').show();
+                ok = false;
+            } else {
+                $('#NovaSenha').next('.help-inline').hide();
+            }
+            if ($('#ConfirmacaoNovaSenha').val() === "") {
+                // invalid
+                $('#ConfirmacaoNovaSenha').next('.help-inline').show();
+                ok = false;
+            } else {
+                $('#ConfirmacaoNovaSenha').next('.help-inline').hide();
+            }
+
+            // submit the form here
+            if (ok === true) {
+                document.getElementById('TrocarS').click();
+            }
+
+            return ok;
+
+        });
+        </script>
 }
 
 

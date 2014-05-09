@@ -65,7 +65,7 @@ namespace LojaVirtual.Infraestrutura.Maps
                     telefoneDao.Excluir(telefoneMap.Id);
                 }
 
-                
+
                 foreach (var telefone in Telefones)
                 {
                     bool adicionar = usuarioParaAtualizar.Telefones.All(f => f.Id != telefone.Id);
@@ -75,9 +75,11 @@ namespace LojaVirtual.Infraestrutura.Maps
                     }
                 }
 
+                usuarioParaAtualizar.Endereco.Atualizar(Endereco);
+
             }
         }
-        
+
         public void RemoverDependencias(IContexto contexto)
         {
            

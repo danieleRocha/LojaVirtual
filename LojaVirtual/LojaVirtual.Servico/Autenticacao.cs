@@ -88,5 +88,14 @@ namespace LojaVirtual.Servico
 
             return false;
         }
+
+        public bool SenhaConfere(string senha)
+        {
+            var usuario = ObterUsuarioAutenticado();
+
+            if (usuario == null) return false;
+
+            return usuario.Senha == senha;
+        }
     }
 }

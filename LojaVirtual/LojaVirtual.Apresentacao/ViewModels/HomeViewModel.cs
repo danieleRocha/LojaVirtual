@@ -85,5 +85,12 @@ namespace LojaVirtual.Apresentacao.ViewModels
 
             return string.Empty;
         }
+
+        public static int NumeroMaximoDeParcelas()
+        {
+            int numeroMaximoDeParcelas = ConfigReader.LerNoInt(ConfigReader.TagPrecos, ConfigReader.TagNumeroDeParcelas);
+
+            return numeroMaximoDeParcelas;
+        }
     }
 }

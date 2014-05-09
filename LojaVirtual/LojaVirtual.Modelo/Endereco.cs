@@ -43,6 +43,15 @@ namespace LojaVirtual.Modelo
             TO
         }
 
+        public bool EIgual(Endereco endereco)
+        {
+            if ((Logradouro == endereco.Logradouro) && (Numero == endereco.Numero) &&
+                (Complemento == endereco.Complemento) &&
+                (Cidade == endereco.Cidade) && (Estado == endereco.Estado) && (Cep == endereco.Cep))
+                return true;
+
+            return false;
+        }
     }
 
     

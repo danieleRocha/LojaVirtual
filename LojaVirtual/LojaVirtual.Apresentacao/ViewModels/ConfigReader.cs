@@ -18,6 +18,8 @@ namespace LojaVirtual.Apresentacao.ViewModels
         public const string TagPropagandas = "Propagandas";
         public const string TagPastaDePropagandas = "Pasta_de_propagandas";
 
+        public const string TagPrecos = "Precos";
+        public const string TagNumeroDeParcelas = "Numero_de_parcelas";
 
         public static int LerNoInt(string grupo, string tag)
         {

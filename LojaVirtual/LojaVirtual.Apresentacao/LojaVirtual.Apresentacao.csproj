@@ -195,6 +195,7 @@
     <Content Include="Content\bootstrap\img\ControleDeEstoque.jpg" />
     <Content Include="Content\Dani-bootstrap\css\Dani-bootstrap.css" />
     <Content Include="Content\Dani-bootstrap\img\Boleto.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Bolsa.ico" />
     <Content Include="Content\Dani-bootstrap\img\Cadastro.ico" />
     <Content Include="Content\Dani-bootstrap\img\Caminhao.ico" />
     <Content Include="Content\Dani-bootstrap\img\CarrinhoCheio.ico" />
@@ -204,15 +205,15 @@
     <Content Include="Content\Dani-bootstrap\img\Dinheiro.ico" />
     <Content Include="Content\Dani-bootstrap\img\Entrar.ico" />
     <Content Include="Content\Dani-bootstrap\img\Facebook.ico" />
+    <Content Include="Content\Dani-bootstrap\img\FitaMetrica.ico" />
     <Content Include="Content\Dani-bootstrap\img\Fundo.jpg" />
     <Content Include="Content\Dani-bootstrap\img\Loja.ico" />
     <Content Include="Content\Dani-bootstrap\img\Meusdados.png" />
     <Content Include="Content\Dani-bootstrap\img\PagSeguro.png" />
-    <Content Include="Content\Dani-bootstrap\img\Pata.png" />
     <Content Include="Content\Dani-bootstrap\img\Paypal.ico" />
     <Content Include="Content\Dani-bootstrap\img\Sair.png" />
     <Content Include="Content\Dani-bootstrap\img\Santander.gif" />
-    <Content Include="Content\Dani-bootstrap\img\Tigre.ico" />
+    <Content Include="Content\Dani-bootstrap\img\Vestido.ico" />
     <Content Include="Content\jasny-bootstrap\css\jasny-bootstrap-responsive.css" />
     <Content Include="Content\jasny-bootstrap\css\jasny-bootstrap-responsive.min.css" />
     <Content Include="Content\jasny-bootstrap\css\jasny-bootstrap.css" />
@@ -328,9 +329,6 @@
     <Content Include="Views\Carrinho\Carrinho.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Produto\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Produto\Produto.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +336,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Usuario\Editar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\MinhasCompras.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\CabecalhoUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\CabecalhoBusca.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Categoria\Mercadorias.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Rodape.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Informacoes.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

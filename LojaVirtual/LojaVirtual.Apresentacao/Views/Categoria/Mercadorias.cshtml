@@ -1,0 +1,82 @@
+﻿@using LojaVirtual.Apresentacao.ViewModels
+@model LojaVirtual.Apresentacao.Paginacao.Paginacao<MercadoriaViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];
+    var nCategorias = mercadorias.TodasCategoriasDisponiveis.Count;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
+    <link href="~/Content/Dani-bootstrap/css/Dani-bootstrap.css" media="screen" rel="stylesheet" />
+    <title>Loja Virtual</title>
+</head>
+<body>
+    <div id="header">
+        <!-- Seção de login -->
+        @Html.Partial("CabecalhoUsuario", Model)
+        @*<!-- Barra Principal -->
+        @Html.Partial("CabecalhoBusca", mercadorias)*@
+
+    </div>
+    <div id="mainBody">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar ================================================== -->
+                <div id="sidebar" class="span2-5">
+                    <ul class="nav nav-tabs nav-stacked">
+                        @for (int i = 1; i < nCategorias; i++)
+                        {
+                            <li>@Html.ActionLink(mercadorias.TodasCategoriasDisponiveis[i].Nome, "Mercadorias", "Categoria", new { id = mercadorias.TodasCategoriasDisponiveis[i].Id }, new { })</li>
+                        }
+                    </ul>
+                </div>
+                <!-- Sidebar end=============================================== -->
+                <div class="span9-5">
+
+                    <div class="well-white row">
+
+                        @foreach (var item in Model.Items)
+                        {
+                            <div class="span2-5 margin-rb" style="">
+                                <div class="well-border row text-center">
+                                    <div class="text-center" style="height: 250px; float: none">
+                                        <div class="center-block img-responsive" style="height: 150px">
+                                            @{
+                                                string referencia = "../../Produto/Produto/" + item.Id;
+                                            }
+                                            <a href=@referencia>
+                                                <img src=@item.Imagens[0].ConteudoMisto alt="..."/></a>
+                                        </div>
+                                        <div class="caption">
+                                            <h6>@item.Nome</h6>
+                                            @{
+                                                int nparcelas = HomeViewModel.NumeroMaximoDeParcelas();
+                                                decimal precoParcelado = item.PrecoParcelado();
+                                                string parcelamento = nparcelas.ToString() + "x de R$" + precoParcelado.ToString() + " sem juros!";
+                                            }
+                                            <div><small>R$@item.Preco à vista ou</small></div>
+                                            <div><small style="color: #ff0000">@parcelamento</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("Informacoes")
+        </div>
+    </div>
+    @Html.Partial("Rodape")
+
+</body>
+<script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+
+</html>

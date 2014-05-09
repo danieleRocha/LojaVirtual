@@ -25,9 +25,19 @@ namespace LojaVirtual.Servico
             get { return DependencyResolver.Current.GetService<IRepositorio<Permissao>>(); }
         }
 
-        public override bool IsUserInRole(string username, string roleName)
+        public override bool IsUserInRole(string username, string email)
         {
-            throw new NotImplementedException();
+            foreach (var permissao in repositorioDePermissoes.ObterTodos())
+            {
+                if (permissao.Tipo.ToString() == email)
+                {
+                    if (permissao.Usuarios.Any(u => u.Email == username))
+                        return true;
+                    break;
+                }
+            }
+
+            return false;
         }
 
         public override string[] GetRolesForUser(string username)

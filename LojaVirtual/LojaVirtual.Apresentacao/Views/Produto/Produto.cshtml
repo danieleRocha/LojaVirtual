@@ -1,17 +1,168 @@
-﻿@{
-    Layout = null;
+﻿@using LojaVirtual.Apresentacao.ViewModels
+@model MercadoriaViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];
+    var nCategorias = mercadorias.TodasCategoriasDisponiveis.Count;
+    var tamanhosDisponiveis = Model.TamanhosDisponiveis();
+    var tamanhoAtivo = string.Empty;
 }
 
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Produto</title>
+    <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
+    <link href="~/Content/Dani-bootstrap/css/Dani-bootstrap.css" media="screen" rel="stylesheet" />
+    <title>Loja Virtual</title>
 </head>
-<body>
-    <div>
-        
+    <body>
+        @using (Html.BeginForm())
+        {
+            <div id="header">
+                <!-- Seção de login -->
+                @Html.Partial("CabecalhoUsuario", Model)
+                @*<!-- Barra Principal -->
+        @Html.Partial("CabecalhoBusca", mercadorias)*@
+
+            </div>
+            <div id="mainBody">
+                <div class="container">
+                    <div class="row">
+                        <!-- Sidebar ================================================== -->
+                        <div id="sidebar" class="span2-5">
+                            <ul class="nav nav-tabs nav-stacked">
+                                @for (int i = 1; i < nCategorias; i++)
+                                {
+                                    <li>@Html.ActionLink(mercadorias.TodasCategoriasDisponiveis[i].Nome, "Mercadorias", "Categoria", new {id = mercadorias.TodasCategoriasDisponiveis[i].Id}, new {})</li>
+                                }
+                            </ul>
+                        </div>
+                        <!-- Sidebar end=============================================== -->
+                        <div class="span9-5">
+                            <div class="well">
+                                <div class="row">
+                                    <div class="span5">
+                                        <div class="well-white">
+                                            <div class="span1" style="margin-left: 0px">
+                                                @for (int i = 0; i < Model.Imagens.Count; i++)
+                                                {
+                                                    <div class="span1" style="margin-bottom: 5px">
+                                                        <div class="well-border row text-center">
+                                                            <div class="text-center" style="height: 70px; float: none">
+                                                                <div class="center-block img-responsive" style="height: 50px; margin-top: 5px">
+                                                                    @{
+                                                                        string id = "imagem" + i;
+                                                                    }
+                                                                    <a onmouseover=" TrocarImagem(@i) " style="cursor: pointer">
+                                                                        <img id=@id src=@Model.Imagens[i].ConteudoMisto alt="..."/></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="span3-5" style="margin-left: 50px">
+                                                <div class="well-border row text-center">
+                                                    <div class="text-center" style="height: 291px; margin-top: 10px; float: none">
+                                                        <div class="center-block img-responsive" style="max-width: 100%;">
+                                                            <a><img id="imagemGrande" src=@Model.Imagens[0].ConteudoMisto alt="..." /></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span3-5">
+                                        <div class="well-white">
+                                            <h4>@Model.Nome</h4>
+                                            <small>@Model.Descricao</small>
+                                            <p>&nbsp;</p>
+                                            <div>
+                                                <label><b style="font-size: 12px; color: #9400d3">Preço:&nbsp;</b>R$&nbsp;<b style="color: #ff0000; font-size: 20px">@Model.Preco</b><small>&nbsp;à vista!</small></label>
+                                            </div>
+                                            @{
+                                                int nparcelas = HomeViewModel.NumeroMaximoDeParcelas();
+                                                decimal precoParcelado = Model.PrecoParcelado();
+                                                string parcelamento = nparcelas.ToString() + "x ";
+                                            }
+                                            <div><b style="font-size: 12px; color: #9400d3">Ou em até: </b><b style="color: #ff0000">@parcelamento</b>de R$&nbsp;<b style="color: #ff0000; font-size: 20px">@precoParcelado</b><small>&nbsp;sem juros!</small></div>
+                                            <p></p>
+                                            <p></p>
+                                            <div><b style="font-size: 12px; color: #9400d3">Tamanhos disponíveis:</b></div>
+                                            <div class="pagination box">
+                                                <ul>
+
+                                                    @for (int i = 0; i < tamanhosDisponiveis.Count; i++)
+                                                    {
+                                                        var id = "tamanho" + i;
+                                                        
+                                                        if (tamanhosDisponiveis.Count == 1)
+                                                        {
+                                                            <li id=@id class="active"><a>@tamanhosDisponiveis[i]</a></li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li id=@id><a>@tamanhosDisponiveis[i]</a></li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <a href="#"> <img src="~/Content/Dani-bootstrap/img/FitaMetrica.ico" /><small style="color: #000000">&nbsp;Tabela de Medidas</small></a>
+                                            <p></p>
+                                            <input type="submit" name="Comprar" value="Comprar" class="pull-right btn-medium btn-plum"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Hidden("TamanhoEscolhido", "nenhum", new { id = "tamanhoEscolhido" });
+                    </div>
+                    @Html.Partial("Informacoes")
+                </div>
+            </div>
+            @Html.Partial("Rodape")
+        }
+    </body>
+    <a id="falhou" href="#Falha" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
+    <div id="Falha" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalRecupSenhaLabel3" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalRecupSenhaLabel3" class="text-info">Atenção!</h3>
+        </div>
+
+        <div class="modal-body">
+            <div>Por favor selecione o tamanho desejado.</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        </div>
     </div>
-</body>
+<script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+<script>
+    function TrocarImagem(id) {
+        var idImagem = "#imagem" + id;
+        var srca = $(idImagem).attr("src");
+        $("#imagemGrande").attr("src", srca);
+    }
+
+    $(document).ready(function () {
+        
+        var f = '@ViewBag.FalhouTamanho';
+        if (f == "True") {
+            document.getElementById('falhou').click();
+        }
+
+        $('.box li').click(function () {
+            $(this).siblings('li').removeClass('active');
+            $(this).addClass('active');
+            var tamanho = $(this).attr("id");
+            $("#tamanhoEscolhido").attr("value", tamanho);
+        });
+    });
+
+</script>
 </html>

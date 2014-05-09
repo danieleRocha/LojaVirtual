@@ -14,10 +14,12 @@ namespace LojaVirtual.Apresentacao.Controllers
     public class LoginController : Controller
     {
         private IRepositorio<Usuario> repositorioDeUsuarios;
+        private IRepositorio<Categoria> repositorioDeCategorias;
 
-        public LoginController(IRepositorio<Usuario> repositorioDeUsuarios)
+        public LoginController(IRepositorio<Usuario> repositorioDeUsuarios, IRepositorio<Categoria> repositorioDeCategorias)
         {
             this.repositorioDeUsuarios = repositorioDeUsuarios;
+            this.repositorioDeCategorias = repositorioDeCategorias;
         }
 
         [HttpGet]
@@ -26,6 +28,7 @@ namespace LojaVirtual.Apresentacao.Controllers
             var loginViewModel = new LoginViewModel();
             ViewBag.Cadastro = false;
             ViewBag.Autenticacao = false;
+            ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
             return View(loginViewModel);
         }
 
@@ -40,6 +43,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         [Submit("Cadastrar")]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
+            ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
             ModelState.Remove("Email");
             ModelState.Remove("Senha");
             if (!ModelState.IsValid)
@@ -66,6 +70,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         [Submit("Autenticar")]
         public ActionResult Autenticar(LoginViewModel loginViewModel)
         {
+            ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
             ModelState.Remove("EmailCadastro");
             if (!ModelState.IsValid)
             {
@@ -102,6 +107,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         [Submit("RecuperarEmail")]
         public ActionResult RecuperarEmail(LoginViewModel loginViewModel)
         {
+            ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
             ModelState.Remove("Email");
             ModelState.Remove("Senha");
             ModelState.Remove("EmailCadastro");
@@ -128,6 +134,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         [Submit("RecuperarSenha")]
         public ActionResult RecuperarSenha(LoginViewModel loginViewModel)
         {
+            ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
             ModelState.Remove("Email");
             ModelState.Remove("Senha");
             ModelState.Remove("EmailCadastro");

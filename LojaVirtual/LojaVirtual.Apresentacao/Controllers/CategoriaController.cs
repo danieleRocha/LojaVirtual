@@ -127,5 +127,27 @@ namespace LojaVirtual.Apresentacao.Controllers
             ViewBag.Mensagem = "Não foi possível editar a Categoria. Por favor informe ao administrador do sistema.";
             return View(categoriaModel);
         }
+
+        [HttpGet]
+        public ActionResult Mercadorias(Guid id,int? pagina)
+        {
+            var mercadoriasViewModel = new List<MercadoriaViewModel>();
+
+            var categoria = repositorioDeCategorias.Obter(id);
+
+            if (categoria != null)
+            {
+                foreach (var mercadoria in categoria.Mercadorias)
+                {
+                    mercadoriasViewModel.Add(Mapper.Map<Mercadoria, MercadoriaViewModel>(mercadoria));
+                }
+            }
+
+            var paginacao = new Paginacao<MercadoriaViewModel>(mercadoriasViewModel, 5);
+            paginacao.VaParaPagina(pagina);
+
+            ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
+            return View(paginacao);
+        }
     }
 }

@@ -28,6 +28,37 @@ namespace LojaVirtual.Modelo
             Femenino,
             Masculino
         }
-        
+
+
+        public void EditarTelefones(IEnumerable<Telefone> telefones)
+        {
+            var telefonesParaEditar = new List<Telefone>(Telefones);
+
+            foreach (var telefone in telefonesParaEditar)
+            {
+                bool achou = telefones != null && telefones.Any(novoTelefone => telefone.EIgual(novoTelefone));
+
+                if (!achou)
+                    this.telefones.Remove(telefone);
+            }
+
+            if (telefones == null) return;
+            
+            foreach (var telefone in telefones)
+            {
+                bool achou = this.telefones.Any(telefoneAntigo => telefone.EIgual(telefoneAntigo));
+
+                if (!achou)
+                    this.telefones.Add(telefone);
+            }
+        }
+
+        public void EditarEndereco(Endereco endereco)
+        {
+            if (!Endereco.EIgual(endereco))
+            {
+                Endereco = endereco;
+            }
+        }
     }
 }

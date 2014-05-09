@@ -106,7 +106,67 @@ input[type="color"]:focus,
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
      -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  
+	
+}
+
+.well-white
+{
+  min-height: 20px;
+  padding: 0px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  background-color: transparent;
+  border: none;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  }
+
+.well-border
+{
+  color: #000000;
+  background-color: #fafafa;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+  *zoom: 1;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+	
+}
+
+.span2-5 {
+	width: 190px;
+}
+
+.span9-5 {
+  width: 730px;
+}
+
+.span3-5 {
+  width: 265px;
+}
+
+.margin-rb {
+	margin-right: 15px;
+	margin-bottom: 20px;
+}
+
+.center-block {
+    display: block;
+	margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+	float: none;
+ }
+
+.img-responsive {
+ display: inline-block;
+ max-width: 75%;
+ vertical-align: middle;
 }
 
 option:hover,
@@ -135,6 +195,51 @@ option:focus,
 	text-decoration: none;
 }
 
-.backImage {
-	background-image:  url("../img/Fundo.jpg");
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  *zoom: 2;
+}
+
+.pagination {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.pagination ul > li > a,
+.pagination ul > li > span {
+  float: left;
+  padding: 4px 12px;
+	margin-left: 4px;
+	margin-bottom: 4px;
+  line-height: 20px;
+  text-decoration: none;
+	color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  
+}
+
+
+.pagination ul > .active > a,
+.pagination ul > .active > span,
+.pagination ul > li > a:hover,
+.pagination ul > li > a:focus,
+.pagination ul > .disabled > span,
+.pagination ul > .disabled > a,
+.pagination ul > .disabled > a:hover,
+.pagination ul > .disabled > a:focus {
+  background-color: #9370db;
+  background-image: none;
+  color: #ffffff;
+}
+
+.box li { cursor:pointer; }
+
+.btn-medium {
+  padding: 7px 20px;
+  font-size: 15px;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
 }

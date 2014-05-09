@@ -1,4 +1,6 @@
-﻿namespace LojaVirtual.Apresentacao.ViewModels
+﻿using System;
+
+namespace LojaVirtual.Apresentacao.ViewModels
 {
     public interface IViewModel
     {

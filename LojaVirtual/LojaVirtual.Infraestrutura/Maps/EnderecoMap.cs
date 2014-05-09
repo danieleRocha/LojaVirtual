@@ -32,5 +32,15 @@ namespace LojaVirtual.Infraestrutura.Maps
         {
            
         }
+
+        internal void Atualizar(EnderecoMap endereco)
+        {
+            Logradouro = endereco.Logradouro;
+            Numero = endereco.Numero;
+            Complemento = endereco.Complemento;
+            Cidade = endereco.Cidade;
+            Estado = endereco.Estado;
+            Cep = endereco.Cep;
+        }
     }
 }

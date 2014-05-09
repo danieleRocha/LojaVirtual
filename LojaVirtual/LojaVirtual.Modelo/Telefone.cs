@@ -15,5 +15,13 @@ namespace LojaVirtual.Modelo
             Residencial,
             Comercial
         }
+
+        public bool EIgual(Telefone telefone)
+        {
+            if ((Ddd == telefone.Ddd) && (Numero == telefone.Numero) && (Tipo == telefone.Tipo))
+                return true;
+
+            return false;
+        }
     }
 }

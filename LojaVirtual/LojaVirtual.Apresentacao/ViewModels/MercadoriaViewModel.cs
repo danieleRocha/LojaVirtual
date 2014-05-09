@@ -48,6 +48,8 @@ namespace LojaVirtual.Apresentacao.ViewModels
             set { cores = value; }
         }
 
+        public List<Produto> Produtos { get; set; }
+
         private List<KeyValuePair<string, string>> tamanhos = new List<KeyValuePair<string, string>>();
         public List<KeyValuePair<string, string>> Tamanhos
         {
@@ -117,6 +119,33 @@ namespace LojaVirtual.Apresentacao.ViewModels
                 }
             }
             return quantidadeTamanhosSelecionados;
+        }
+
+        public decimal PrecoParcelado()
+        {
+            int numeroMaximoDeParcelas = ConfigReader.LerNoInt(ConfigReader.TagPrecos, ConfigReader.TagNumeroDeParcelas);
+
+            if (Preco == null)
+                return (decimal)Math.Round(0.0,2);
+
+            return Math.Round((decimal) (Preco/numeroMaximoDeParcelas),2);
+        }
+
+        public List<string> TamanhosDisponiveis()
+        {
+            var listaDeTamanhos = new List<string>();
+
+            foreach (var tam in Catalogo.Tamanhos)
+            {
+                foreach (var produto in Produtos)
+                {
+                    if((produto.Tamanho==tam)&&(produto.Estado==Produto.EstadoDoProduto.Disponível.ToString())
+                        &&(!listaDeTamanhos.Contains(tam)))
+                        listaDeTamanhos.Add(tam);
+                }
+            }
+
+            return listaDeTamanhos;
         }
     }
 }

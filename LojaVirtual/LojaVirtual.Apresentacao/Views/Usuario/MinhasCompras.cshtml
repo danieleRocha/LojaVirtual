@@ -1,0 +1,54 @@
+﻿@using LojaVirtual.Apresentacao.ViewModels
+@model UsuarioViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
+    <link href="~/Content/Dani-bootstrap/css/Dani-bootstrap.css" media="screen" rel="stylesheet" />
+    <title>Dados do Cliente</title>
+</head>
+@using (Html.BeginForm())
+{
+    <div id="header">
+        <!-- Seção de login -->
+        @Html.Partial("CabecalhoUsuario", Model)
+       @* <!-- Barra Principal -->
+        @Html.Partial("CabecalhoBusca", mercadorias)*@
+
+    </div>
+
+    <div id="mainBody">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar ================================================== -->
+                <div id="sidebar" class="span2-5">
+                    <ul class="nav nav-tabs nav-stacked">
+                         <li>@Html.ActionLink("Minhas Compras", "MinhasCompras", "Usuario", new { }, new { })</li>
+                        <li>@Html.ActionLink("Meus Dados", "Editar", "Usuario", new { }, new { })</li>
+                    </ul>
+                </div>
+
+                <!-- Sidebar end=============================================== -->
+                <div class="span9-5">
+                    <div class="well">
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("Informacoes")
+        </div>
+    </div>
+       
+    @Html.Partial("Rodape")
+    <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+
+}
+
+</html>

@@ -1,19 +1,11 @@
 ﻿@using System.Globalization
 @using LojaVirtual.Apresentacao.ViewModels
-@model LojaVirtual.Apresentacao.ViewModels.UsuarioViewModel
+@model UsuarioViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];
     var nCategorias = mercadorias.TodasCategoriasDisponiveis.Count;
-
-    var categorias = new List<string>();
-
-    for (int i = 0; i < nCategorias; i++)
-    {
-        categorias.Add(mercadorias.TodasCategoriasDisponiveis[i].Nome);
-    }
-    
 }
 
 <!DOCTYPE html>
@@ -29,78 +21,16 @@
 <body>
     <div id="header">
         <!-- Seção de login -->
-        <div class="container">
-            <div id="welcomeLine" class="row">
-                @if (Model == null)
-                {
-                    <div class="span8">
-                        <img src="~/Content/Dani-bootstrap/img/Pata.png" />
-                        <strong class="text-plum">Seja bem vindo(a)!</strong>&nbsp;&nbsp;&nbsp;
-                    <a href="../Login/Login" class="text-plum">
-                        <img src="~/Content/Dani-bootstrap/img/Entrar.ico" />Entrar</a>&nbsp;&nbsp;&nbsp;
-                    <a href="../Login/Logout" class="text-plum">
-                        <img src="~/Content/Dani-bootstrap/img/Sair.png" />Sair</a>
-                    </div>
-                }
-                else
-                {
-                    <div class="span8">
-                        <img src="~/Content/Dani-bootstrap/img/Pata.png" />
-                        <strong class="text-plum">@Model.Tratamento</strong><strong class="text-plum">@Model.Nome!</strong>&nbsp;&nbsp;&nbsp;
-                    <a href="../Usuario/Editar" class="text-plum">
-                        <img src="~/Content/Dani-bootstrap/img/MeusDados.png" />Meus Dados</a>&nbsp;&nbsp;&nbsp;
-                    <a href="../Login/Logout" class="text-plum">
-                        <img src="~/Content/Dani-bootstrap/img/Sair.png" />Sair</a>
-                    </div>
-                }
-                <div class="span4">
-                    <div class="pull-right">
-                        <ul class="inline">
-                            <li><a href="../Carrinho/Carrinho" style="color: #000000">
-                                <img src="~/Content/Dani-bootstrap/img/CarrinhoCheio.ico" /></a></li>
-                            <li>
-                                <h6>Meu Carrinho</h6>
-                            </li>
-                            <li><a href="../Carrinho/Carrinho"><span class="btn btn-mini btn-plum">
-                                <img src="~/Content/Dani-bootstrap/img/Dinheiro.ico" />R$110,00</span></a></li>
-                        </ul>
-                    </div>
-                </div>
+        @Html.Partial("CabecalhoUsuario", Model)
+        @*<!-- Barra Principal -->
+        @Html.Partial("CabecalhoBusca", mercadorias)*@
+        <!-- Barra de Administrador ou Gerente-->
+        @if (ViewBag.EAdministradorOuGerente)
+        {
+            <div class="container">
+                @LojaVirtual.Apresentacao.Helpers.BarraMenu.Administrador("Administração")
             </div>
-        </div>
-        <p></p>
-        <p></p>
-        <!-- Barra Principal -->
-        <div class="well well-verysmall container">
-            <ul class="inline" style="margin-top: 5px; margin-bottom: 5px">
-                <li>
-                    <img src="~/Content/Dani-bootstrap/img/Tigre.ico" /></li>
-                <li>Procure seu modelo aqui&nbsp;&nbsp;&nbsp;<i class="icon-arrow-right"></i></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <ul class="inline">
-                            <li>
-                                <div id="categoriaSel" style="color: #000000">Todas as Categorias&nbsp;&nbsp;&nbsp;<b class="caret"></b></div>
-                            </li>
-                        </ul>
-                    </a>
-                    <ul class="dropdown-menu">
-                        @for (int i = 0; i < nCategorias; i++)
-                        {
-                            var id = "cat" + i;
-                            <li><a id=@id style="cursor: pointer;">@categorias[i]</a></li>
-                        }
-                    </ul>
-                </li>
-                <li>
-                    <input type="text" class="span3" style="margin-top: 6px; margin-bottom: 5px" placeholder="Digite aqui o modelo que deseja..."></li>
-                <li>&nbsp;&nbsp;&nbsp;</li>
-                <li>
-                    <button type="submit" class="btn btn-plum" style="margin-top: 6px; margin-bottom: 5px">Procurar</button>
-                </li>
-            </ul>
-        </div>
-
+        }
     </div>
     @*<!-- Carousel -->
 <div class="container" id="carouselBlk">
@@ -129,22 +59,20 @@
     </div>
 
 </div>*@
-
     <div id="mainBody">
         <div class="container">
             <div class="row">
                 <!-- Sidebar ================================================== -->
-                <div id="sidebar" class="span3">
+                <div id="sidebar" class="span2-5">
                     <ul class="nav nav-tabs nav-stacked">
                         @for (int i = 1; i < nCategorias; i++)
                         {
-                            var id = "categ" + i;
-                            <li><a id=@id style="cursor: pointer">@categorias[i]</a></li>
+                            <li>@Html.ActionLink(mercadorias.TodasCategoriasDisponiveis[i].Nome, "Mercadorias", "Categoria", new { id = mercadorias.TodasCategoriasDisponiveis[i].Id }, new { })</li>
                         }
                     </ul>
                 </div>
                 <!-- Sidebar end=============================================== -->
-                <div class="span9">
+                <div class="span9-5">
                     <div class="well">
                         <div class="row-fluid" id="carouselBlk2">
                             <div id="Carousel2" class="carousel slide" data-interval="5000" data-pause="hover">
@@ -174,131 +102,11 @@
                     </div>
                 </div>
             </div>
-            <hr />
-            <ul class="inline">
-                <li>
-                    <blockquote>
-                        <ul class="inline">
-                            <li>
-                                <img src="~/Content/Dani-bootstrap/img/Caminhao.ico" /></li>
-                            <li>
-                                <h6 style="color: #9370db">Entregamos para todo o Brasil!</h6>
-                            </li>
-                        </ul>
-                    </blockquote>
-                </li>
-                <li>
-                    <blockquote>
-                        <ul class="inline">
-                            <li>
-                                <img src="~/Content/Dani-bootstrap/img/Cartao.ico" /></li>
-                            <li>
-                                <h6 style="color: #9370db">Parcelamos em até 6x sem juros!</h6>
-                            </li>
-                        </ul>
-                    </blockquote>
-                </li>
-                <li>
-                    <blockquote>
-                        <ul class="inline">
-                            <li>
-                                <img src="~/Content/Dani-bootstrap/img/Conversa.ico" /></li>
-                            <li>
-                                <h6 style="color: #9370db">Tire suas dúvidas, Fale Conosco!</h6>
-                            </li>
-                        </ul>
-                    </blockquote>
-                </li>
-            </ul>
-            <ul class="inline">
-                <li>
-                    <blockquote>
-                        <ul class="inline">
-                            <li>
-                                <img src="~/Content/Dani-bootstrap/img/Loja.ico" /></li>
-                            <li>
-                                <h6 style="color: #9370db">Conheça a nossa Loja!</h6>
-                            </li>
-                        </ul>
-                    </blockquote>
-                </li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li>
-                <blockquote>
-                    <ul class="inline">
-                        <li>
-                            <img src="~/Content/Dani-bootstrap/img/Facebook.ico" /></li>
-                        <li>
-                            <h6 style="color: #9370db">Siga-nos no Facebbok!</h6>
-                        </li>
-                    </ul>
-                </blockquote>
-            </li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li>
-                <blockquote>
-                    <ul class="inline">
-                        <li>
-                            <img src="~/Content/Dani-bootstrap/img/Cadastro.ico" /></li>
-                        <li>
-                            <h6 style="color: #9370db">Cadastre-se e receba nosssas promoções!</h6>
-                        </li>
-                    </ul>
-                </blockquote>
-            </li>
-            </ul>
+            @Html.Partial("Informacoes")
         </div>
-
     </div>
-
-    <div id="footerSection">
-        <div class="well container">
-            <div class="row">
-                <div class="span3">
-                    <h5>Importante</h5>
-                    <h6><a style="color: #9370db" href="login.html">Política de Vendas</a></h6>
-                    <h6><a style="color: #9370db" href="login.html">Segurança e Privacidade</a></h6>
-                    <h6><a style="color: #9370db" href="login.html">Código do consumidor</a></h6>
-                </div>
-                <div class="span3">
-                    <h5>Compras</h5>
-                    <h6><a style="color: #9370db" href="login.html">Prazos de entrega</a></h6>
-                    <h6><a style="color: #9370db" href="login.html">Trocas e Devoluções</a></h6>
-                    <h6><a style="color: #9370db" href="login.html">Tabela de medidas</a></h6>
-                </div>
-                <div class="span5">
-                    <h5>Formas de Pagamento</h5>
-                    <a href="login.html">
-                        <img src="~/Content/Dani-bootstrap/img/PagSeguro.png" /></a>&nbsp;&nbsp;&nbsp;
-                    <a href="login.html">
-                        <img src="~/Content/Dani-bootstrap/img/Paypal.ico" /></a>&nbsp;&nbsp;&nbsp;
-                    <a href="login.html">
-                        <img src="~/Content/Dani-bootstrap/img/Boleto.ico" /></a>&nbsp;&nbsp;&nbsp;
-                    <a href="login.html">
-                        <img src="~/Content/Dani-bootstrap/img/Santander.gif" /></a>
-                </div>
-            </div>
-            <p class="pull-right">© Daniele C. Rocha</p>
-        </div>
-        <!-- Container End -->
-    </div>
+    @Html.Partial("Rodape")
 </body>
 <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
-
-<script>
-    $(document).click(function (e) {
-        
-        for (var i = 0; i < @nCategorias; i++) {
-            
-            var id = 'cat' + i;
-                
-            if (e.target.id == id) {
-                  
-                document.getElementById('categoriaSel').textContent = e.target.textContent;                 
-            }
-        }    
-        return true;
-    });
-</script>
 
 </html>

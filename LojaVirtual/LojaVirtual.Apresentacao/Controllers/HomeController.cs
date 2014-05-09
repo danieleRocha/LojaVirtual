@@ -26,6 +26,17 @@ namespace LojaVirtual.Apresentacao.Controllers
             Usuario usuario = Seguranca.Autenticacao.ObterUsuarioAutenticado();
             UsuarioViewModel usuarioViewModel = Mapper.Map<Usuario, UsuarioViewModel>(usuario);
             ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
+
+            bool temPermissaoTotal = false;
+
+            if (usuario != null)
+            {
+                temPermissaoTotal = Seguranca.Autorizacao.IsUserInRole(usuario.Email, "Gerente");
+                if (!temPermissaoTotal)
+                    temPermissaoTotal = Seguranca.Autorizacao.IsUserInRole(usuario.Email, "Administrador");
+            }
+
+            ViewBag.EAdministradorOuGerente = temPermissaoTotal;
             return View(usuarioViewModel);
         }
 
@@ -39,5 +50,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         {
             return View();
         }
+
+        
     }
 }

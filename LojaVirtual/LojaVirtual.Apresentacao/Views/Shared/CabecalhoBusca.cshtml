@@ -1,0 +1,52 @@
+﻿@model LojaVirtual.Apresentacao.ViewModels.MercadoriasViewModel
+
+
+<body>
+    <!-- Barra Principal -->
+    <div class="well well-verysmall container">
+        <ul class="inline" style="margin-top: 5px; margin-bottom: 5px">
+            <li><a href="~/Home/Index">
+                <img src="~/Content/Dani-bootstrap/img/Vestido.ico" /></a></li>
+            <li>Procure seu modelo aqui&nbsp;&nbsp;&nbsp;<i class="icon-arrow-right"></i></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <ul class="inline">
+                        <li>
+                            <div id="categoriaSel" style="color: #000000">Todas as Categorias</div>
+                        </li>
+                        <li><div>&nbsp;&nbsp;&nbsp;<b class="caret"></b></div></li>
+                    </ul>
+                </a>
+                <ul class="dropdown-menu">
+                    @for (int i = 0; i < Model.TodasCategoriasDisponiveis.Count; i++)
+                    {
+                        var id = "cat" + i;
+                        <li><a id=@id style="cursor: pointer;">@Model.TodasCategoriasDisponiveis[i].Nome</a></li>
+                    }
+                </ul>
+            </li>
+            <li>
+                <input type="text" class="span3" style="margin-top: 6px; margin-bottom: 5px" placeholder="Digite aqui o modelo que deseja..."></li>
+            <li>&nbsp;&nbsp;&nbsp;</li>
+            <li>
+                <button type="submit" class="btn btn-plum" style="margin-top: 6px; margin-bottom: 5px">Procurar</button>
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
+<script>
+    $(document).click(function (e) {
+        
+        for (var i = 0; i < @Model.TodasCategoriasDisponiveis.Count; i++) {
+            
+            var id = 'cat' + i;
+                
+            if (e.target.id == id) {
+                  
+                document.getElementById('categoriaSel').textContent = e.target.textContent;                 
+            }
+        }    
+        return true;
+    });
+</script>
