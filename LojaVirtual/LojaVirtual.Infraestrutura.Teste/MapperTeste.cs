@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using LojaVirtual.Apresentacao.Mappers;
+using LojaVirtual.Apresentacao.Model;
 using LojaVirtual.Infraestrutura.Daos;
 using LojaVirtual.Infraestrutura.Maps;
 using LojaVirtual.Modelo;

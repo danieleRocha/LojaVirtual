@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using LojaVirtual.Apresentacao.Model;
 using LojaVirtual.Infraestrutura.Daos;
 using LojaVirtual.Infraestrutura.Maps;
 using LojaVirtual.Modelo;

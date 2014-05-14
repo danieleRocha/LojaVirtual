@@ -45,12 +45,14 @@
     <Compile Include="BaseDao.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="ContextoBase.cs" />
+    <Compile Include="Daos\CompraDao.cs" />
     <Compile Include="Daos\PermissaoDao.cs" />
     <Compile Include="Daos\UsuarioDao.cs" />
     <Compile Include="Daos\EnderecoDao.cs" />
     <Compile Include="Daos\TelefoneDao.cs" />
     <Compile Include="Daos\FotoDao.cs" />
     <Compile Include="IContexto.cs" />
+    <Compile Include="Maps\CompraMap.cs" />
     <Compile Include="Maps\PermissaoMap.cs" />
     <Compile Include="Maps\EnderecoMap.cs" />
     <Compile Include="Maps\TelefoneMap.cs" />

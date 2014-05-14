@@ -13,7 +13,6 @@ namespace LojaVirtual.Modelo
         {
             Celular,
             Residencial,
-            Comercial
         }
 
         public bool EIgual(Telefone telefone)

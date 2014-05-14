@@ -36,8 +36,10 @@ namespace LojaVirtual.Apresentacao.Controllers
         {
             var mercadoria = repositorioDeMercadorias.Obter(mercadoriaViewModel.Id);
             var merViewModel = Mapper.Map<Mercadoria, MercadoriaViewModel>(mercadoria);
+            var tamDisponiveis = merViewModel.TamanhosDisponiveis();
 
-            if ((merViewModel.TamanhosDisponiveis().Count > 1)&&(form["TamanhoEscolhido"]=="nenhum"))
+
+            if ((tamDisponiveis.Count > 1) && (form["TamanhoEscolhido"] == "nenhum"))
             {
                 ViewBag.FalhouTamanho = true;
                 ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
@@ -45,8 +47,24 @@ namespace LojaVirtual.Apresentacao.Controllers
 
             }
 
-            ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
-            return View(merViewModel);
+            var tamanhoEscolhido = string.Empty;
+
+            if (tamDisponiveis.Count == 1)
+                tamanhoEscolhido = tamDisponiveis[0];
+            else
+            {
+                for (int i = 0; i < tamDisponiveis.Count; i++)
+                {
+                    var tam = "tamanho" + i;
+                    if (tam != form["TamanhoEscolhido"]) continue;
+                    tamanhoEscolhido = tamDisponiveis[i];
+                    break;
+                }
+            }
+
+            var produto = mercadoria.Produtos.FirstOrDefault(prod => prod.Tamanho == tamanhoEscolhido);
+
+            return RedirectToAction("AdicionarProduto", "Carrinho", produto);
         }
     }
-}
+} 

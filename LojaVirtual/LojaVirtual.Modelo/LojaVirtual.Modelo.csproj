@@ -32,20 +32,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Catalogo.cs" />
+    <Compile Include="Carrinho.cs" />
     <Compile Include="Categoria.cs" />
+    <Compile Include="Compra.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Permissao.cs" />
     <Compile Include="Endereco.cs" />
     <Compile Include="Foto.cs" />
-    <Compile Include="ITipo.cs" />
     <Compile Include="Mercadoria.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Produto.cs" />

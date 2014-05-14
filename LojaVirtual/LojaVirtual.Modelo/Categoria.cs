@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LojaVirtual.Modelo
 {
-    public class Categoria:ITipo
+    public class Categoria
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
@@ -23,26 +23,12 @@ namespace LojaVirtual.Modelo
                 mercadorias.Add(mercadoria);
         }
 
-        public void RemoverMercadoria(Mercadoria mercadoria)
-        {
-            if (mercadorias.FirstOrDefault(p => p.Id == mercadoria.Id) != null)
-                mercadorias.Remove(mercadoria);
-        }
-
         public void RemoverMercadoria(Guid idMercadoria)
         {
             foreach (var mercadoria in Mercadorias.Where(mercadoria => mercadoria.Id == idMercadoria))
             {
                 mercadorias.Remove(mercadoria);
                 break;
-            }
-        }
-
-        public void AdicionarMercadorias(IEnumerable<Mercadoria> mercadoriasAdicionadas)
-        {
-            foreach (var mercadoria in mercadoriasAdicionadas)
-            {
-                AdicionarMercadoria(mercadoria);
             }
         }
     }

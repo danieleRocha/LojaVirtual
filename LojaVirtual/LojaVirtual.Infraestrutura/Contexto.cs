@@ -16,6 +16,7 @@ namespace LojaVirtual.Infraestrutura
         public DbSet<MercadoriaMap> Mercadoria { get; set; }
         public DbSet<CategoriaMap> Categoria { get; set; }
         public DbSet<FotoMap> Foto { get; set; }
+        public DbSet<CompraMap> Compra { get; set; }
 
     }
 }

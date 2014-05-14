@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using LojaVirtual.Modelo;
+using LojaVirtual.Servico;
 
 namespace LojaVirtual.Fabrica
 {
@@ -21,6 +22,7 @@ namespace LojaVirtual.Fabrica
         {
             usuario.Id = Guid.NewGuid();
             usuario.Endereco.Id = Guid.NewGuid();
+            usuario.Carrinho = Compras.MeuCarrinho.ObterCarrinho();
             foreach (var telefone in usuario.Telefones)
             {
                 telefone.Id = Guid.NewGuid();

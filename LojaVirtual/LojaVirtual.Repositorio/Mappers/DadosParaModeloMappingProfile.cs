@@ -17,6 +17,7 @@ namespace LojaVirtual.Repositorio.Mappers
            Mapper.CreateMap<PermissaoMap, Permissao>();
            Mapper.CreateMap<TelefoneMap, Telefone>();
            Mapper.CreateMap<EnderecoMap, Endereco>();
+           Mapper.CreateMap<CompraMap, Compra>();
            //Mapper.CreateMap<PermissaoMap, Permissao>().ForMember(dest => dest.Tipo, opt => opt.ResolveUsing<DadosParaModeloPermissaoResolver>().ConstructedBy(() => new DadosParaModeloPermissaoResolver()));
        }
        

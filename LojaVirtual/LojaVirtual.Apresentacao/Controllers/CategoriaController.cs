@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using LojaVirtual.Apresentacao.Model;
 using LojaVirtual.Apresentacao.Paginacao;
 using LojaVirtual.Apresentacao.ViewModels;
 using LojaVirtual.Fabrica;

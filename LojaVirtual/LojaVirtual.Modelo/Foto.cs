@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LojaVirtual.Modelo
 {
-    public class Foto:ITipo
+    public class Foto
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }

@@ -17,7 +17,7 @@
     <link href="~/Content/Dani-bootstrap/css/Dani-bootstrap.css" media="screen" rel="stylesheet" />
     <title>Loja Virtual</title>
 </head>
-<body>
+<body class="back">
     <div id="header">
         <!-- Seção de login -->
         @Html.Partial("CabecalhoUsuario", Model)
@@ -71,9 +71,10 @@
                     </div>
                 </div>
             </div>
-            @Html.Partial("Informacoes")
+           
         </div>
     </div>
+     @Html.Partial("Informacoes")
     @Html.Partial("Rodape")
 
 </body>

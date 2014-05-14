@@ -22,14 +22,12 @@ namespace LojaVirtual.Fabrica
         {
             mercadoria.Id = Guid.NewGuid();
             mercadoria.DataDeCadastramento = DateTime.Now;
-            mercadoria.Produtos = FabricaDeProduto.Instancia().CriarProdutos(tamanhos);
-            //mercadoria.Fotos = FabricaDeFoto.Instancia().CriarFotos(arquivos);
+            mercadoria.Produtos = FabricaDeProduto.Instancia().CriarProdutos(tamanhos,mercadoria.Preco);
         }
 
         public void EditarMercadoria(Mercadoria mercadoria, List<KeyValuePair<string, string>> tamanhos, List<HttpPostedFileWrapper> arquivos)
         {
-            mercadoria.Produtos = FabricaDeProduto.Instancia().CriarProdutos(tamanhos);
-            //mercadoria.AdicionarFotos(FabricaDeFoto.Instancia().CriarFotos(arquivos));
+            mercadoria.Produtos = FabricaDeProduto.Instancia().CriarProdutos(tamanhos,mercadoria.Preco);
         }
     }
 }

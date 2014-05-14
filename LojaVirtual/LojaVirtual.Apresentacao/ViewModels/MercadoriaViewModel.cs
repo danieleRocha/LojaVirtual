@@ -147,5 +147,21 @@ namespace LojaVirtual.Apresentacao.ViewModels
 
             return listaDeTamanhos;
         }
+
+        public int QuantidadeDisponivel(string tamanho)
+        {
+            var listaTamanhos = new List<string>();
+
+            foreach (var tam in Catalogo.Tamanhos)
+            {
+                foreach (var produto in Produtos)
+                {
+                    if ((produto.Tamanho == tam) && (produto.Estado == Produto.EstadoDoProduto.Disponível.ToString()))
+                        listaTamanhos.Add(tam);
+                }
+            }
+            
+            return listaTamanhos.Count(tam => tam == tamanho);
+        }
     }
 }

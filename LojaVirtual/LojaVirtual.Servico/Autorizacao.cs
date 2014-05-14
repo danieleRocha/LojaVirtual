@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -16,10 +15,6 @@ namespace LojaVirtual.Servico
     {
         private string applicationName;
 
-        private IRepositorio<Usuario> repositorioDeUsuarios
-        {
-            get { return DependencyResolver.Current.GetService<IRepositorio<Usuario>>(); }
-        }
         private IRepositorio<Permissao> repositorioDePermissoes
         {
             get { return DependencyResolver.Current.GetService<IRepositorio<Permissao>>(); }

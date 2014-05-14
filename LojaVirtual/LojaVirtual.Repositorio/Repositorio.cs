@@ -8,7 +8,7 @@ using LojaVirtual.Modelo;
 namespace LojaVirtual.Repositorio
 {
     public class Repositorio<T, TData> : IRepositorio<T>
-        where T : ITipo
+        where T : class 
         where TData : class
     {
         private IDao<TData> dao;

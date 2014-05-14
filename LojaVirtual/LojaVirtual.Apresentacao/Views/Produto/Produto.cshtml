@@ -6,7 +6,7 @@
     var mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];
     var nCategorias = mercadorias.TodasCategoriasDisponiveis.Count;
     var tamanhosDisponiveis = Model.TamanhosDisponiveis();
-    var tamanhoAtivo = string.Empty;
+    
 }
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
     <link href="~/Content/Dani-bootstrap/css/Dani-bootstrap.css" media="screen" rel="stylesheet" />
     <title>Loja Virtual</title>
 </head>
-    <body>
+    <body class="back">
         @using (Html.BeginForm())
         {
             <div id="header">
@@ -121,9 +121,9 @@
                         </div>
                         @Html.Hidden("TamanhoEscolhido", "nenhum", new { id = "tamanhoEscolhido" });
                     </div>
-                    @Html.Partial("Informacoes")
                 </div>
             </div>
+             @Html.Partial("Informacoes")
             @Html.Partial("Rodape")
         }
     </body>

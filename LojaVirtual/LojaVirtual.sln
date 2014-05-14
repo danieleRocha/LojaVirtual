@@ -6,7 +6,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Anotações", "Anotações", "{196C8C4D-45BA-42CD-8F48-F4AF3CC7C7DA}"
 	ProjectSection(SolutionItems) = preProject
 		Anotações.txt = Anotações.txt
-		Todo.txt = Todo.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LojaVirtual.Modelo", "LojaVirtual.Modelo\LojaVirtual.Modelo.csproj", "{C8FC2371-B2D3-454E-8259-F8C61C8AD97D}"

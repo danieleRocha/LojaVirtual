@@ -1,17 +1,264 @@
-﻿@{
-    Layout = null;
+﻿@using System.Globalization
+@using LojaVirtual.Apresentacao.Helpers
+@using LojaVirtual.Apresentacao.ViewModels
+@model CarrinhoViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mercadorias = (MercadoriasViewModel)ViewData[MercadoriasViewModel.Mercadorias];
+    var excluidas = string.Empty;
 }
+
 
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Carrinho</title>
+    <link href="~/Content/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" />
+    <link href="~/Content/jasny-bootstrap/css/jasny-bootstrap.css" media="screen" rel="stylesheet" />
+    <link href="~/Content/Dani-bootstrap/css/Dani-bootstrap.css" media="screen" rel="stylesheet" />
+    <title>Carrinho de Compras</title>
 </head>
-<body>
-    <div>
+
+@using (Html.BeginForm())
+{
+    <body class="back">
+        <div id="header">
+            <!-- Seção de login -->
+            @Html.Partial("CabecalhoUsuario")
+            @*<!-- Barra Principal -->
+        @Html.Partial("CabecalhoBusca",mercadorias)*@
+
+        </div>
+
+        <div id="mainBody">
+            <div class="well container">
+                <h5>Meu Carrinho</h5>
+                <hr />
+                @if (Model.Itens.Count == 0)
+                {
+                    <h6>Seu carrinho está vazio!</h6>
+                }
+                else
+                {
+                    <table class="table table-striped" id="tabelaDados">
+                        <thead>
+                            <tr style="font-size: 13px">
+                                <th style="width: 30px">Produto</th>
+                                <th>Descrição</th>
+                                <th>Disponibilidade</th>
+                                <th>Preço Individual</th>
+                                <th>Quantidade</th>
+                                <th>Preço&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Itens.Count; i++)
+                            {
+                                <tr>
+                                    <td style="vertical-align: middle;">
+                                        <div class="span1" style="margin-bottom: 5px">
+                                            <div class="well-border row text-center">
+                                                <div class="text-center" style="height: 70px; float: none">
+                                                    <div class="center-block img-responsive" style="height: 50px; margin-top: 5px">
+                                                        <a style="cursor: pointer">
+                                                            <img src=@Model.Itens[i].Mercadoria.Imagens[0].ConteudoMisto alt="..."/></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="font-size: 13px; vertical-align: middle">
+                                        <div>@Model.Itens[i].Mercadoria.Nome</div>
+                                        <div><small>@Model.Itens[i].Mercadoria.Descricao</small></div>
+                                        <div>Tamanho: @Model.Itens[i].Produto.Tamanho</div>
+                                    </td>
+                                    <td style="font-size: 13px; vertical-align: middle;">
+                                        @{
+                                var nDisponiveis = Model.Itens[i].Mercadoria.QuantidadeDisponivel(Model.Itens[i].Produto.Tamanho);
+                                var lista = new List<int>();
+
+                                for (int j = 0; j < nDisponiveis; j++)
+                                {
+                                    lista.Add((j + 1));
+                                }
+                                            
+                                        }
+                                        @if (nDisponiveis <= 3)
+                                        {
+                                            <div>Restam apenas @nDisponiveis.ToString() unidades disponíveis</div>
+                                        }
+                                        else
+                                        {
+                                            <div>@nDisponiveis.ToString() unidades disponíveis</div>
+                                        }
+                                    </td>
+
+                                    @{
+                                        var idd = i.ToString();
+                                        var idItem = "item" + i;
+                                        var idItemf = "itemf" + i;
+                                        var idItemff = "itemff" + i;
+                                        var idIteme = "iteme" + i;
+                                    }
+                                    <td style="font-size: 15px; vertical-align: middle">
+                                        <div><small>R$ </small>
+                                            <input type="button" class="btn-invisivel" style="cursor: text"  id=@idItem value=@Model.Itens[i].Produto.Preco.ToString() /></div>
+                                    </td>
+                                    <td style="font-size: 13px; vertical-align: middle">
+                                        <div>@Html.DropDownList(@idd,
+                                                                new List<SelectListItem>(lista.Select(c => new SelectListItem { Text = c.ToString(), Value = c.ToString(), Selected = (c == Model.Itens[i].Quantidade) }).ToList()), new { @class = "input-mini", @onchange = "AtualizarPreco(this.name,this.value)" })
+                                        </div>
+                                    </td>
+                                    <td style="font-size: 15px; vertical-align: middle">
+                                        <div><small>R$ </small>
+                                            <input type="button" class="btn-invisivel" style="cursor: text"  id=@idItemf value=@Model.Itens[i].Valor()  /></div>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="btn btn-plum" style="cursor: pointer" onclick="ExcluirLinha(@i)"><i class="icon-trash icon-white"></i>Excluir</a>
+                                    </td>
+                                </tr>
+                                
+                                @Html.HiddenFor(x => x.Itens[i].Quantidade, new { @id = @idItemff })
+                                @Html.Hidden(@idIteme, "0", new { @id = @idIteme })
+                            }
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="font-size: 14px; vertical-align: middle">
+                                <div><strong>Total </strong><strong>R$ </strong>
+                                    <input type="button" class="btn-invisivel" style="cursor: text; font-weight: bold"  id="Total" value=@Model.ValorTotal() /></div>
+                                @{
+                            int nparcelas = HomeViewModel.NumeroMaximoDeParcelas();
+                            decimal precoParcelado = Model.PrecoParcelado();
+                           
+                                }
+                                <div>
+                                    <small>ou </small>
+                                    <strong style="color: #ff0000">@nparcelas.ToString()x</strong>
+                                    <small>de </small>
+                                    <strong style="color: #ff0000">R$</strong>
+                                    <input type="button" class="btn-invisivel" style="cursor: text; font-weight: bold; color: #ff0000"  id="TotalParcelado" value=@precoParcelado.ToString() />
+                                </div>
+                            </td>
+                            <td></td>
+                        </tbody>
+
+                    </table>
+                    @Html.Hidden("ApagouTudo", "0", new { @id = "apagoutudo" })
+                }
+                <div align="right">
+                    <input type="submit" class="btn btn-inverse" name="ContinuarComprando" value="Continuar Comprando" />
+                    <input type="submit" class="btn btn-plum" name="FinalizarCompra" value="Finalizar Compra" />
+                </div>
+            </div>
+
+        </div>
+
+        @Html.Partial("Informacoes")
+        @Html.Partial("Rodape")
+
+        <a id="mm" href="#myModal" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel" class="text-error">Erro!</h3>
+            </div>
+            <div class="modal-body">
+                <p class="text-error">Seu carrinho está vazio!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+            </div>
+        </div>
+    </body>
+    <script>
+        function AtualizarPreco(id, qtd) {
+            var idd = "#item" + id;
+            var id1 = "#itemf" + id;
+            var id2 = "#itemff" + id;
+            var preco = $(idd).val();
+            var precoFinal = parseFloat(preco.replace(",", ".")) * parseFloat(qtd);
+            $(id1).attr("value", precoFinal.toFixed(2).replace(".", ","));
+            $(id2).attr("value", qtd);
+
+            AtualizarTotal();
+
+           
+        }
+
+        function AtualizarTotal() {
+
+
+            var nItens = '@Model.Itens.Count';
+
+            var vTotal = 0.0;
+           
+            for (var i = 0; i < nItens; i++) {
+                
+                var iexcluido = "#iteme" + i;
+                var excluido = $(iexcluido).attr("value");
+                
+                if (excluido === "1") {
+                    
+                } else {
+                      
+                    var idItem = "#item" + i;
+                    var precoItem = $(idItem).val();
+                    var idQuantidade = "#itemff" + i;
+                    var quantidade = $(idQuantidade).attr("value");
+                    var precoTotalItem = parseFloat(precoItem.replace(",", ".")) * parseFloat(quantidade);
+                    
+                    vTotal = vTotal + precoTotalItem;
+                }
+            }
+            
+            var nparcelas = @HomeViewModel.NumeroMaximoDeParcelas();
+            var parcelado = vTotal / parseFloat(nparcelas);
+
+            $("#Total").attr("value", vTotal.toFixed(2).replace(".", ","));
+            $("#TotalParcelado").attr("value", parcelado.toFixed(2).replace(".", ","));
+        }
+
+        function ExcluirLinha(i) {
+
+            var myTable = document.getElementById("tabelaDados");
+
+            var id = "#iteme" + i;
+            $(id).attr("value", "1");
+
+            AtualizarTotal();
+
+            if (myTable.rows.length == 3) {
+                $("#tabelaDados tbody").remove();
+                $("#apagoutudo").attr("value", "1");
+            } else {
+                myTable.deleteRow(i + 1);
+            }
+            
+        }
+
+        document.onkeydown = function () {
+            switch (event.keyCode) {
+                case 116:
+                    //F5 button
+                    event.returnValue = false;
+                    event.keyCode = 0;
+                    return false;
+            }
+        };
         
-    </div>
-</body>
-</html>
+        $(document).ready(function (e) {
+            var f = '@ViewBag.Vazio';
+            if (f == "True") {
+                document.getElementById('mm').click();
+            }
+        });
+
+    </script>
+}

@@ -45,6 +45,8 @@ namespace LojaVirtual.Apresentacao
               new ContainerControlledLifetimeManager());
           container.RegisterType<ISeguranca, Seguranca>(
               new ContainerControlledLifetimeManager());
+          container.RegisterType<ICompras, Compras>(
+              new ContainerControlledLifetimeManager());
       }
   }
 }

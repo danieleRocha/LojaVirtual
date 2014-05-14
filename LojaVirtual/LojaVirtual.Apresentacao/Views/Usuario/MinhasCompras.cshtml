@@ -17,6 +17,7 @@
 </head>
 @using (Html.BeginForm())
 {
+    <body class="back">
     <div id="header">
         <!-- Seção de login -->
         @Html.Partial("CabecalhoUsuario", Model)
@@ -42,11 +43,12 @@
                     </div>
                 </div>
             </div>
-            @Html.Partial("Informacoes")
+            
         </div>
     </div>
-       
+       @Html.Partial("Informacoes")
     @Html.Partial("Rodape")
+        </body>
     <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
 
 }

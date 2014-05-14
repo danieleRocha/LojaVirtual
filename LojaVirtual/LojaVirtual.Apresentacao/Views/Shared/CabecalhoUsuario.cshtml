@@ -1,56 +1,63 @@
-﻿@using LojaVirtual.Apresentacao.ViewModels
+﻿@using AutoMapper
+@using LojaVirtual.Apresentacao.ViewModels
+@using LojaVirtual.Modelo
+@using LojaVirtual.Servico
 @model dynamic
 
 @{
-    var model = Model;
-    var usuario = Model as UsuarioViewModel;
-    if ((Model!=null)&&(Model.GetType() != typeof (UsuarioViewModel)))
+    UsuarioViewModel modelo = null;
+    var usuarioAutenticado = Seguranca.Autenticacao.ObterUsuarioAutenticado();
+    if (usuarioAutenticado != null)
     {
-        model = null;
+        modelo = Mapper.Map<Usuario, UsuarioViewModel>(usuarioAutenticado);
     }
+    
 }
 
 <!-- Seção de login -->
-        <div class="container">
-            <div id="welcomeLine" class="row">
-                @if ((model == null)||(Model.Nome==null)||(usuario==null)||(usuario.Id==Guid.Empty))
-                {
-                    <div class="span8"><a href="~/Home/Index">
-                                           <img src="~/Content/Dani-bootstrap/img/Vestido.ico" /></a>
-                        <strong class="text-plum">Seja bem vindo(a)!</strong>&nbsp;&nbsp;&nbsp;
-                        <a href="../../../Login/Login" class="text-plum">
-                            <img src="~/Content/Dani-bootstrap/img/Entrar.ico" />Entrar</a>&nbsp;&nbsp;&nbsp;
-                        <a href="../Login/Logout" class="text-plum">
-                            <img src="~/Content/Dani-bootstrap/img/Sair.png" />Sair</a>
-                    </div>
-                }
-                else
-                {
-                    <div class="span8"><a href="~/Home/Index">
-                                           <img src="~/Content/Dani-bootstrap/img/Vestido.ico" /></a>
-                        <strong class="text-plum">@Model.Tratamento</strong><strong class="text-plum">@Model.Nome!</strong>&nbsp;&nbsp;&nbsp;
-                        <a href="../Usuario/MinhasCompras" class="text-plum">
-                            <img src="~/Content/Dani-bootstrap/img/MeusDados.png" />Meu Cadastro</a>&nbsp;&nbsp;&nbsp;
-                        <a href="../Login/Logout" class="text-plum">
-                            <img src="~/Content/Dani-bootstrap/img/Sair.png" />Sair</a>
-                    </div>
-                }
-                <div class="span4">
-                    <div class="pull-right">
-                        <ul class="inline">
-                            <li><a href="../Carrinho/Carrinho" style="color: #000000">
-                                    <img src="~/Content/Dani-bootstrap/img/CarrinhoCheio.ico" /></a></li>
-                            <li>
-                                <h6>Meu Carrinho</h6>
-                            </li>
-                            <li><a href="../Carrinho/Carrinho"><span class="btn btn-mini btn-plum">
-                                                                   <img src="~/Content/Dani-bootstrap/img/Dinheiro.ico" />R$110,00</span></a></li>
-                        </ul>
-                    </div>
-                </div>
+<div class="well container">
+    <div id="welcomeLine" class="row">
+        @if (modelo == null)
+        {
+            <div class="span8">
+                <a href="~/Home/Index">
+                    <img src="~/Content/Dani-bootstrap/img/Vestido.ico" /></a>
+                <strong class="text-plum">Seja bem vindo(a)!</strong>&nbsp;&nbsp;&nbsp;
+                <a href="../../../Login/Login" class="text-plum">
+                    <img src="~/Content/Dani-bootstrap/img/Entrar.ico" />Entrar</a>&nbsp;&nbsp;&nbsp;
+                <a href="../Login/Logout" class="text-plum">
+                    <img src="~/Content/Dani-bootstrap/img/Sair.png" />Sair</a>
             </div>
-            <p>&nbsp;</p>
-            <hr/>
+        }
+        else
+        {
+            <div class="span8">
+                <a href="~/Home/Index">
+                    <img src="~/Content/Dani-bootstrap/img/Vestido.ico" /></a>
+                <strong class="text-plum">@modelo.Tratamento</strong><strong class="text-plum">@modelo.Nome!</strong>&nbsp;&nbsp;&nbsp;
+                <a href="~/Usuario/MinhasCompras" class="text-plum">
+                    <img src="~/Content/Dani-bootstrap/img/MeusDados.png" />Meu Cadastro</a>&nbsp;&nbsp;&nbsp;
+                <a href="~/Login/Logout" class="text-plum">
+                    <img src="~/Content/Dani-bootstrap/img/Sair.png" />Sair</a>
+            </div>
+        }
+        <div class="span4">
+            <div class="pull-right">
+                <ul class="inline">
+                    <li><a href="~/Carrinho/Carrinho" style="color: #000000">
+                        <img src="~/Content/Dani-bootstrap/img/CarrinhoCheio.ico" /></a></li>
+                    <li>
+                        <h6>Meu Carrinho</h6>
+                    </li>
+                    </ul>
+            </div>
         </div>
-        
+    </div>
+    <p></p>
+</div>
+<div class="container">
+    <hr />
+</div>
+
+
 

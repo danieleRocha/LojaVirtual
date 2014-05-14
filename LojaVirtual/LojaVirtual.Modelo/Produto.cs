@@ -2,10 +2,11 @@
 
 namespace LojaVirtual.Modelo
 {
-    public class Produto:ITipo
+    public class Produto
     {
         public Guid Id { get; set; }
         public string Tamanho { get; set; }
+        public decimal Preco { get; set; }
         
         private EstadoDoProduto estado = EstadoDoProduto.Disponível;
         public string Estado

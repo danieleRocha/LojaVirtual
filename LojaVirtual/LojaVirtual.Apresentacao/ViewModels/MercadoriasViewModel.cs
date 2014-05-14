@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
+using LojaVirtual.Apresentacao.Model;
 using LojaVirtual.Apresentacao.Paginacao;
 using LojaVirtual.Modelo;
 

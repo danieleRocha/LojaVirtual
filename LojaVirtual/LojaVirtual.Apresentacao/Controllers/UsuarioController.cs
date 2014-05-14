@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using LojaVirtual.Apresentacao.Helpers;
+using LojaVirtual.Apresentacao.Model;
 using LojaVirtual.Apresentacao.ViewModels;
 using LojaVirtual.Fabrica;
 using LojaVirtual.Modelo;
@@ -30,7 +31,7 @@ namespace LojaVirtual.Apresentacao.Controllers
         [HttpGet]
         public ActionResult Cadastrar(string email)
         {
-            var usuarioViewModel = new UsuarioViewModel() { Email = email };
+            var usuarioViewModel = FabricaDeUsuarioViewModel.Instancia().CriarUsuarioViewModel(email);
             ViewData[MercadoriasViewModel.Mercadorias] = new MercadoriasViewModel(repositorioDeCategorias.ObterTodos());
             return View(usuarioViewModel);
         }

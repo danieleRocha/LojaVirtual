@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LojaVirtual.Modelo
 {
-    public class Permissao:ITipo
+    public class Permissao
     {
         public Guid Id { get; set; }
         public Tipos Tipo { get; set; }

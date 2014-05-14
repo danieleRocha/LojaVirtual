@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using LojaVirtual.Apresentacao.App_Start;
 using LojaVirtual.Apresentacao.Mappers;
 
 namespace LojaVirtual.Apresentacao

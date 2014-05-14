@@ -3,9 +3,9 @@ using LojaVirtual.Infraestrutura.Maps;
 
 namespace LojaVirtual.Infraestrutura.Daos
 {
-    public class MercadoriaDao:BaseDao<MercadoriaMap>
+    public class CompraDao:BaseDao<CompraMap>
     {
-        public MercadoriaDao(IUnitOfWork unitOfWork)
+        public CompraDao(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
         }

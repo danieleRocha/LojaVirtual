@@ -97,6 +97,8 @@ namespace LojaVirtual.Apresentacao.ViewModels
             }
         }
 
+        public Carrinho Carrinho { get; set; }
+        
         public string Tratamento
         {
             get

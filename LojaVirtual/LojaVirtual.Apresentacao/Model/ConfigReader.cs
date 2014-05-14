@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Xml;
 
-namespace LojaVirtual.Apresentacao.ViewModels
+namespace LojaVirtual.Apresentacao.Model
 {
     public static class ConfigReader
     {

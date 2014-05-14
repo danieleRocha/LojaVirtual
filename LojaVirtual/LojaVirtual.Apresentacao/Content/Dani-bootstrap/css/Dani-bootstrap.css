@@ -190,8 +190,8 @@ option:focus,
 .dropdown:hover,
 .dropdown:focus {
 	color: #ffffff;
-	text-shadow: 0 1px 1px #000000, 0 0 8px #9370db;
-	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #9370db;
+	/*text-shadow: 0 1px 1px #000000, 0 0 8px #9370db;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #9370db;*/
 	text-decoration: none;
 }
 
@@ -242,4 +242,22 @@ option:focus,
   -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
           border-radius: 3px;
+}
+
+.btn-invisivel {
+	border: none;
+	background-color: transparent;
+}
+
+.btn-invisivel:focus,
+.btn-invisivel:hover {
+	border-color: transparent;
+	outline: 0;
+    -webkit-box-shadow: none;
+	-moz-box-shadow:none;
+	box-shadow: none;
+}
+
+.back {
+	/*background-image: url("../img/bolhas.jpg")*/
 }

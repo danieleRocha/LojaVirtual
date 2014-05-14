@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LojaVirtual.Modelo
 {
-    public class Mercadoria : ITipo
+    public class Mercadoria
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
@@ -36,12 +36,5 @@ namespace LojaVirtual.Modelo
             set { produtos = value.ToList(); }
         }
 
-        public void AdicionarFotos(IEnumerable<Foto> listaDeFotos)
-        {
-            foreach (var foto in listaDeFotos.Where(foto => fotos.FirstOrDefault(p => p.Id == foto.Id) == null))
-            {
-                fotos.Add(foto);
-            }
-        }       
     }
 }

@@ -21,6 +21,7 @@
 
 @using (Html.BeginForm())
 {
+    <body class="back">
     <div id="header">
         <!-- Seção de login -->
         @Html.Partial("CabecalhoUsuario", Model)
@@ -239,12 +240,12 @@
                     </div>
                 </div>
             </div>
-            @Html.Partial("Informacoes")
+           
         </div>
     </div>
-    
+     @Html.Partial("Informacoes")
     @Html.Partial("Rodape")
-    
+    </body>
     <a id="mm" href="#myModal" role="button" class="btn" style="visibility: hidden" data-toggle="modal"></a>
     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">

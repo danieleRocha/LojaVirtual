@@ -13,6 +13,7 @@ namespace LojaVirtual.Infraestrutura.Maps
 
         public string Tamanho { get; set; }
         public string Estado { get; set; }
+        public decimal Preco { get; set; }
 
         [Required]
         public virtual MercadoriaMap Mercadoria { get; set; }

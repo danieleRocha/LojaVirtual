@@ -13,6 +13,7 @@ namespace LojaVirtual.Infraestrutura
         private UsuarioDao UsuarioDao { get; set; }
         private EnderecoDao EnderecoDao { get; set; }
         private PermissaoDao PermissaoDao { get; set; }
+        private CompraDao CompraDao { get; set; }
 
         public static FabricaDeDaos Instancia()
         {
@@ -83,6 +84,13 @@ namespace LojaVirtual.Infraestrutura
                     PermissaoDao = new PermissaoDao(unitOfWork);
 
                 dao = (IDao<T>)PermissaoDao;
+            }
+            else if (typeof(T) == typeof(CompraMap))
+            {
+                if (CompraDao == null)
+                    CompraDao = new CompraDao(unitOfWork);
+
+                dao = (IDao<T>)CompraDao;
             }
             
             return dao;

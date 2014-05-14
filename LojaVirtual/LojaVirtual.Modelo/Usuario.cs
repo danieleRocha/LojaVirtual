@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LojaVirtual.Modelo
 {
-    public class Usuario:ITipo
+    public class Usuario
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
@@ -14,6 +14,7 @@ namespace LojaVirtual.Modelo
         public DateTime DataDeNascimento { get; set; }
         public Sexos Sexo { get; set; }
         public Endereco Endereco { get; set; }
+        public Carrinho Carrinho { get; set; }
 
         private List<Telefone> telefones = new List<Telefone>();
 
@@ -28,7 +29,6 @@ namespace LojaVirtual.Modelo
             Femenino,
             Masculino
         }
-
 
         public void EditarTelefones(IEnumerable<Telefone> telefones)
         {

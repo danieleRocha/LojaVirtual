@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -17,11 +16,7 @@ namespace LojaVirtual.Servico
         {
             get { return DependencyResolver.Current.GetService<IRepositorio<Usuario>>(); }
         }
-        private IRepositorio<Permissao> repositorioDePermissoes
-        {
-            get { return DependencyResolver.Current.GetService<IRepositorio<Permissao>>(); }
-        }
-
+        
         public bool AutenticarUsuario(string email, string senha)
         {
             foreach (var usuario in repositorioDeUsuarios.ObterTodos())

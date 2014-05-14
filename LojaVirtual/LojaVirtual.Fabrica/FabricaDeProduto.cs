@@ -17,9 +17,8 @@ namespace LojaVirtual.Fabrica
         {
             internal static readonly FabricaDeProduto instancia = new FabricaDeProduto();
         }
-
-
-        public IEnumerable<Produto> CriarProdutos(List<KeyValuePair<string, string>> tamanhos)
+        
+        public IEnumerable<Produto> CriarProdutos(List<KeyValuePair<string, string>> tamanhos,decimal preco)
         {
             var produtos = new List<Produto>();
 
@@ -30,7 +29,8 @@ namespace LojaVirtual.Fabrica
                     produtos.Add(new Produto()
                     {
                         Id = Guid.NewGuid(),
-                        Tamanho = tamanhos[i].Key
+                        Tamanho = tamanhos[i].Key,
+                        Preco = preco
                     });
                 }
             }
