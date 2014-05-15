@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="b759b27d-5a75-4149-bf7f-2e870d6feb9e"
+  name="Camada de Domínio" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="842c3c5b-4a1d-41f6-9915-004b4be5d0e6"
+        LastKnownName="Fabrica"
+        LastKnownLocation="Package1_2041.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="af5eb242-115b-42ed-9ccd-48d389a8836c"
+        LastKnownName="Serviço"
+        LastKnownLocation="Package_2041.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="2e985c97-c74d-4be8-9513-a19f2b26127f"
+        LastKnownName="Repositorio"
+        LastKnownLocation="Package1_2040.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="679e15a1-868a-4093-b8be-0196e0cbc89a"
+        LastKnownName="Modelo"
+        LastKnownLocation="Package_2040.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

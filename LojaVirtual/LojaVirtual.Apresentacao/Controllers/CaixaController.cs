@@ -27,9 +27,8 @@ namespace LojaVirtual.Apresentacao.Controllers
                 return RedirectToAction("Login", "Login");
 
 
-            //Todo: Fazer a view de agradecimento pela compra e de visualização das compras passadas.
-
-            return RedirectToAction("Login", "Login");
+            
+            return RedirectToAction("PaginaEmConstrucao", "Home");
         }
 
     }

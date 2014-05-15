@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="8f3e91c2-b145-4513-b58d-ab5c8a84e616"
+  name="ModeloCamadaDeDominio" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="8999388d-8917-4f9d-a898-96a6cf2e5ced"
+        name="Carrinho"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="2515b24b-1862-4d17-99fb-9bf33bab1e5d">
+            <classMoniker
+              Id="7169f3e8-b199-4951-9665-8ac9a36574aa"
+              LastKnownName="Item"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f2726c15-2511-452f-ade0-962b17bcf038"
+        name="Usuario"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="58a7eaf5-fc66-46f8-b030-57696f255340">
+            <classMoniker
+              Id="9f505fa1-8a2a-484e-b075-9623935a7029"
+              LastKnownName="Endereco"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+          <dependency
+            Id="d5f0cc95-5e74-4909-b920-c707d377af77">
+            <classMoniker
+              Id="3d683cd4-583a-48dd-b94a-e93e8d882d6e"
+              LastKnownName="Telefone"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+          <dependency
+            Id="314dcb2b-a9a3-437e-8f55-df620346ed69">
+            <classMoniker
+              Id="8999388d-8917-4f9d-a898-96a6cf2e5ced"
+              LastKnownName="Carrinho"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+          <dependency
+            Id="124974ea-210a-4ae1-a81f-bb39f612ccaf">
+            <classMoniker
+              Id="477d6f57-1941-4cd6-a296-a658b2c79e84"
+              LastKnownName="Compra"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="477d6f57-1941-4cd6-a296-a658b2c79e84"
+        name="Compra"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="68359228-d5eb-485b-88b0-2d1df7de611f">
+            <classMoniker
+              Id="b58cca7d-dad0-4199-9d85-4ca7e9a56f0c"
+              LastKnownName="Produto"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="c02e3516-541c-491d-b23a-9c2b8f9f3a7f"
+        name="Categoria"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="859ae9c6-a4bf-4f3d-8bb4-4004068e5666">
+            <classMoniker
+              Id="deeea780-fc5d-4d12-96d5-32e0c21c691e"
+              LastKnownName="Mercadoria"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="9f505fa1-8a2a-484e-b075-9623935a7029"
+        name="Endereco"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b6e1af9e-214d-4ecf-ae0a-83abddaeeb7b"
+        name="Foto"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="7169f3e8-b199-4951-9665-8ac9a36574aa"
+        name="Item"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="c19eac78-8bfe-4eed-a8dc-a59c31ce6a23">
+            <classMoniker
+              Id="b58cca7d-dad0-4199-9d85-4ca7e9a56f0c"
+              LastKnownName="Produto"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="deeea780-fc5d-4d12-96d5-32e0c21c691e"
+        name="Mercadoria"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="9ed43b83-59c3-490f-afdc-4a658209d6c2">
+            <classMoniker
+              Id="b58cca7d-dad0-4199-9d85-4ca7e9a56f0c"
+              LastKnownName="Produto"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+          <dependency
+            Id="cb8fb248-1dc1-46a0-8435-21889b3b9765">
+            <classMoniker
+              Id="b6e1af9e-214d-4ecf-ae0a-83abddaeeb7b"
+              LastKnownName="Foto"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b2ac7067-dc3f-481f-82fd-c646d14d16ff"
+        name="Permisssao"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="0c23bfeb-be74-4ec6-852b-6936da39c83a">
+            <classMoniker
+              Id="f2726c15-2511-452f-ade0-962b17bcf038"
+              LastKnownName="Usuario"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b58cca7d-dad0-4199-9d85-4ca7e9a56f0c"
+        name="Produto"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3d683cd4-583a-48dd-b94a-e93e8d882d6e"
+        name="Telefone"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="81d7df42-a708-4fc5-9466-39a84e38a20f"
+        name="Repositorio"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="346236a1-41bc-48f8-bebc-c94cfbd96505">
+            <interfaceMoniker
+              Id="4bca7719-2d65-4948-939b-4a5e71c9a86d"
+              LastKnownName="IRepositorio"
+              LastKnownLocation="ModeloCamadaDeDominio.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="4bca7719-2d65-4948-939b-4a5e71c9a86d"
+        name="IRepositorio"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="c14ab9c3-49b8-455a-a021-5e4574c4a240"
+        LastKnownName="Package1"
+        LastKnownLocation="Package_2039.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="c1ca9ba4-a2ee-4639-b5d7-9fd4070ea4c8"
+        LastKnownName="Camada de Infraestrutura"
+        LastKnownLocation="Package_2042.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="b759b27d-5a75-4149-bf7f-2e870d6feb9e"
+        LastKnownName="Camada de Domínio"
+        LastKnownLocation="Package_2044.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

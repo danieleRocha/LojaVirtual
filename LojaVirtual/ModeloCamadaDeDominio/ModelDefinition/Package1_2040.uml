@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="2e985c97-c74d-4be8-9513-a19f2b26127f"
+  name="Repositorio" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <suppliersInternal>
+    <dependency
+      Id="8248d538-0bde-43d6-942c-f4d0896dc4c2">
+      <packageMoniker
+        Id="679e15a1-868a-4093-b8be-0196e0cbc89a"
+        LastKnownName="Modelo"
+        LastKnownLocation="Package_2040.uml" />
+    </dependency>
+    <dependency
+      Id="c1c46f15-601f-41a2-9067-fc632ef1b4fe">
+      <interfaceMoniker
+        Id="d7b846ff-0446-4a92-8929-20f5ba686593"
+        LastKnownName="IDao"
+        LastKnownLocation="Package_2042.uml" />
+    </dependency>
+    <dependency
+      Id="f48afc25-6e4f-4014-816a-858a54dc7f4d">
+      <interfaceMoniker
+        Id="b84c3535-9f85-414d-aaf6-13532727be24"
+        LastKnownName="IContexto"
+        LastKnownLocation="Package_2042.uml" />
+    </dependency>
+  </suppliersInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="ff1bc6b0-f85b-47d6-83b1-54c45231bf6c"
+        name="Class1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="6abaf79c-b0b4-488d-90a0-07d062720c1b"
+        name="IRepositorio"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="76ca6bd5-856a-4ce0-8b43-4f4f1a373fca" name="CamadaDeDominio" linkedPackageId="8b519740-92d5-4f8d-8fc1-3c6ad7516c54" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="b08d465f-2067-46b9-9d52-95ec42b301c2">
+      <profileInstance Id="8af5f5bd-c5d3-4784-bb2e-966a2dee296b" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="5a91b5d1-16c0-4134-b906-a847ca2f0dac">
+      <profileInstance Id="5f3c6b7f-aa16-48e2-8df3-6c0b1cc20452" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="0938cc8f-9e1b-4c30-9122-41069b9f8b84" name="Camada de Infraestrutura">
+        <elementDefinition Id="c1ca9ba4-a2ee-4639-b5d7-9fd4070ea4c8" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <Interface Id="1289ff74-9e6d-4804-ba5e-c28641ece3d1" name="IContexto" isAbstract="false" isLeaf="false">
+              <elementDefinition Id="b84c3535-9f85-414d-aaf6-13532727be24" />
+            </Interface>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <Interface Id="b35016ff-1f24-4591-8480-27caa570c9a5" name="IDao" isAbstract="false" isLeaf="false">
+              <elementDefinition Id="d7b846ff-0446-4a92-8929-20f5ba686593" />
+            </Interface>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="6fcb4d49-b351-4b46-9222-7c9ab42eb2c6" name="BaseDao" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="e6c9efd0-b378-4b36-a517-f6cb0bb567e1" />
+              <suppliersInternal>
+                <interfaceRealization Id="df94f9dc-db07-4c12-a36c-31ff71d59535">
+                  <interfaceMoniker Id="b35016ff-1f24-4591-8480-27caa570c9a5" LastKnownName="IDao" />
+                  <elementDefinition Id="570c9563-7e22-403f-93e4-724c89909b02" />
+                </interfaceRealization>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="10d32778-9a41-4de6-9fda-ef8e8993b953" name="ContextoBase" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="e74ecbaf-0871-4a87-829d-5720c6565119" />
+              <suppliersInternal>
+                <interfaceRealization Id="a6d03f1a-a35f-4061-9596-ba19e2dde37f">
+                  <interfaceMoniker Id="1289ff74-9e6d-4804-ba5e-c28641ece3d1" LastKnownName="IContexto" />
+                  <elementDefinition Id="414bdc8e-4319-40d0-8b2c-9aa79ff8fa74" />
+                </interfaceRealization>
+              </suppliersInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="c46dac0c-232a-4599-b1ba-b2b68aa947bd" name="Camada de Domínio">
+        <elementDefinition Id="b759b27d-5a75-4149-bf7f-2e870d6feb9e" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <package Id="039579fb-7959-4a51-bb1f-d21dbef6d28f" name="Fabrica">
+              <elementDefinition Id="842c3c5b-4a1d-41f6-9915-004b4be5d0e6" />
+              <suppliersInternal>
+                <dependency Id="2aabf62a-d7f0-436c-a988-784ceb385577">
+                  <packageMoniker Id="90256634-be1e-4a65-afb5-3f6c13cfbb72" LastKnownName="Modelo" />
+                  <elementDefinition Id="2d1c5335-81f1-45f6-9f73-ee060824a3ba" />
+                </dependency>
+                <dependency Id="ca6bbc4b-f60f-4e0c-b5b6-0d1e5694997a">
+                  <packageMoniker Id="ef073cd2-e675-48f7-b29a-4ca89ce1091b" LastKnownName="Serviço" />
+                  <elementDefinition Id="a2144dba-c5db-46d0-b8a3-773e49462890" />
+                </dependency>
+              </suppliersInternal>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="ef073cd2-e675-48f7-b29a-4ca89ce1091b" name="Serviço">
+              <elementDefinition Id="af5eb242-115b-42ed-9ccd-48d389a8836c" />
+              <suppliersInternal>
+                <dependency Id="7ccb6f69-7c35-4e89-a2ba-612e22e34fa4">
+                  <packageMoniker Id="fd4a7d70-c75e-41d3-9ed4-8f7e7a4ef0f5" LastKnownName="Repositorio" />
+                  <elementDefinition Id="6db920e5-2236-4580-bef1-d39b27597bf8" />
+                </dependency>
+                <dependency Id="76590f4d-73fd-4854-aac2-1fffa6c2496d">
+                  <packageMoniker Id="90256634-be1e-4a65-afb5-3f6c13cfbb72" LastKnownName="Modelo" />
+                  <elementDefinition Id="f020ab01-7e3f-4c44-a5c7-7fe4659f3c64" />
+                </dependency>
+              </suppliersInternal>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="fd4a7d70-c75e-41d3-9ed4-8f7e7a4ef0f5" name="Repositorio">
+              <elementDefinition Id="2e985c97-c74d-4be8-9513-a19f2b26127f" />
+              <suppliersInternal>
+                <dependency Id="b269c2e9-7e22-48ce-9d5b-6e3f10ac00bd">
+                  <packageMoniker Id="90256634-be1e-4a65-afb5-3f6c13cfbb72" LastKnownName="Modelo" />
+                  <elementDefinition Id="8248d538-0bde-43d6-942c-f4d0896dc4c2" />
+                </dependency>
+                <dependency Id="481d229a-d271-4c76-a56d-539fddbf79ba">
+                  <interfaceMoniker Id="b35016ff-1f24-4591-8480-27caa570c9a5" LastKnownName="IDao" />
+                  <elementDefinition Id="c1c46f15-601f-41a2-9067-fc632ef1b4fe" />
+                </dependency>
+                <dependency Id="00072361-e2c2-4322-9f21-37324917e9f1">
+                  <interfaceMoniker Id="1289ff74-9e6d-4804-ba5e-c28641ece3d1" LastKnownName="IContexto" />
+                  <elementDefinition Id="f48afc25-6e4f-4014-816a-858a54dc7f4d" />
+                </dependency>
+              </suppliersInternal>
+              <packagedElements>
+                <packageHasNamedElement>
+                  <Interface Id="8179bb1c-520a-49e3-87dd-31802a2b3530" name="IRepositorio" isAbstract="false" isLeaf="false">
+                    <elementDefinition Id="6abaf79c-b0b4-488d-90a0-07d062720c1b" />
+                  </Interface>
+                </packageHasNamedElement>
+              </packagedElements>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="90256634-be1e-4a65-afb5-3f6c13cfbb72" name="Modelo">
+              <elementDefinition Id="679e15a1-868a-4093-b8be-0196e0cbc89a" />
+            </package>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+  </packagedElements>
+  <package Id="8b519740-92d5-4f8d-8fc1-3c6ad7516c54" name="ModeloCamadaDeDominio">
+    <elementDefinition Id="8f3e91c2-b145-4513-b58d-ab5c8a84e616" />
+  </package>
+</logicalClassDesignerModel>

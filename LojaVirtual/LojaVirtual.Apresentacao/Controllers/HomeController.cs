@@ -46,6 +46,11 @@ namespace LojaVirtual.Apresentacao.Controllers
             return View("NaoAutorizado");
         }
 
+        public ActionResult PaginaEmConstrucao()
+        {
+            return View("PaginaEmConstrucao");
+        }
+
         [FiltroSeguranca(Roles = "Gerente,Administrador")]
         public ActionResult BarraMenu()
         {

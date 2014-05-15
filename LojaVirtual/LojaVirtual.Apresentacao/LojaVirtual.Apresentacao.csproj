@@ -113,7 +113,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BarraMenu.cs" />
-    <Compile Include="Helpers\Redirect.cs" />
     <Compile Include="Helpers\SubmitAttribute.cs" />
     <Compile Include="Helpers\Validacao.cs" />
     <Compile Include="Mappers\AutoMapperRegister.cs" />
@@ -310,6 +309,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Informacoes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\PaginaEmConstrucao.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

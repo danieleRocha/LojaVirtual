@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="842c3c5b-4a1d-41f6-9915-004b4be5d0e6"
+  name="Fabrica" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <suppliersInternal>
+    <dependency
+      Id="2d1c5335-81f1-45f6-9f73-ee060824a3ba">
+      <packageMoniker
+        Id="679e15a1-868a-4093-b8be-0196e0cbc89a"
+        LastKnownName="Modelo"
+        LastKnownLocation="Package_2040.uml" />
+    </dependency>
+    <dependency
+      Id="a2144dba-c5db-46d0-b8a3-773e49462890">
+      <packageMoniker
+        Id="af5eb242-115b-42ed-9ccd-48d389a8836c"
+        LastKnownName="Serviço"
+        LastKnownLocation="Package_2041.uml" />
+    </dependency>
+  </suppliersInternal>
+</package>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="c1ca9ba4-a2ee-4639-b5d7-9fd4070ea4c8"
+  name="Camada de Infraestrutura" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="7cbf1c5c-545c-4ef4-aaee-fa06e4278071"
+        name="Class1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="b84c3535-9f85-414d-aaf6-13532727be24"
+        name="IContexto"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="d7b846ff-0446-4a92-8929-20f5ba686593"
+        name="IDao"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e6c9efd0-b378-4b36-a517-f6cb0bb567e1"
+        name="BaseDao"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="570c9563-7e22-403f-93e4-724c89909b02">
+            <interfaceMoniker
+              Id="d7b846ff-0446-4a92-8929-20f5ba686593"
+              LastKnownName="IDao"
+              LastKnownLocation="Package_2042.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e74ecbaf-0871-4a87-829d-5720c6565119"
+        name="ContextoBase"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="414bdc8e-4319-40d0-8b2c-9aa79ff8fa74">
+            <interfaceMoniker
+              Id="b84c3535-9f85-414d-aaf6-13532727be24"
+              LastKnownName="IContexto"
+              LastKnownLocation="Package_2042.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

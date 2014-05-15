@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="973da5ef-5a41-4ebf-899a-fc6841ac79c5" name="CamadaDeDominio" linkedPackageId="1747a349-d12c-44a7-b7c0-f16bd37bcbfc" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="6b70aaf0-2680-4e33-9b05-13ca160f36a3">
+      <profileInstance Id="de170736-6d22-4f77-adca-22ffcc624d7a" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="1c64b25e-6034-47ab-aaa7-4c569ff72053">
+      <profileInstance Id="01a9b6d5-be67-4103-bb44-542517ce3402" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="cba8b2c0-609c-481b-8e7b-0e442639fc27" name="Carrinho" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8999388d-8917-4f9d-a898-96a6cf2e5ced" />
+        <suppliersInternal>
+          <dependency Id="5ef593ab-1e53-4240-b6d3-7bad954b7853">
+            <classMoniker Id="3c0aa0a0-4e1e-486f-b5ed-ed274cc3ce80" LastKnownName="Item" />
+            <elementDefinition Id="2515b24b-1862-4d17-99fb-9bf33bab1e5d" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="026df981-42cb-44cc-91f1-c2aab85ef1e4" name="Usuario" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f2726c15-2511-452f-ade0-962b17bcf038" />
+        <suppliersInternal>
+          <dependency Id="6ed2b525-723a-4c2b-9e8a-ac341fb4f759">
+            <classMoniker Id="e2ff1bd7-8bcf-41eb-89cc-61cb68ed607d" LastKnownName="Endereco" />
+            <elementDefinition Id="58a7eaf5-fc66-46f8-b030-57696f255340" />
+          </dependency>
+          <dependency Id="49ec1b0c-3758-49e7-ac0f-878ed4a9f295">
+            <classMoniker Id="845a27d0-b90e-4e44-9c23-c078c0e56efd" LastKnownName="Telefone" />
+            <elementDefinition Id="d5f0cc95-5e74-4909-b920-c707d377af77" />
+          </dependency>
+          <dependency Id="de4ba495-bbfa-4eb3-9a92-cfd70b6e010b">
+            <classMoniker Id="cba8b2c0-609c-481b-8e7b-0e442639fc27" LastKnownName="Carrinho" />
+            <elementDefinition Id="314dcb2b-a9a3-437e-8f55-df620346ed69" />
+          </dependency>
+          <dependency Id="3d925577-c8f6-4854-ab7e-cf2e4d2902dc">
+            <classMoniker Id="1141bc14-e37a-42dd-97d3-702eccf0cfa0" LastKnownName="Compra" />
+            <elementDefinition Id="124974ea-210a-4ae1-a81f-bb39f612ccaf" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1141bc14-e37a-42dd-97d3-702eccf0cfa0" name="Compra" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="477d6f57-1941-4cd6-a296-a658b2c79e84" />
+        <suppliersInternal>
+          <dependency Id="e77f997e-8a36-41fe-b539-8296d6147130">
+            <classMoniker Id="82ad5698-2f4b-4e25-8da7-64ebb00daa78" LastKnownName="Produto" />
+            <elementDefinition Id="68359228-d5eb-485b-88b0-2d1df7de611f" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="ce059275-21bb-4ce2-994c-5ca97f2acf26" name="Categoria" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c02e3516-541c-491d-b23a-9c2b8f9f3a7f" />
+        <suppliersInternal>
+          <dependency Id="925374f1-3e97-4efd-8771-669826c02904">
+            <classMoniker Id="b83acaf4-473d-4ad1-911a-3be9a4973435" LastKnownName="Mercadoria" />
+            <elementDefinition Id="859ae9c6-a4bf-4f3d-8bb4-4004068e5666" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e2ff1bd7-8bcf-41eb-89cc-61cb68ed607d" name="Endereco" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9f505fa1-8a2a-484e-b075-9623935a7029" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="aa268a52-2487-4037-8738-0a328e9e680e" name="Foto" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b6e1af9e-214d-4ecf-ae0a-83abddaeeb7b" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="3c0aa0a0-4e1e-486f-b5ed-ed274cc3ce80" name="Item" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="7169f3e8-b199-4951-9665-8ac9a36574aa" />
+        <suppliersInternal>
+          <dependency Id="434b6eae-d2d7-4040-acb9-4ba80fa0dea7">
+            <classMoniker Id="82ad5698-2f4b-4e25-8da7-64ebb00daa78" LastKnownName="Produto" />
+            <elementDefinition Id="c19eac78-8bfe-4eed-a8dc-a59c31ce6a23" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="b83acaf4-473d-4ad1-911a-3be9a4973435" name="Mercadoria" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="deeea780-fc5d-4d12-96d5-32e0c21c691e" />
+        <suppliersInternal>
+          <dependency Id="3a630b38-3f4b-454a-9dcb-97bc39e07b36">
+            <classMoniker Id="82ad5698-2f4b-4e25-8da7-64ebb00daa78" LastKnownName="Produto" />
+            <elementDefinition Id="9ed43b83-59c3-490f-afdc-4a658209d6c2" />
+          </dependency>
+          <dependency Id="434d4fb4-9cb8-49f9-b7ef-731ce9ddb0f7">
+            <classMoniker Id="aa268a52-2487-4037-8738-0a328e9e680e" LastKnownName="Foto" />
+            <elementDefinition Id="cb8fb248-1dc1-46a0-8435-21889b3b9765" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="474e694b-4e82-475e-9460-5941da283605" name="Permisssao" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b2ac7067-dc3f-481f-82fd-c646d14d16ff" />
+        <suppliersInternal>
+          <dependency Id="7eff94a9-411a-47ce-a629-3dfd84e0f491">
+            <classMoniker Id="026df981-42cb-44cc-91f1-c2aab85ef1e4" LastKnownName="Usuario" />
+            <elementDefinition Id="0c23bfeb-be74-4ec6-852b-6936da39c83a" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="82ad5698-2f4b-4e25-8da7-64ebb00daa78" name="Produto" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b58cca7d-dad0-4199-9d85-4ca7e9a56f0c" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="845a27d0-b90e-4e44-9c23-c078c0e56efd" name="Telefone" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3d683cd4-583a-48dd-b94a-e93e8d882d6e" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="1747a349-d12c-44a7-b7c0-f16bd37bcbfc" name="ModeloCamadaDeDominio">
+    <elementDefinition Id="8f3e91c2-b145-4513-b58d-ab5c8a84e616" />
+  </package>
+</logicalClassDesignerModel>
